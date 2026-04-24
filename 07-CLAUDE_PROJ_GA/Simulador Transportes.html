@@ -614,7 +614,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-left">
-            <div class="logo">G</div>
+            <img src="logo-galeazzi.svg" alt="Galeazzi & Associados" style="width: 60px; height: 60px;">
             <div class="header-title">
                 <h1>Sistema de Cálculo de Custos de Transporte</h1>
                 <p>Modelo Galeazzi - Galeazzi & Associados</p>
@@ -713,9 +713,14 @@
                 <div class="card-header">
                     <h2 class="card-title">Veículos Cadastrados</h2>
                     <div class="btn-group">
-                        <button class="btn btn-outline" onclick="exportarDados()">📤 Exportar Dados</button>
+                        <button class="btn btn-success" onclick="exportarExcel()">📊 Exportar Excel</button>
                         <label class="btn btn-outline">
-                            📥 Importar Dados
+                            📥 Importar Excel
+                            <input type="file" id="importar-excel" accept=".xlsx,.xls,.csv" style="display: none;" onchange="importarExcel(this)">
+                        </label>
+                        <button class="btn btn-outline" onclick="exportarDados()">📤 Exportar JSON</button>
+                        <label class="btn btn-outline">
+                            📥 Importar JSON
                             <input type="file" id="importar-veiculos" accept=".json" style="display: none;" onchange="importarDados(this)">
                         </label>
                     </div>
@@ -1418,7 +1423,7 @@
             const html = `
                 <div class="report-container" id="print-area">
                     <div class="report-header">
-                        <div class="report-logo">G</div>
+                        <img src="logo-galeazzi.svg" alt="Galeazzi & Associados" style="width: 60px; height: 60px; margin: 0 auto 15px;">
                         <h1 class="report-title">Galeazzi & Associados</h1>
                         <p class="report-subtitle">Sistema de Cálculo de Custos de Transporte - Modelo Galeazzi</p>
                         <p style="margin-top: 10px; color: var(--text-light);">www.galeazzi.com.br | (11) 3383-9600 | Av. Paulista, 1000 - São Paulo, SP</p>
@@ -1489,7 +1494,7 @@
                     <style>
                         body { font-family: 'Inter', sans-serif; padding: 40px; }
                         .report-header { text-align: center; margin-bottom: 30px; }
-                        .report-logo { width: 60px; height: 60px; background: #ED8936; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; color: white; margin: 0 auto 15px; }
+                        .report-logo { width: 60px; height: 60px; margin: 0 auto 15px; }
                         .report-title { font-size: 20px; font-weight: 700; color: #1E3A5F; margin-bottom: 5px; }
                         .report-subtitle { font-size: 14px; color: #718096; }
                         .report-section { margin-bottom: 24px; }
@@ -1585,7 +1590,24 @@
                 return;
             }
             
-            const conteudo = printArea.innerHTML;
+            // Logo SVG como base64
+            const logoSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ED8936"/>
+      <stop offset="100%" style="stop-color:#DD6B20"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="15" fill="url(#grad)"/>
+  <text x="50" y="68" font-family="Arial, sans-serif" font-size="55" font-weight="bold" fill="white" text-anchor="middle">G</text>
+  <text x="50" y="85" font-family="Arial, sans-serif" font-size="12" font-weight="600" fill="white" text-anchor="middle" letter-spacing="2">&amp; ASSOCIADOS</text>
+</svg>`;
+            
+            const conteudo = printArea.innerHTML.replace(
+                '<img src="logo-galeazzi.svg" alt="Galeazzi & Associados" style="width: 60px; height: 60px; margin: 0 auto 15px;">',
+                `<img src="data:image/svg+xml;base64,${btoa(logoSVG)}" alt="Galeazzi & Associados" style="width: 60px; height: 60px; margin: 0 auto 15px;">`
+            );
+            
             const janela = window.open('', '_blank');
             janela.document.write(`
                 <!DOCTYPE html>
@@ -1613,14 +1635,6 @@
                         .report-logo { 
                             width: 50px; 
                             height: 50px; 
-                            background: #ED8936; 
-                            border-radius: 8px; 
-                            display: flex; 
-                            align-items: center; 
-                            justify-content: center; 
-                            font-weight: bold; 
-                            font-size: 20px; 
-                            color: white; 
                             margin: 0 auto 12px; 
                         }
                         .report-title { 
@@ -1685,6 +1699,113 @@
                 `;
                 mostrarToast('Simulação limpa com sucesso!', 'success');
             }
+        }
+
+        // ==================== EXPORTAR/IMPORTAR EXCEL ====================
+        function exportarExcel() {
+            if (veiculos.length === 0) {
+                mostrarToast('Nenhum veículo cadastrado para exportar', 'error');
+                return;
+            }
+            
+            // Criar conteúdo CSV
+            const headers = ['Placa', 'Modelo', 'Categoria', 'Ano', 'Capacidade (kg)', 'Carroceria', 'Km Anual', 'Vida Útil (anos)', 'Valor Aquisição (R$)', 'Valor Residual (R$)'];
+            const rows = veiculos.map(v => [
+                v.placa,
+                v.modelo,
+                getCategoriaLabel(v.categoria),
+                v.ano || '',
+                v.capacidade,
+                v.carroceria || '',
+                v.kmAnual,
+                v.vidaUtil,
+                v.valorAquisicao,
+                v.valorResidual
+            ]);
+            
+            let csvContent = '\uFEFF' + headers.join(';') + '\n';
+            rows.forEach(row => {
+                csvContent += row.join(';') + '\n';
+            });
+            
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `veiculos_galeazzi_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            mostrarToast('Excel exportado com sucesso!', 'success');
+        }
+
+        function importarExcel(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const text = e.target.result;
+                    const lines = text.split('\n').filter(line => line.trim());
+                    
+                    if (lines.length < 2) {
+                        mostrarToast('Arquivo vazio ou inválido', 'error');
+                        return;
+                    }
+                    
+                    // Ler dados (pular cabeçalho)
+                    const dataLines = lines.slice(1);
+                    let importados = 0;
+                    
+                    dataLines.forEach(line => {
+                        const cols = line.split(';');
+                        if (cols.length >= 8) {
+                            const veiculo = {
+                                id: Date.now() + Math.random(),
+                                placa: cols[0].trim().toUpperCase(),
+                                modelo: cols[1].trim(),
+                                categoria: getCategoriaValue(cols[2].trim()),
+                                ano: parseInt(cols[3]) || 2024,
+                                capacidade: parseFloat(cols[4]) || 0,
+                                carroceria: cols[5].trim().toLowerCase(),
+                                kmAnual: parseFloat(cols[6]) || 60000,
+                                vidaUtil: parseFloat(cols[7]) || 10,
+                                valorAquisicao: parseFloat(cols[8]) || 0,
+                                valorResidual: parseFloat(cols[9]) || 0
+                            };
+                            
+                            if (veiculo.placa && veiculo.modelo) {
+                                veiculos.push(veiculo);
+                                importados++;
+                            }
+                        }
+                    });
+                    
+                    salvarDados();
+                    renderizarTabelaVeiculos();
+                    atualizarSelectVeiculos();
+                    
+                    mostrarToast(`${importados} veículos importados com sucesso!`, 'success');
+                } catch (err) {
+                    mostrarToast('Erro ao importar arquivo. Verifique o formato.', 'error');
+                }
+            };
+            reader.readAsText(file);
+            input.value = '';
+        }
+
+        function getCategoriaValue(label) {
+            const map = {
+                'Leve': 'leve',
+                'Médio': 'medio',
+                'Medio': 'medio',
+                'Pesado': 'pesado',
+                'Bitrem': 'bitrem',
+                'Carreta': 'carreta',
+                'Cavalo': 'cavalo'
+            };
+            return map[label] || 'leve';
         }
 
         function mostrarToast(mensagem, tipo = 'success') {
