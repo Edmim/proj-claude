@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Cálculo de Custos de Transporte - Galeazzi Consultoria</title>
+    <title>Sistema de Cálculo de Custos de Transporte - Galeazzi & Associados</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -617,12 +617,12 @@
             <div class="logo">G</div>
             <div class="header-title">
                 <h1>Sistema de Cálculo de Custos de Transporte</h1>
-                <p>Modelo Galeazzi - Galeazzi Consultoria</p>
+                <p>Modelo Galeazzi - Galeazzi & Associados</p>
             </div>
         </div>
         <div class="header-right">
-            <div class="company">Galeazzi Consultoria</div>
-            <div class="cnpj">CNPJ: 00.000.000/0001-00</div>
+            <div class="company">Galeazzi & Associados</div>
+                    <div class="cnpj">www.galeazzi.com.br | (11) 3383-9600</div>
         </div>
     </header>
 
@@ -994,7 +994,9 @@
                 <div class="card-header">
                     <h2 class="card-title">Relatório de Simulação</h2>
                     <div class="btn-group">
+                        <button class="btn btn-primary" onclick="exportarPDF()">📄 Exportar PDF</button>
                         <button class="btn btn-outline" onclick="imprimirRelatorio()">🖨️ Imprimir Relatório</button>
+                        <button class="btn btn-outline" onclick="limparSimulacao()">🗑️ Limpar Simulação</button>
                     </div>
                 </div>
                 <div id="relatorio-conteudo">
@@ -1417,9 +1419,9 @@
                 <div class="report-container" id="print-area">
                     <div class="report-header">
                         <div class="report-logo">G</div>
-                        <h1 class="report-title">Galeazzi Consultoria</h1>
+                        <h1 class="report-title">Galeazzi & Associados</h1>
                         <p class="report-subtitle">Sistema de Cálculo de Custos de Transporte - Modelo Galeazzi</p>
-                        <p style="margin-top: 10px; color: var(--text-light);">CNPJ: 00.000.000/0001-00 | Av. Paulista, 1000 - São Paulo, SP</p>
+                        <p style="margin-top: 10px; color: var(--text-light);">www.galeazzi.com.br | (11) 3383-9600 | Av. Paulista, 1000 - São Paulo, SP</p>
                     </div>
                     
                     <div class="report-section">
@@ -1461,7 +1463,7 @@
                     
                     <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; color: var(--text-light); font-size: 12px;">
                         <p>Relatório gerado em ${data} às ${hora}</p>
-                        <p>www.galeazziconsultoria.com.br | contato@galeazziconsultoria.com.br</p>
+                        <p>www.galeazzi.com.br | (11) 3383-9600</p>
                     </div>
                 </div>
             `;
@@ -1482,7 +1484,7 @@
                 <!DOCTYPE html>
                 <html>
                 <head>
-                    <title>Relatório - Galeazzi Consultoria</title>
+                    <title>Relatório - Galeazzi & Associados</title>
                     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
                     <style>
                         body { font-family: 'Inter', sans-serif; padding: 40px; }
@@ -1573,6 +1575,116 @@
         // ==================== UTILITÁRIOS ====================
         function formatarMoeda(valor) {
             return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor);
+        }
+
+        // ==================== EXPORTAR PDF ====================
+        function exportarPDF() {
+            const printArea = document.getElementById('print-area');
+            if (!printArea) {
+                mostrarToast('Execute uma simulação primeiro', 'error');
+                return;
+            }
+            
+            const conteudo = printArea.innerHTML;
+            const janela = window.open('', '_blank');
+            janela.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Relatório - Galeazzi & Associados</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+                    <style>
+                        @page {
+                            size: A4;
+                            margin: 15mm;
+                        }
+                        body { 
+                            font-family: 'Inter', sans-serif; 
+                            padding: 20px; 
+                            max-width: 210mm;
+                            margin: 0 auto;
+                        }
+                        .report-header { 
+                            text-align: center; 
+                            margin-bottom: 25px; 
+                            padding-bottom: 15px;
+                            border-bottom: 2px solid #1E3A5F;
+                        }
+                        .report-logo { 
+                            width: 50px; 
+                            height: 50px; 
+                            background: #ED8936; 
+                            border-radius: 8px; 
+                            display: flex; 
+                            align-items: center; 
+                            justify-content: center; 
+                            font-weight: bold; 
+                            font-size: 20px; 
+                            color: white; 
+                            margin: 0 auto 12px; 
+                        }
+                        .report-title { 
+                            font-size: 18px; 
+                            font-weight: 700; 
+                            color: #1E3A5F; 
+                            margin-bottom: 5px; 
+                        }
+                        .report-subtitle { 
+                            font-size: 12px; 
+                            color: #718096; 
+                        }
+                        .report-section { 
+                            margin-bottom: 18px; 
+                            page-break-inside: avoid;
+                        }
+                        .report-section-title { 
+                            font-size: 13px; 
+                            font-weight: 600; 
+                            color: #1E3A5F; 
+                            margin-bottom: 8px; 
+                            padding-bottom: 4px; 
+                            border-bottom: 1px solid #E2E8F0; 
+                        }
+                        table { 
+                            width: 100%; 
+                            font-size: 11px; 
+                            border-collapse: collapse;
+                        }
+                        td { 
+                            padding: 4px 0; 
+                            border-bottom: 1px solid #E2E8F0;
+                        }
+                        @media print {
+                            body { padding: 0; }
+                        }
+                    </style>
+                </head>
+                <body>${conteudo}</body>
+                </html>
+            `);
+            janela.document.close();
+            janela.focus();
+            setTimeout(() => {
+                janela.print();
+            }, 500);
+        }
+
+        // ==================== LIMPAR SIMULAÇÃO ====================
+        function limparSimulacao() {
+            if (confirm('Tem certeza que deseja limpar a simulação atual?')) {
+                resultadoSimulacao = null;
+                document.getElementById('resultados-simulacao').style.display = 'none';
+                document.getElementById('form-simulacao').reset();
+                document.getElementById('relatorio-conteudo').innerHTML = `
+                    <div class="empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <p>Execute uma simulação para gerar o relatório</p>
+                    </div>
+                `;
+                mostrarToast('Simulação limpa com sucesso!', 'success');
+            }
         }
 
         function mostrarToast(mensagem, tipo = 'success') {
