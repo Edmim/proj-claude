@@ -1,0 +1,17 @@
+# Ignore arquivos temporários e do sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Pastas de configurações locais
+.claude/
+.vscode/
+*.local.json
+
+# Arquivos de ambiente
+.env
+.env.local
+
+# Arquivos temporários
+*.tmp
+*.bak
