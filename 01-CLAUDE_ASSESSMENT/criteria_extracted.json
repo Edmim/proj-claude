@@ -1,0 +1,835 @@
+﻿[
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.1",
+        "ponto":  "Certificação ISO9001 ou Manual de Qualidade",
+        "pergunta":  "A empresa possui certificação ISO9001 vigente ou Manual de Qualidade formalizado e atualizado?",
+        "evidencia":  "Certificado ISO9001 vigente ou Manual de Qualidade aprovado e datado"
+    },
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.2",
+        "ponto":  "Estrutura organizacional documentada",
+        "pergunta":  "Existem quadros organizacionais demonstrativos de toda a estrutura da empresa, atualizados e divulgados?",
+        "evidencia":  "Organograma atualizado com todos os níveis hierárquicos e funções"
+    },
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.3",
+        "ponto":  "Descrição de cargos documentada",
+        "pergunta":  "Existe documentação formal com descrição de cargos, verificada por amostragem?",
+        "evidencia":  "Documentos de descrição de cargo por função / nível, assinados e datados"
+    },
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.4",
+        "ponto":  "Processos operacionais e registros de funcionamento",
+        "pergunta":  "Os processos críticos estão documentados com registros mantidos e gestor responsável identificado?",
+        "evidencia":  "Procedimentos operacionais documentados, registros de funcionamento e nome do gestor responsável"
+    },
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.5",
+        "ponto":  "Planos de comunicação interna (gestão à vista)",
+        "pergunta":  "Há evidências de planos de comunicação interna e avaliação da disseminação da informação (gestão à vista)?",
+        "evidencia":  "E-mails, relatórios de envio, painéis de gestão à vista, entrevistas com funcionários"
+    },
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.6",
+        "ponto":  "Relatórios e apresentações a stakeholders",
+        "pergunta":  "A empresa produz e mantém evidências de relatórios e apresentações periódicas aos stakeholders?",
+        "evidencia":  "Atas de reunião, e-mails, newsletters com stakeholders, relatórios periódicos"
+    },
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.7",
+        "ponto":  "Comunicação com subcontratadas",
+        "pergunta":  "Há registros formalizados de comunicação com empresas subcontratadas?",
+        "evidencia":  "E-mails, newsletters e comunicados às empresas subcontratadas"
+    },
+    {
+        "setor":  "G1",
+        "codigo":  "1.1.1.8",
+        "ponto":  "Comunicação com fornecedores e clientes",
+        "pergunta":  "Existem registros de comunicação com fornecedores e clientes e entrevistas com gestores comprovam a prática?",
+        "evidencia":  "Atas de reunião, e-mails, newsletters com fornecedores e clientes"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.1.1",
+        "ponto":  "Sustentabilidade financeira – demonstrações financeiras",
+        "pergunta":  "A sustentabilidade do negócio no médio prazo pode ser avaliada mediante análise de demonstrações financeiras (DRE, balanço, fluxo de caixa)?",
+        "evidencia":  "DRE, balanço patrimonial e fluxo de caixa dos últimos 2 anos"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.1.2",
+        "ponto":  "Situação financeira – avaliação de balanço",
+        "pergunta":  "A situação financeira da empresa foi avaliada mediante demonstrações financeiras e indicadores de solidez?",
+        "evidencia":  "Balanço patrimonial, índices de liquidez, endividamento"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.1.3",
+        "ponto":  "Planejamento estratégico formalizado",
+        "pergunta":  "O planejamento estratégico está documentado e envolve os níveis diretivos da empresa?",
+        "evidencia":  "Documento de planejamento estratégico com participação da diretoria"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.1.4",
+        "ponto":  "Envolvimento gerencial no planejamento",
+        "pergunta":  "Os níveis gerenciais participam do planejamento de suas respectivas áreas, com evidências documentadas?",
+        "evidencia":  "Planos de área, atas de reunião com gestores, documentos de alinhamento gerencial"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.1.5",
+        "ponto":  "Manutenção de carteira de clientes",
+        "pergunta":  "A lista de clientes dos últimos 3 anos demonstra grau satisfatório de retenção?",
+        "evidencia":  "Lista de clientes (3 anos), análise de churn, contratos vigentes"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.2.1",
+        "ponto":  "Certificação ISO14001 ou Manual de Gestão Ambiental",
+        "pergunta":  "A empresa possui certificação ISO14001 ou Manual de Gestão Ambiental formalizado?",
+        "evidencia":  "Certificado ISO14001 vigente ou Manual de Gestão Ambiental aprovado"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.2.2",
+        "ponto":  "Controle de emissões – relatórios e registros",
+        "pergunta":  "Há relatórios e registros de controle de emissões de poluentes e GEE?",
+        "evidencia":  "Relatórios periódicos de controle de emissões, inventário de GEE"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.2.3",
+        "ponto":  "Política de gestão de resíduos e coleta seletiva",
+        "pergunta":  "A empresa possui política de gestão de resíduos, contratos com empresas especializadas e processo de coleta seletiva?",
+        "evidencia":  "Política de resíduos documentada, contratos com empresa de reciclagem, registros de coleta seletiva"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.2.8",
+        "ponto":  "Publicação de inventário de GEE",
+        "pergunta":  "A empresa publica inventário anual de Gases de Efeito Estufa (GEE)?",
+        "evidencia":  "Inventário de GEE publicado ou disponível, com metodologia documentada (ex: GHG Protocol)"
+    },
+    {
+        "setor":  "G2",
+        "codigo":  "1.2.3.1",
+        "ponto":  "Responsabilidade social – políticas e programas",
+        "pergunta":  "A empresa possui políticas e programas de responsabilidade social documentados e praticados?",
+        "evidencia":  "Políticas de diversidade, programas de inclusão, aprendizes, estagiários, ações comunitárias"
+    },
+    {
+        "setor":  "G3",
+        "codigo":  "1.3.1.1",
+        "ponto":  "Política comercial documentada",
+        "pergunta":  "A empresa possui política comercial documentada, incluindo critérios de precificação, SLAs e condições contratuais?",
+        "evidencia":  "Política comercial aprovada, tabela de preços, modelos de contrato com SLAs"
+    },
+    {
+        "setor":  "G3",
+        "codigo":  "1.3.2.1",
+        "ponto":  "Metodologia de gerenciamento de reclamações",
+        "pergunta":  "Existe metodologia formalizada de gerenciamento de reclamações de clientes?",
+        "evidencia":  "Procedimento de gestão de reclamações, software de atendimento, fluxo de escalação"
+    },
+    {
+        "setor":  "G3",
+        "codigo":  "1.3.2.2",
+        "ponto":  "Prazo de resposta a reclamações",
+        "pergunta":  "A empresa monitora e cumpre prazos de resposta e resolução de reclamações?",
+        "evidencia":  "Registros de reclamações com datas de abertura e fechamento, SLA de resposta"
+    },
+    {
+        "setor":  "G3",
+        "codigo":  "1.3.2.3",
+        "ponto":  "Indicadores de desempenho do setor de clientes",
+        "pergunta":  "Existem indicadores de desempenho formalizados para o setor de atendimento ao cliente?",
+        "evidencia":  "Dashboard ou relatório de KPIs de atendimento: NPS, tempo de resposta, resolutividade"
+    },
+    {
+        "setor":  "G3",
+        "codigo":  "1.3.3.1",
+        "ponto":  "Avaliação de satisfação de clientes",
+        "pergunta":  "A empresa realiza avaliação periódica de satisfação de clientes com metodologia definida?",
+        "evidencia":  "Pesquisas de satisfação, NPS, relatórios de resultados com planos de ação"
+    },
+    {
+        "setor":  "G4",
+        "codigo":  "1.4.1.1",
+        "ponto":  "Cláusula de confidencialidade em contratos",
+        "pergunta":  "Os contratos com clientes e fornecedores possuem cláusula de confidencialidade?",
+        "evidencia":  "Contratos com cláusula NDA/confidencialidade, política de sigilo documentada"
+    },
+    {
+        "setor":  "G4",
+        "codigo":  "1.4.1.2",
+        "ponto":  "Responsável por segurança de TI",
+        "pergunta":  "A empresa possui profissional responsável por segurança de TI identificado no organograma?",
+        "evidencia":  "Organograma com cargo de CISO ou responsável por TI/segurança da informação"
+    },
+    {
+        "setor":  "G4",
+        "codigo":  "1.4.1.3",
+        "ponto":  "Treinamentos de segurança da informação",
+        "pergunta":  "Existem planos e registros de treinamentos de segurança da informação para funcionários?",
+        "evidencia":  "Planos de treinamento anuais, registros de participação, avaliações de eficácia"
+    },
+    {
+        "setor":  "G4",
+        "codigo":  "1.4.1.4",
+        "ponto":  "Testes de intrusão (pentest) periódicos",
+        "pergunta":  "A empresa realiza testes de intrusão periódicos e mantém planos de ação para os pontos identificados?",
+        "evidencia":  "Relatórios de pentest, planos de ação documentados, periodicidade definida"
+    },
+    {
+        "setor":  "G4",
+        "codigo":  "1.4.1.5",
+        "ponto":  "Procedimentos documentados de segurança de TI",
+        "pergunta":  "Existem procedimentos documentados de segurança de TI, incluindo envolvimento de terceiros?",
+        "evidencia":  "Política de segurança da informação, procedimentos de acesso, backup, gestão de terceiros"
+    },
+    {
+        "setor":  "G4",
+        "codigo":  "1.4.1.6",
+        "ponto":  "Indicadores de performance de segurança (KPIs/KGIs)",
+        "pergunta":  "A empresa monitora indicadores de performance de segurança e os gestores conhecem os KPIs/KGIs?",
+        "evidencia":  "Dashboard de KPIs de segurança, registros de planos de ação, entrevista com gestores"
+    },
+    {
+        "setor":  "G4",
+        "codigo":  "1.4.1.7",
+        "ponto":  "Equipamentos e ferramentas de suporte à segurança",
+        "pergunta":  "A empresa possui equipamentos e ferramentas adequadas de suporte à segurança da informação?",
+        "evidencia":  "Firewall, antivírus, sistemas de monitoramento, controle de acesso físico e lógico"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.1.1",
+        "ponto":  "Programa de treinamento e desenvolvimento",
+        "pergunta":  "A empresa possui programa formal de treinamento e desenvolvimento com plano anual e orçamento aprovado?",
+        "evidencia":  "Plano de treinamento anual, registros de participação, avaliação de eficácia, orçamento"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.1.2",
+        "ponto":  "Mapeamento de competências",
+        "pergunta":  "Existe mapeamento de competências por cargo, com gap analysis e plano de desenvolvimento?",
+        "evidencia":  "Matriz de competências por cargo, registros de avaliação e plano de desenvolvimento"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.1.3",
+        "ponto":  "Documentação de qualificações e certificações",
+        "pergunta":  "A documentação de qualificações, certificações e habilitações dos funcionários está mantida e atualizada?",
+        "evidencia":  "Dossiê de funcionários, cópias de certificados, habilitações e treinamentos obrigatórios"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.2.1",
+        "ponto":  "Conformidade com normas laborais",
+        "pergunta":  "A empresa está em conformidade com as normas laborais aplicáveis (CLT, NRs, acordos coletivos)?",
+        "evidencia":  "Laudos de conformidade NR, PPRA, PCMSO, acordos coletivos, certidões trabalhistas"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.2.2",
+        "ponto":  "Processos seletivos formalizados",
+        "pergunta":  "A empresa possui processo seletivo documentado e registros de processos seletivos realizados?",
+        "evidencia":  "Procedimento de recrutamento, registros de processos seletivos, descrições de vaga"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.3.1",
+        "ponto":  "Sistema de gestão de segurança no trabalho (OHSAS/ISO45001)",
+        "pergunta":  "A empresa possui sistema de gestão de saúde e segurança no trabalho (ISO45001 ou OHSAS18001)?",
+        "evidencia":  "Certificado ISO45001 ou OHSAS18001, ou evidências de sistema equivalente implementado"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.3.2",
+        "ponto":  "Planos de comunicação sobre segurança no trabalho",
+        "pergunta":  "Existem planos e registros de comunicação sobre segurança no trabalho para funcionários?",
+        "evidencia":  "E-mails, atas de reunião, DDS (Diálogo Diário de Segurança), comunicados de segurança"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.4.1",
+        "ponto":  "Responsável por ergonomia identificado",
+        "pergunta":  "A empresa possui profissional responsável por ergonomia identificado no organograma ou cargo dedicado?",
+        "evidencia":  "Organograma ou descrição de cargo do responsável por ergonomia / SESMT"
+    },
+    {
+        "setor":  "G5",
+        "codigo":  "1.5.4.2",
+        "ponto":  "Procedimentos ergonômicos documentados e praticados",
+        "pergunta":  "Existem procedimentos ergonômicos documentados, com evidências de aplicação verificada por amostragem?",
+        "evidencia":  "NR-17 implementada, laudo ergonômico, procedimentos de posto de trabalho"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.1.1",
+        "ponto":  "Compliance – política e programa",
+        "pergunta":  "A empresa possui política e programa de compliance documentados, com comitê ou responsável designado?",
+        "evidencia":  "Código de conduta, política anticorrupção, canal de denúncias, treinamentos de compliance"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.1.2",
+        "ponto":  "Conformidade regulatória monitorada",
+        "pergunta":  "A empresa monitora alterações regulatórias aplicáveis (fiscal, trabalhista, ambiental, setorial)?",
+        "evidencia":  "Processo de monitoramento regulatório, registros de atualização, assessoria jurídica"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.2.1",
+        "ponto":  "Apólices de seguro da empresa vigentes",
+        "pergunta":  "A empresa possui apólices de seguro patrimonial, responsabilidade civil e de carga em vigor?",
+        "evidencia":  "Apólices de seguro vigentes: patrimonial, RC, carga, interrupção de negócios"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.2.4",
+        "ponto":  "Apólices de seguro dos fornecedores verificadas",
+        "pergunta":  "A empresa verifica e mantém cópias das apólices de seguro dos fornecedores?",
+        "evidencia":  "Cópias de apólices de fornecedores/transportadoras, controle de vencimentos"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.3.1",
+        "ponto":  "Segurança patrimonial – dispositivos e monitoramento",
+        "pergunta":  "O armazém possui dispositivos de segurança patrimonial adequados e em funcionamento?",
+        "evidencia":  "CFTV ativo, controle de acesso, alarmes, vigilância, cercas e iluminação perimetral"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.3.7",
+        "ponto":  "Comitê de Gestão de Riscos (CGR) constituído",
+        "pergunta":  "Existe Comitê de Gestão de Riscos constituído com atas de reunião e estudos de vulnerabilidade?",
+        "evidencia":  "Ata de criação do CGR, atas de reuniões periódicas, mapeamento de vulnerabilidades"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.4.1",
+        "ponto":  "Processo de gestão de ocorrências documentado",
+        "pergunta":  "Existe processo formal de gestão de ocorrências (incidentes, não conformidades) documentado?",
+        "evidencia":  "Procedimento de registro de ocorrências, sistema de gestão de não conformidades"
+    },
+    {
+        "setor":  "G6",
+        "codigo":  "1.6.4.2",
+        "ponto":  "Indicadores de performance de segurança patrimonial",
+        "pergunta":  "A empresa monitora indicadores de performance de segurança patrimonial (ocorrências, furtos, avarias)?",
+        "evidencia":  "Dashboard ou relatório de KPIs de segurança patrimonial, registros históricos"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.1.1",
+        "ponto":  "Planejamento de recebimento documentado",
+        "pergunta":  "Existem procedimentos documentados para o planejamento e programação de recebimentos?",
+        "evidencia":  "Procedimento de recebimento, agendamento de docas, regras de priorização"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.2.1",
+        "ponto":  "Planejamento de pátio e docas",
+        "pergunta":  "O planejamento de pátio e docas é realizado de forma estruturada com regras documentadas?",
+        "evidencia":  "Procedimento de gestão de pátio/YMS, regras de agendamento, layout de docas"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.3.1",
+        "ponto":  "Conferência e destinação de produtos não conformes",
+        "pergunta":  "Existe processo de conferência e destinação formal de produtos não conformes no recebimento?",
+        "evidencia":  "Procedimento de não conformidade no recebimento, área de segregação identificada"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.3.2",
+        "ponto":  "Conferência cega no recebimento",
+        "pergunta":  "A empresa utiliza processo de conferência cega no recebimento?",
+        "evidencia":  "Evidência do processo de conferência cega: sem quantidade no romaneio ou leitura eletrônica"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.3.3",
+        "ponto":  "Etiquetagem das mercadorias recebidas",
+        "pergunta":  "As mercadorias recebidas são etiquetadas conforme padrão documentado?",
+        "evidencia":  "Padrão de etiquetagem, amostras de etiquetas, frequência de itens etiquetados"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.3.4",
+        "ponto":  "Endereçamento automático no recebimento",
+        "pergunta":  "O processo de leitura no recebimento resulta em endereçamento automático integrado ao WMS?",
+        "evidencia":  "Demonstração do processo de leitura + endereçamento automático no WMS"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.4.1",
+        "ponto":  "Dispositivos tecnológicos no recebimento e inspeção",
+        "pergunta":  "Os dispositivos utilizados nas operações de recebimento e inspeção são adequados e integrados ao sistema?",
+        "evidencia":  "Terminais RF, leitores de código de barras/RFID, balanças integradas ao WMS"
+    },
+    {
+        "setor":  "T1",
+        "codigo":  "2.1.5.1",
+        "ponto":  "Processos operacionais de recebimento documentados",
+        "pergunta":  "Existe documento descrevendo todas as atividades do processo de recebimento com fluxograma?",
+        "evidencia":  "POP ou fluxograma do processo de recebimento com todas as etapas descritas"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.3.1.1",
+        "ponto":  "Regras FIFO e FEFO no processo de alocação",
+        "pergunta":  "O WMS possui regras preestabelecidas de FIFO e FEFO para alocação de materiais?",
+        "evidencia":  "Configuração de regras FIFO/FEFO no WMS, demonstração do processo"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.3.2.1",
+        "ponto":  "Metodologia ABC e KPIs de alocação",
+        "pergunta":  "A empresa utiliza metodologia ABC de materiais para alocação e monitora KPIs de performance?",
+        "evidencia":  "Relatório de curva ABC, configuração no WMS, KPIs de ocupação e giro"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.3.3.1",
+        "ponto":  "Endereçamento e giro de estoque com suporte de sistema",
+        "pergunta":  "O sistema suporta controle de endereçamento e giro de estoque com informações atualizadas?",
+        "evidencia":  "Relatório de endereçamento e giro por SKU extraído do WMS"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.3.4.1",
+        "ponto":  "Processo de reorganização de estoques",
+        "pergunta":  "Existe processo documentado e registros de reorganização periódica dos estoques?",
+        "evidencia":  "Procedimento de reorganização, registros de execução, critérios de gatilho"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.4.1.1",
+        "ponto":  "Gestão e revisão de localização",
+        "pergunta":  "O processo de revisão de localização é realizado periodicamente com registros documentados?",
+        "evidencia":  "Procedimento de revisão de endereçamento, registros e frequência definida"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.4.2.1",
+        "ponto":  "Dados dos produtos e exigências especiais documentados",
+        "pergunta":  "Os dados dos produtos e exigências especiais de armazenagem (temperatura, fragilidade) estão documentados?",
+        "evidencia":  "Cadastro de produtos com exigências especiais, áreas segregadas identificadas"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.4.3.1",
+        "ponto":  "Integração WMS – endereçamento e gestão de estoque",
+        "pergunta":  "O WMS suporta integralmente as operações de endereçamento, armazenagem e gestão de estoque?",
+        "evidencia":  "Demonstração das funcionalidades de endereçamento e gestão de estoque no WMS"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.4.5.1",
+        "ponto":  "Processo de inventário cíclico",
+        "pergunta":  "O processo de contagem cíclica está documentado e o sistema suporta a atividade?",
+        "evidencia":  "Procedimento de inventário cíclico, configuração no WMS, registros de contagens"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.4.6.1",
+        "ponto":  "Estratégia de estoque documentada",
+        "pergunta":  "A empresa possui estratégia de gestão de estoque documentada com critérios de reposição?",
+        "evidencia":  "Política de estoques, parâmetros de reposição (ponto de pedido, estoque de segurança)"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.2.2.1",
+        "ponto":  "Condições de limpeza e organização das instalações",
+        "pergunta":  "As instalações do armazém atendem a padrões de limpeza e organização documentados?",
+        "evidencia":  "Procedimento de limpeza, check-list de vistoria, histórico de inspeções"
+    },
+    {
+        "setor":  "T2",
+        "codigo":  "2.2.3.1",
+        "ponto":  "Crossdocking – processo e documentação",
+        "pergunta":  "O processo de crossdocking está documentado e operacionalizado com suporte de sistema?",
+        "evidencia":  "Procedimento de crossdocking, área dedicada, integração WMS/TMS"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.1.1",
+        "ponto":  "Estratégia e metodologia de picking documentada",
+        "pergunta":  "A empresa possui estratégia e metodologia de picking documentada e alinhada ao perfil de operação?",
+        "evidencia":  "Documento de estratégia de picking (zona, onda, batch, etc.), justificativa da escolha"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.2.1",
+        "ponto":  "Dimensionamento e utilização das áreas de picking",
+        "pergunta":  "O dimensionamento e a utilização das áreas de picking são avaliados periodicamente?",
+        "evidencia":  "Layout das áreas de picking, índices de utilização, relatório de dimensionamento"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.2.3",
+        "ponto":  "Indicadores de eficiência do picking",
+        "pergunta":  "Existem índices de eficiência formalizados para o processo de picking?",
+        "evidencia":  "KPIs de picking: linhas/hora, acuracidade, lead time de separação"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.2.4",
+        "ponto":  "Ergonomia na área de picking",
+        "pergunta":  "A ergonomia da área de picking foi avaliada e implementada conforme NR-17?",
+        "evidencia":  "Laudo ergonômico da área de picking, adequações implementadas conforme NR-17"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.3.1",
+        "ponto":  "Listas de picking e eficiência do processo",
+        "pergunta":  "A empresa utiliza listas de picking formalizadas com avaliação periódica da eficiência?",
+        "evidencia":  "Amostras de listas de picking, registros de produtividade, avaliação de eficiência"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.3.2",
+        "ponto":  "Documentação de picking formalizada",
+        "pergunta":  "A emissão da documentação de picking está formalizada e integrada ao sistema?",
+        "evidencia":  "Processo de emissão de documentação de picking integrado ao WMS"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.3.3",
+        "ponto":  "Tecnologia empregada no picking",
+        "pergunta":  "A tecnologia empregada no picking (RF, voice, put-to-light, etc.) é adequada ao perfil da operação?",
+        "evidencia":  "Descrição da tecnologia de picking, evidência de uso, integração com WMS"
+    },
+    {
+        "setor":  "T3",
+        "codigo":  "2.5.4.1",
+        "ponto":  "Processamento e disponibilização de informações do picking",
+        "pergunta":  "O processamento e a disponibilização das informações no picking são eficientes e em tempo real?",
+        "evidencia":  "Demonstração do processamento de informações no WMS durante o picking"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.6.1.1",
+        "ponto":  "Integração picking–expedição–sistemas",
+        "pergunta":  "Há integração efetiva entre o processo de picking, expedição e as plataformas de sistema?",
+        "evidencia":  "Demonstração da integração WMS-TMS, fluxo de informações picking \u003e expedição"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.6.1.2",
+        "ponto":  "Processamento de pedidos para embarque",
+        "pergunta":  "O processamento dos pedidos para embarque é realizado de forma eficiente e documentada?",
+        "evidencia":  "Procedimento de processamento de pedidos, integração com WMS/TMS, registro de embarques"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.6.1.4",
+        "ponto":  "Processo de conferência para expedição",
+        "pergunta":  "O processo de conferência para expedição utiliza dispositivos de acuracidade para evitar erros?",
+        "evidencia":  "Processo de conferência com leitura eletrônica, registros de erro zero ou desvios"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.6.3.1",
+        "ponto":  "Gestão de exigências do cliente na expedição",
+        "pergunta":  "As exigências específicas de clientes na expedição estão parametrizadas no sistema?",
+        "evidencia":  "Configurações de exigências de clientes no WMS, registros de atendimento"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.7.1.1",
+        "ponto":  "Comunicação com transportadoras documentada",
+        "pergunta":  "A comunicação com transportadoras é documentada e padronizada, com canais formais definidos?",
+        "evidencia":  "Procedimento de comunicação com transportadoras, canais formais, registros"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.7.2.1",
+        "ponto":  "Programação de transporte formalizada",
+        "pergunta":  "A programação de transporte é realizada de forma estruturada com suporte do TMS?",
+        "evidencia":  "Processo de programação de transporte, relatório de programação do TMS"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.7.3.1",
+        "ponto":  "Avaliação de performance de transportadoras",
+        "pergunta":  "A empresa avalia periodicamente a performance das transportadoras com KPIs documentados?",
+        "evidencia":  "BSC ou relatório de performance de transportadoras, critérios de avaliação, periodicidade"
+    },
+    {
+        "setor":  "T4",
+        "codigo":  "2.7.3.3",
+        "ponto":  "Programas de incentivo a transportadoras",
+        "pergunta":  "A empresa possui programas de incentivo à melhoria de performance de transportadoras?",
+        "evidencia":  "Contrato ou programa de incentivo, registros de bonificações, resultados"
+    },
+    {
+        "setor":  "T5",
+        "codigo":  "2.8.1.1",
+        "ponto":  "Organograma e responsável pela logística reversa",
+        "pergunta":  "Existe equipe ou responsável identificado para recebimento e triagem de devoluções no organograma?",
+        "evidencia":  "Organograma com equipe/responsável de logística reversa identificado"
+    },
+    {
+        "setor":  "T5",
+        "codigo":  "2.8.1.2",
+        "ponto":  "Sistema e fluxo de informações da logística reversa",
+        "pergunta":  "O sistema e o fluxo de informações do processo de logística reversa são adequados e documentados?",
+        "evidencia":  "Fluxograma do processo de logística reversa, integração com WMS, procedimento"
+    },
+    {
+        "setor":  "T5",
+        "codigo":  "2.8.1.3",
+        "ponto":  "Eficiência e eficácia do processo de logística reversa",
+        "pergunta":  "A eficiência e eficácia do processo de logística reversa são monitoradas com KPIs?",
+        "evidencia":  "KPIs de logística reversa: prazo de processamento, % de recuperação, custo unitário"
+    },
+    {
+        "setor":  "T5",
+        "codigo":  "2.8.1.4",
+        "ponto":  "Utilização de RFID na logística reversa",
+        "pergunta":  "A empresa utiliza tecnologia RFID integrada ao processo de logística reversa (quando aplicável)?",
+        "evidencia":  "Evidência de uso de RFID no processo de devolução, configuração no WMS"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.1.1",
+        "ponto":  "Integração WMS-TMS e outros sistemas",
+        "pergunta":  "A integração entre WMS, TMS e outros sistemas de gestão é eficiente e documentada?",
+        "evidencia":  "Arquitetura de sistemas, evidência de integração, tempo de resposta"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.1.2",
+        "ponto":  "Velocidade de atualização das informações no sistema",
+        "pergunta":  "A velocidade de disponibilização e atualização das informações no sistema é adequada?",
+        "evidencia":  "SLA de atualização de dados, demonstração em ambiente produtivo"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.2.1",
+        "ponto":  "Funções-chave do WMS implementadas",
+        "pergunta":  "O WMS possui as funções-chave implementadas (recebimento, armazenagem, picking, expedição, inventário)?",
+        "evidencia":  "Demonstração das funcionalidades do WMS nas operações principais"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.3.1",
+        "ponto":  "Funções-chave do TMS implementadas",
+        "pergunta":  "O TMS possui as funções-chave implementadas (programação, rastreamento, auditoria de frete, relatórios)?",
+        "evidencia":  "Demonstração das funcionalidades do TMS nas operações de transporte"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.4.1",
+        "ponto":  "Emissão de documentos no WMS e TMS",
+        "pergunta":  "O WMS e o TMS suportam a emissão completa de documentos fiscais e operacionais?",
+        "evidencia":  "Amostras de documentos emitidos: NF-e, CT-e, DANFE, etiquetas, manifestos"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.5.1",
+        "ponto":  "Integração WMS com sistemas do cliente e fornecedores",
+        "pergunta":  "O WMS possui integração com os sistemas do cliente e dos fornecedores (EDI, API, WebService)?",
+        "evidencia":  "Documentação de integração, contratos de API/EDI, evidência de troca de dados"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.6.1",
+        "ponto":  "Relatórios de KPIs emitidos pelo sistema",
+        "pergunta":  "O sistema suporta a emissão de relatórios de KPIs operacionais de forma automatizada?",
+        "evidencia":  "Amostras de relatórios de KPIs emitidos pelo WMS/TMS, frequência e destinatários"
+    },
+    {
+        "setor":  "T6",
+        "codigo":  "2.9.7.1",
+        "ponto":  "Gestão de sistemas – manutenção e atualização",
+        "pergunta":  "A empresa possui processo documentado de gestão de sistemas (atualização, backup, suporte)?",
+        "evidencia":  "Política de gestão de TI, cronograma de atualização, SLAs com fornecedores de sistema"
+    },
+    {
+        "setor":  "T7",
+        "codigo":  "2.10.1.1",
+        "ponto":  "Política de manutenção documentada",
+        "pergunta":  "A empresa possui política documentada de manutenção preventiva, preditiva e corretiva?",
+        "evidencia":  "Política de manutenção, plano anual, cronograma preventivo, ordens de serviço"
+    },
+    {
+        "setor":  "T7",
+        "codigo":  "2.10.2.1",
+        "ponto":  "Inspeção periódica da frota",
+        "pergunta":  "A frota de veículos é inspecionada periodicamente com registros documentados?",
+        "evidencia":  "Registros de inspeção de frota, RNTRC, documentação de veículos, laudos de revisão"
+    },
+    {
+        "setor":  "T7",
+        "codigo":  "2.10.3.1",
+        "ponto":  "Inspeção periódica das instalações",
+        "pergunta":  "As instalações do armazém são inspecionadas periodicamente com laudos técnicos?",
+        "evidencia":  "Laudos de inspeção de instalações: estrutura, piso, cobertura, elétrica, hidráulica"
+    },
+    {
+        "setor":  "T8",
+        "codigo":  "2.11.1.1",
+        "ponto":  "Processo de contratação de fornecedores – avaliação de cotações",
+        "pergunta":  "A empresa possui processo documentado de avaliação de cotações e seleção de fornecedores?",
+        "evidencia":  "Procedimento de compras, registros de cotações, critérios de avaliação"
+    },
+    {
+        "setor":  "T8",
+        "codigo":  "2.12.1.1",
+        "ponto":  "Metodologia de gestão de projetos",
+        "pergunta":  "A empresa utiliza metodologia estruturada de gestão de projetos (escopo, custo, prazo, risco)?",
+        "evidencia":  "Metodologia de GP documentada, projetos em andamento com artefatos formalizados"
+    },
+    {
+        "setor":  "T8",
+        "codigo":  "2.12.1.3",
+        "ponto":  "Formalização de projetos de melhoria em contrato",
+        "pergunta":  "Os projetos de melhoria contínua com clientes estão formalizados em contrato?",
+        "evidencia":  "Contratos ou aditivos contratuais com cláusulas de melhoria contínua"
+    },
+    {
+        "setor":  "T8",
+        "codigo":  "2.13.1.1",
+        "ponto":  "Visibilidade da operação – plataformas e informações disponíveis",
+        "pergunta":  "A empresa disponibiliza plataformas de visibilidade da operação em tempo real para os clientes?",
+        "evidencia":  "Demonstração da plataforma de visibilidade, informações disponíveis por perfil de acesso"
+    },
+    {
+        "setor":  "T8",
+        "codigo":  "2.14.1.1",
+        "ponto":  "Registros de performance por atividade operacional",
+        "pergunta":  "Existem e são divulgados registros de performance por atividade (recebimento, alocação, picking, expedição)?",
+        "evidencia":  "Relatórios de performance por processo, frequência de divulgação, destinatários"
+    },
+    {
+        "setor":  "T8",
+        "codigo":  "2.14.1.4",
+        "ponto":  "Métricas formais de performance e SLAs com fornecedores e clientes",
+        "pergunta":  "A empresa possui métricas formais de performance e SLAs documentados com fornecedores e clientes?",
+        "evidencia":  "Contratos com SLAs, relatórios de acompanhamento, penalidades e bônus definidos"
+    },
+    {
+        "setor":  "T8",
+        "codigo":  "2.14.2.1",
+        "ponto":  "Monitoramento de performance de fornecedores – BSC ou equivalente",
+        "pergunta":  "A empresa monitora e mantém registros de performance dos fornecedores usando BSC ou equivalente?",
+        "evidencia":  "BSC ou ferramenta de avaliação de fornecedores, histórico de avaliações, planos de ação"
+    },
+    {
+        "setor":  "K1",
+        "codigo":  "KPI-A1",
+        "ponto":  "Recebimento na Data (On Time Receipt)",
+        "pergunta":  "A empresa monitora o % de pedidos recebidos dentro do prazo acordado? Meta definida e acompanhada?",
+        "evidencia":  "Relatório de On Time Receipt, meta documentada, frequência de medição mensal"
+    },
+    {
+        "setor":  "K1",
+        "codigo":  "KPI-A2",
+        "ponto":  "Acuracidade de inventário",
+        "pergunta":  "A empresa monitora o % de assertividade entre estoque físico e contábil? Meta e plano de ação definidos?",
+        "evidencia":  "Relatório de acuracidade de inventário, meta por faixa (ex: \u003e99,5%), plano de ação"
+    },
+    {
+        "setor":  "K1",
+        "codigo":  "KPI-A3",
+        "ponto":  "Avarias no armazém",
+        "pergunta":  "A empresa monitora o % em valor de itens avariados no armazém? Meta e análise de causa raiz?",
+        "evidencia":  "Relatório de avarias no armazém, meta definida, análise de causa raiz documentada"
+    },
+    {
+        "setor":  "K1",
+        "codigo":  "KPI-A4",
+        "ponto":  "Acuracidade de picking",
+        "pergunta":  "A empresa monitora o % de itens separados corretamente? Meta e tratamento de erros documentados?",
+        "evidencia":  "Relatório de acuracidade de picking, meta definida, análise de erro documentada"
+    },
+    {
+        "setor":  "K1",
+        "codigo":  "KPI-A5",
+        "ponto":  "Expedição na Data (On Time Shipment)",
+        "pergunta":  "A empresa monitora o % de pedidos expedidos no prazo acordado? Meta e plano de ação definidos?",
+        "evidencia":  "Relatório de On Time Shipment, meta documentada, análise de desvios"
+    },
+    {
+        "setor":  "K1",
+        "codigo":  "KPI-A6",
+        "ponto":  "Exatidão das notas fiscais",
+        "pergunta":  "A empresa monitora o % de notas fiscais emitidas sem erros? Meta e processo de controle documentados?",
+        "evidencia":  "Relatório de exatidão de NF, meta definida, análise de erros fiscais"
+    },
+    {
+        "setor":  "K2",
+        "codigo":  "KPI-T1",
+        "ponto":  "Custo de não conformidades em transportes",
+        "pergunta":  "A empresa monitora o % de custos de não conformidades em transportes? Meta e análise documentados?",
+        "evidencia":  "Relatório de custo de não conformidades, detalhamento por tipo, meta e análise de causa"
+    },
+    {
+        "setor":  "K2",
+        "codigo":  "KPI-T2",
+        "ponto":  "Pedidos entregues OTIF (On Time In Full)",
+        "pergunta":  "A empresa monitora o OTIF (pedidos entregues no prazo, quantidade e especificação corretos)?",
+        "evidencia":  "Relatório de OTIF por cliente e filial, meta contratual, análise de desvios"
+    },
+    {
+        "setor":  "K2",
+        "codigo":  "KPI-T3",
+        "ponto":  "Pedidos entregues On Time",
+        "pergunta":  "A empresa monitora o % de pedidos entregues no prazo acordado (On Time)?",
+        "evidencia":  "Relatório de On Time por cliente e filial, meta documentada, análise de desvios"
+    },
+    {
+        "setor":  "K2",
+        "codigo":  "KPI-T4",
+        "ponto":  "Pedidos integralmente atendidos (In Full)",
+        "pergunta":  "A empresa monitora o % de pedidos atendidos nas quantidades e especificações (In Full)?",
+        "evidencia":  "Relatório de In Full por cliente, meta documentada, análise de desvios"
+    },
+    {
+        "setor":  "K2",
+        "codigo":  "KPI-T5",
+        "ponto":  "Avarias e perdas no transporte",
+        "pergunta":  "A empresa monitora o % em valor de itens avariados ou perdidos durante o transporte?",
+        "evidencia":  "Relatório de avarias no transporte, meta por transportadora, plano de ação"
+    },
+    {
+        "setor":  "K2",
+        "codigo":  "KPI-T6",
+        "ponto":  "Pedido Perfeito (Perfect Order)",
+        "pergunta":  "A empresa monitora o Perfect Order (prazo + quantidade + especificação + documentação corretos)?",
+        "evidencia":  "Relatório de Perfect Order, meta contratual, análise de causa raiz dos desvios"
+    },
+    {
+        "setor":  "K3",
+        "codigo":  "KPI-F1",
+        "ponto":  "Retorno sobre Investimento (ROI)",
+        "pergunta":  "A empresa calcula e monitora o ROI das operações e investimentos realizados?",
+        "evidencia":  "Cálculo de ROI documentado, relatório financeiro com evidência de uso gerencial"
+    },
+    {
+        "setor":  "K3",
+        "codigo":  "KPI-F2",
+        "ponto":  "Lucratividade (EBITDA %)",
+        "pergunta":  "A empresa monitora a lucratividade (EBITDA) com frequência mensal e análise de desvios?",
+        "evidencia":  "DRE com cálculo de EBITDA, análise mensal de variação, comparativo com meta"
+    },
+    {
+        "setor":  "K3",
+        "codigo":  "KPI-F3",
+        "ponto":  "Endividamento geral",
+        "pergunta":  "A empresa acompanha o índice de endividamento geral com análise de tendência?",
+        "evidencia":  "Relatório de endividamento, análise de tendência, limites de endividamento definidos"
+    }
+]

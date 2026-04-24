@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Galeazzi Enterprise Platform — Assessment Operador Logístico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g-black:#1A1A1A;--g-charcoal:#333333;--g-dark:#555555;--g-gray:#777777;--g-muted:#999999;
+  --g-silver:#BBBBBB;--g-light:#D9D9D9;--g-border:#E0E4EA;--g-surface:#F5F7FA;--g-white:#FFFFFF;
+  --g-navy:#0B2447;--g-navy-mid:#163A6B;--g-blue:#1A5296;--g-blue-mid:#2878C8;
+  --g-blue-light:#3D9BE9;--g-blue-bright:#5BB5F5;--g-blue-sky:#7ECBFF;
+  --g-teal:#1B5C6B;--g-logo-teal:#005B6D;--g-logo-gray:#979797;--g-teal-accent:#2A7B88;
+  --shadow-card:0 0 0 1px rgba(0,0,0,.04),0 4px 8px rgba(0,0,0,.03),0 16px 40px rgba(0,0,0,.08);
+  --shadow-btn:0 4px 12px rgba(26,82,150,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#FFF;color:var(--g-charcoal);font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-weight:400;font-size:15px;line-height:1.5;overflow-x:hidden}
+a{color:var(--g-blue);text-decoration:none}
+a:hover{color:var(--g-navy-mid)}
+
+/* ===== Background decorativo ===== */
+.bg-deco{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-deco::before{content:"";position:absolute;right:-10%;top:-5%;width:70%;height:110%;background:linear-gradient(135deg,#F3F8FE,#E6F1FB 50%,#D7F0FF);border-radius:55% 40% 0 50%;opacity:.55}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;animation:float 18s ease-in-out infinite}
+.blob-1{width:520px;height:520px;background:radial-gradient(circle,#2878C8 0%,transparent 70%);top:-80px;right:-40px;animation-duration:18s}
+.blob-2{width:420px;height:420px;background:radial-gradient(circle,#3D9BE9 0%,transparent 70%);top:30%;right:5%;animation-duration:22s;animation-delay:-4s}
+.blob-3{width:360px;height:360px;background:radial-gradient(circle,#5BB5F5 0%,transparent 70%);bottom:20%;right:10%;animation-duration:15s;animation-delay:-8s}
+.blob-4{width:480px;height:480px;background:radial-gradient(circle,#081A35 0%,transparent 65%);bottom:-120px;right:-80px;animation-duration:24s;animation-delay:-2s;opacity:.25}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1);opacity:.5}33%{transform:translate(-30px,-20px) scale(1.05);opacity:.6}66%{transform:translate(20px,30px) scale(.97);opacity:.45}}
+.waves{position:absolute;right:-5%;top:0;width:80%;height:100%;opacity:.35;clip-path:ellipse(75% 95% at 75% 50%)}
+.wave{fill:none;stroke-width:1.2;opacity:.6}
+
+/* ===== Layout ===== */
+.topbar{position:fixed;top:0;left:0;right:0;height:78px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--g-border);display:flex;align-items:center;padding:0 36px;z-index:10;gap:20px}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mono{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:38px;letter-spacing:-1px;line-height:1}
+.brand-mono .g{color:var(--g-logo-gray)}
+.brand-mono .a{color:var(--g-logo-teal)}
+.brand-txt{display:flex;flex-direction:column;line-height:1.05}
+.brand-txt .line1{font-family:'DM Sans',sans-serif;font-weight:700;font-size:13px;letter-spacing:2px;color:var(--g-charcoal)}
+.brand-txt .line2{font-family:'DM Sans',sans-serif;font-weight:700;font-size:10px;letter-spacing:3.5px;color:var(--g-teal-accent);margin-top:2px}
+.topbar-spacer{flex:1}
+.topbar-right{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--g-muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;border:none;transition:all .2s ease;white-space:nowrap}
+.btn-primary{background:var(--g-blue);color:#FFF}
+.btn-primary:hover{background:var(--g-navy-mid);box-shadow:var(--shadow-btn)}
+.btn-ghost{background:transparent;color:var(--g-blue);border:1.5px solid var(--g-border)}
+.btn-ghost:hover{background:var(--g-surface);border-color:var(--g-blue)}
+
+.sidebar{position:fixed;top:78px;left:0;bottom:0;width:260px;background:rgba(255,255,255,.88);backdrop-filter:blur(12px);border-right:1px solid var(--g-border);overflow-y:auto;padding:22px 0}
+.nav-group{font-family:'DM Sans',sans-serif;font-weight:700;font-size:10px;letter-spacing:2px;color:var(--g-muted);padding:14px 24px 6px;text-transform:uppercase}
+.nav a{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 24px;color:var(--g-dark);font-size:14px;font-weight:500;border-left:3px solid transparent;transition:all .15s ease}
+.nav a:hover{background:var(--g-surface);color:var(--g-blue)}
+.nav a.active{background:linear-gradient(90deg,rgba(26,82,150,.08),transparent);border-left-color:var(--g-blue);color:var(--g-navy);font-weight:600}
+.nav .nav-code{font-family:'DM Sans',sans-serif;font-weight:700;color:var(--g-muted);font-size:11px;letter-spacing:.5px;min-width:26px}
+.nav a.active .nav-code{color:var(--g-blue)}
+.nav .nav-pct{font-size:11px;color:var(--g-muted);font-variant-numeric:tabular-nums}
+.nav-dot{width:8px;height:8px;border-radius:50%;background:var(--g-light);flex-shrink:0}
+.nav-dot.ok{background:#22A06B}
+.nav-dot.mid{background:#E8A317}
+.nav-dot.low{background:#D64545}
+
+main{margin-left:260px;padding:100px 48px 48px;min-height:100vh}
+.page{max-width:1200px;margin:0 auto}
+.page-head{margin-bottom:28px}
+.page-eyebrow{font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:2.5px;color:var(--g-teal-accent);text-transform:uppercase;margin-bottom:8px}
+.page-title{font-family:'EB Garamond',Georgia,serif;font-weight:500;font-size:38px;color:var(--g-navy);line-height:1.1;letter-spacing:-.5px}
+.page-sub{margin-top:10px;font-size:15px;color:var(--g-gray);max-width:780px}
+
+/* ===== Cards ===== */
+.card{background:#FFF;border-radius:16px;padding:32px;box-shadow:var(--shadow-card);margin-bottom:22px}
+.card-sm{padding:22px}
+.card-title{font-family:'EB Garamond',serif;font-weight:500;font-size:22px;color:var(--g-navy);margin-bottom:14px}
+
+/* ===== Dashboard Início ===== */
+.hero{background:linear-gradient(135deg,#0B2447 0%,#163A6B 55%,#1A5296 100%);color:#FFF;border-radius:20px;padding:40px 44px;margin-bottom:28px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-80px;top:-80px;width:380px;height:380px;background:radial-gradient(circle,rgba(125,203,255,.35),transparent 70%);border-radius:50%}
+.hero-eyebrow{font-weight:700;font-size:11px;letter-spacing:3px;color:#7ECBFF;text-transform:uppercase}
+.hero h1{font-family:'EB Garamond',serif;font-weight:500;font-size:42px;line-height:1.05;margin:10px 0 18px;letter-spacing:-.5px}
+.hero-meta{display:flex;gap:28px;flex-wrap:wrap;font-size:14px;color:rgba(255,255,255,.82)}
+.hero-meta b{color:#FFF;font-weight:600}
+.hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px;position:relative;z-index:1}
+.hero-kpi{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:16px 18px}
+.hero-kpi .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#BCE0FF;font-weight:600}
+.hero-kpi .val{font-family:'EB Garamond',serif;font-weight:500;font-size:32px;margin-top:4px;letter-spacing:-.5px}
+.hero-kpi .unit{font-size:14px;color:#BCE0FF;font-weight:500;margin-left:4px}
+
+.grid-setores{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.setor-card{background:#FFF;border-radius:14px;padding:22px;box-shadow:var(--shadow-card);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:inherit}
+.setor-card:hover{transform:translateY(-3px);box-shadow:0 0 0 1px rgba(26,82,150,.12),0 18px 44px rgba(26,82,150,.12)}
+.setor-card .head{display:flex;justify-content:space-between;align-items:flex-start}
+.setor-card .code{font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.5px;color:var(--g-teal-accent)}
+.setor-card .peso{font-size:12px;color:var(--g-muted);font-weight:600}
+.setor-card .ttl{font-family:'EB Garamond',serif;font-weight:500;font-size:22px;color:var(--g-navy);line-height:1.15}
+.setor-card .pilar-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--g-muted);margin-bottom:4px}
+.progress{height:6px;background:var(--g-border);border-radius:99px;overflow:hidden;margin-top:8px}
+.progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--g-blue),var(--g-blue-light));border-radius:99px;transition:width .3s ease}
+.setor-card .meta{display:flex;justify-content:space-between;font-size:12px;color:var(--g-gray)}
+.setor-card .meta b{color:var(--g-navy);font-weight:600;font-variant-numeric:tabular-nums}
+
+/* ===== Tabela setor ===== */
+.table-wrap{background:#FFF;border-radius:16px;box-shadow:var(--shadow-card);overflow:hidden;margin-bottom:22px}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl thead th{background:var(--g-navy);color:#FFF;font-weight:600;text-align:left;padding:14px 16px;font-size:12px;letter-spacing:.5px;text-transform:uppercase}
+.tbl thead th.num{text-align:center;width:80px}
+.tbl thead th.nota{width:180px}
+.tbl thead th.npq{width:90px;text-align:center}
+.tbl tbody td{padding:14px 16px;border-bottom:1px solid var(--g-border);vertical-align:top}
+.tbl tbody tr:nth-child(even){background:var(--g-surface)}
+.tbl tbody tr:hover{background:#FAFCFE}
+.tbl .cod{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;color:var(--g-teal-accent);white-space:nowrap;letter-spacing:.5px}
+.tbl .ponto{font-weight:600;color:var(--g-navy);margin-bottom:4px}
+.tbl .pergunta{font-size:13.5px;color:var(--g-charcoal);margin-bottom:6px}
+.tbl .evid{font-size:12px;color:var(--g-gray);font-style:italic;border-left:3px solid var(--g-border);padding-left:10px;margin-top:6px}
+.nota-input{display:flex;gap:4px;flex-wrap:wrap}
+.nota-btn{width:32px;height:32px;border:1.5px solid var(--g-border);background:#FFF;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:13px;color:var(--g-gray);cursor:pointer;transition:all .15s ease;display:flex;align-items:center;justify-content:center}
+.nota-btn:hover{border-color:var(--g-blue);color:var(--g-blue)}
+.nota-btn.sel{background:var(--g-blue);color:#FFF;border-color:var(--g-blue);box-shadow:0 2px 8px rgba(26,82,150,.25)}
+.obs-input{width:100%;min-height:38px;border:1.5px solid var(--g-border);border-radius:8px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--g-charcoal);resize:vertical;margin-top:8px;background:#FFF}
+.obs-input:focus{outline:none;border-color:var(--g-blue);box-shadow:0 0 0 3px rgba(26,82,150,.12)}
+.npq-cell{text-align:center;font-family:'EB Garamond',serif;font-size:20px;font-weight:500;color:var(--g-navy);font-variant-numeric:tabular-nums}
+.npq-cell.empty{color:var(--g-light)}
+
+/* ===== Setor footer score ===== */
+.sector-footer{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px}
+.stat{background:#FFF;border-radius:14px;padding:20px;box-shadow:var(--shadow-card);text-align:center}
+.stat .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--g-muted);font-weight:700;margin-bottom:6px}
+.stat .val{font-family:'EB Garamond',serif;font-weight:500;font-size:36px;color:var(--g-navy);line-height:1;font-variant-numeric:tabular-nums}
+.stat .unit{font-size:15px;color:var(--g-gray);font-weight:500;margin-left:4px}
+.stat.accent{background:linear-gradient(135deg,#0B2447,#1A5296);color:#FFF}
+.stat.accent .lbl{color:#BCE0FF}
+.stat.accent .val{color:#FFF}
+.stat.accent .unit{color:#BCE0FF}
+
+/* ===== Resumo Geral ===== */
+.resumo-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:24px;margin-bottom:22px}
+.chart-card{background:#FFF;border-radius:16px;padding:28px;box-shadow:var(--shadow-card)}
+.chart-card h3{font-family:'EB Garamond',serif;font-weight:500;font-size:22px;color:var(--g-navy);margin-bottom:18px}
+.gauge-wrap{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.level-tag{padding:8px 18px;border-radius:99px;font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.level-not{background:#FCE8E8;color:#B23030}
+.level-bas{background:#FFF3D6;color:#8A5A00}
+.level-ple{background:#DEF0FF;color:#0F4F82}
+.level-ava{background:#D4F4E4;color:#127548}
+.niveis-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+.niveis-tbl th,.niveis-tbl td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--g-border)}
+.niveis-tbl th{background:var(--g-surface);font-weight:600;color:var(--g-navy);font-size:12px;letter-spacing:.5px;text-transform:uppercase}
+
+.pilares-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.pilar-stat{background:#FFF;border-radius:14px;padding:22px;box-shadow:var(--shadow-card);border-top:4px solid var(--g-blue)}
+.pilar-stat.gov{border-top-color:#0B2447}
+.pilar-stat.tec{border-top-color:#1A5296}
+.pilar-stat.kpi{border-top-color:#1B5C6B}
+.pilar-stat .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--g-muted);font-weight:700}
+.pilar-stat .val{font-family:'EB Garamond',serif;font-weight:500;font-size:38px;color:var(--g-navy);line-height:1;margin-top:4px}
+.pilar-stat .sub{font-size:12px;color:var(--g-gray);margin-top:4px}
+
+/* ===== Empresa form ===== */
+.empresa-form{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+.field label{display:block;font-size:13px;font-weight:600;color:var(--g-dark);margin-bottom:6px}
+.field input{width:100%;padding:11px 14px;border:1.5px solid var(--g-border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14.5px;color:var(--g-charcoal);background:#FFF}
+.field input:focus{outline:none;border-color:var(--g-blue);box-shadow:0 0 0 3px rgba(26,82,150,.12)}
+
+/* ===== Plano de Ação ===== */
+.plano-tbl{width:100%;border-collapse:collapse;font-size:13px}
+.plano-tbl thead th{background:var(--g-navy);color:#FFF;padding:12px 10px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.5px;text-transform:uppercase}
+.plano-tbl tbody td{padding:12px 10px;border-bottom:1px solid var(--g-border);vertical-align:top}
+.plano-tbl tbody tr:nth-child(even){background:var(--g-surface)}
+.prio{display:inline-block;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.prio-alta{background:#FCE8E8;color:#B23030}
+.prio-media{background:#FFF3D6;color:#8A5A00}
+.prio-baixa{background:#DEF0FF;color:#0F4F82}
+
+/* ===== Instruções ===== */
+.inst-card{background:#FFF;border-radius:16px;padding:32px 36px;box-shadow:var(--shadow-card);margin-bottom:22px}
+.inst-card h2{font-family:'EB Garamond',serif;font-weight:500;font-size:26px;color:var(--g-navy);margin-bottom:14px;letter-spacing:-.3px}
+.inst-card h3{font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--g-teal-accent);margin:20px 0 10px}
+.inst-card p,.inst-card li{font-size:14.5px;line-height:1.6;color:var(--g-charcoal);margin-bottom:8px}
+.inst-card ul,.inst-card ol{padding-left:24px;margin-bottom:10px}
+.inst-card strong{color:var(--g-navy);font-weight:600}
+.inst-alert{background:#FFF5E6;border-left:4px solid #E8A317;padding:14px 18px;border-radius:8px;margin:14px 0}
+.inst-alert b{color:#8A5A00}
+
+/* ===== Footer ===== */
+footer{margin-left:260px;padding:26px 48px 40px;font-size:12px;color:var(--g-muted);text-align:center;border-top:1px solid var(--g-border);background:rgba(255,255,255,.5)}
+
+/* ===== Responsividade suave ===== */
+@media (max-width:980px){
+  .sidebar{position:static;width:auto;border-right:none;border-bottom:1px solid var(--g-border)}
+  main,footer{margin-left:0}
+  .resumo-grid,.empresa-form,.pilares-row,.hero-kpis,.sector-footer{grid-template-columns:1fr}
+}
+
+@media print{
+  .topbar,.sidebar,footer,.btn{display:none!important}
+  main{margin:0;padding:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-deco">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <svg class="waves" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+    <path class="wave" stroke="#5BB5F5" d="M0,200 Q250,180 500,220 T1000,200"/>
+    <path class="wave" stroke="#3D9BE9" d="M0,400 Q250,360 500,420 T1000,400"/>
+    <path class="wave" stroke="#2878C8" d="M0,600 Q250,560 500,620 T1000,600"/>
+    <path class="wave" stroke="#1A5296" d="M0,800 Q250,760 500,820 T1000,800"/>
+  </svg>
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mono"><span class="g">G</span><span class="a">A</span></div>
+    <div class="brand-txt">
+      <span class="line1">GALEAZZI &amp; ASSOCIADOS</span>
+      <span class="line2">ENTERPRISE PLATFORM</span>
+    </div>
+  </div>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-right">
+    <span id="tb-progress">—</span>
+    <button class="btn btn-primary" onclick="exportHTMLReport()">📄 Exportar Relatório</button>
+    <button class="btn btn-ghost" onclick="exportJSON()">⬇ JSON</button>
+    <button class="btn btn-ghost" onclick="importFile()">⬆ Importar</button>
+    <button class="btn btn-ghost" onclick="resetState()">↺ Novo</button>
+  </div>
+</header>
+
+<aside class="sidebar">
+  <nav class="nav" id="nav"></nav>
+</aside>
+
+<main id="app"></main>
+<footer>
+  <div style="max-width:900px;margin:0 auto">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;letter-spacing:-.5px;margin-bottom:6px">
+      <span style="color:var(--g-logo-gray)">G</span><span style="color:var(--g-logo-teal)">A</span>
+      <span style="font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;letter-spacing:2.5px;color:var(--g-charcoal);margin-left:10px">GALEAZZI &amp; ASSOCIADOS</span>
+    </div>
+    <div style="font-size:11px;letter-spacing:3px;color:var(--g-teal-accent);font-weight:700;margin-bottom:14px">ENTERPRISE PLATFORM</div>
+    <div style="font-size:13px;color:var(--g-dark);line-height:1.7">
+      Consultoria em Transformação Operacional · 38 anos de experiência em supply chain, logística e reestruturação<br>
+      Av. Brigadeiro Faria Lima, 2081, 10º andar · Pinheiros, São Paulo · SP · Brasil<br>
+      <b>+55 11 3383 9600</b> · <a href="mailto:galeazzi@galeazzi.com.br">galeazzi@galeazzi.com.br</a> · <a href="https://www.galeazzi.com.br" target="_blank" rel="noopener">www.galeazzi.com.br</a>
+    </div>
+    <div style="font-size:11px;color:var(--g-muted);margin-top:14px;opacity:.9">Assessment de Operador Logístico · NPQ-OL / ABOL · 119 Critérios · Confidencial — Uso Interno e Clientes Galeazzi</div>
+  </div>
+</footer>
+
+<script>
+// ============ DADOS ============
+const S = {
+  G1:{nome:"Gestão da Qualidade",pilar:"Governança",peso:8,sub:"1.1"},
+  G2:{nome:"Sustentabilidade",pilar:"Governança",peso:7,sub:"1.2"},
+  G3:{nome:"Gestão de Clientes",pilar:"Governança",peso:6,sub:"1.3"},
+  G4:{nome:"Confidencialidade e TI",pilar:"Governança",peso:5,sub:"1.4"},
+  G5:{nome:"Recursos Humanos",pilar:"Governança",peso:7,sub:"1.5"},
+  G6:{nome:"Gestão de Riscos",pilar:"Governança",peso:7,sub:"1.6"},
+  T1:{nome:"Recebimento e Inspeção",pilar:"Técnico",peso:7,sub:"2.1"},
+  T2:{nome:"Armazenagem e Estoque",pilar:"Técnico",peso:10,sub:"2.3-2.4"},
+  T3:{nome:"Picking e Preparação",pilar:"Técnico",peso:7,sub:"2.5"},
+  T4:{nome:"Expedição e Transportes",pilar:"Técnico",peso:9,sub:"2.6-2.7"},
+  T5:{nome:"Logística Reversa",pilar:"Técnico",peso:3,sub:"2.8"},
+  T6:{nome:"Sistemas de Informação",pilar:"Técnico",peso:8,sub:"2.9"},
+  T7:{nome:"Manutenção",pilar:"Técnico",peso:3,sub:"2.10"},
+  T8:{nome:"Projetos e Melhoria",pilar:"Técnico",peso:5,sub:"2.11-2.14"},
+  K1:{nome:"KPIs de Armazenagem",pilar:"KPIs",peso:4,sub:"3.2.1"},
+  K2:{nome:"KPIs de Transporte",pilar:"KPIs",peso:3,sub:"3.2.2"},
+  K3:{nome:"KPIs Financeiros",pilar:"KPIs",peso:1,sub:"3.2.3"}
+};
+const SETORES_ORDER = ['G1','G2','G3','G4','G5','G6','T1','T2','T3','T4','T5','T6','T7','T8','K1','K2','K3'];
+
+// Critérios (setor, codigo, ponto, pergunta, evidencia)
+const C = [
+["G1","1.1.1.1","Certificação ISO9001 ou Manual de Qualidade","A empresa possui certificação ISO9001 vigente ou Manual de Qualidade formalizado e atualizado?","Certificado ISO9001 vigente ou Manual de Qualidade aprovado e datado"],
+["G1","1.1.1.2","Estrutura organizacional documentada","Existem quadros organizacionais demonstrativos de toda a estrutura da empresa, atualizados e divulgados?","Organograma atualizado com todos os níveis hierárquicos e funções"],
+["G1","1.1.1.3","Descrição de cargos documentada","Existe documentação formal com descrição de cargos, verificada por amostragem?","Documentos de descrição de cargo por função / nível, assinados e datados"],
+["G1","1.1.1.4","Processos operacionais e registros de funcionamento","Os processos críticos estão documentados com registros mantidos e gestor responsável identificado?","Procedimentos operacionais documentados, registros de funcionamento e nome do gestor responsável"],
+["G1","1.1.1.5","Planos de comunicação interna (gestão à vista)","Há evidências de planos de comunicação interna e avaliação da disseminação da informação (gestão à vista)?","E-mails, relatórios de envio, painéis de gestão à vista, entrevistas com funcionários"],
+["G1","1.1.1.6","Relatórios e apresentações a stakeholders","A empresa produz e mantém evidências de relatórios e apresentações periódicas aos stakeholders?","Atas de reunião, e-mails, newsletters com stakeholders, relatórios periódicos"],
+["G1","1.1.1.7","Comunicação com subcontratadas","Há registros formalizados de comunicação com empresas subcontratadas?","E-mails, newsletters e comunicados às empresas subcontratadas"],
+["G1","1.1.1.8","Comunicação com fornecedores e clientes","Existem registros de comunicação com fornecedores e clientes e entrevistas com gestores comprovam a prática?","Atas de reunião, e-mails, newsletters com fornecedores e clientes"],
+["G2","1.2.1.1","Sustentabilidade financeira – demonstrações financeiras","A sustentabilidade do negócio no médio prazo pode ser avaliada mediante análise de demonstrações financeiras (DRE, balanço, fluxo de caixa)?","DRE, balanço patrimonial e fluxo de caixa dos últimos 2 anos"],
+["G2","1.2.1.2","Situação financeira – avaliação de balanço","A situação financeira da empresa foi avaliada mediante demonstrações financeiras e indicadores de solidez?","Balanço patrimonial, índices de liquidez, endividamento"],
+["G2","1.2.1.3","Planejamento estratégico formalizado","O planejamento estratégico está documentado e envolve os níveis diretivos da empresa?","Documento de planejamento estratégico com participação da diretoria"],
+["G2","1.2.1.4","Envolvimento gerencial no planejamento","Os níveis gerenciais participam do planejamento de suas respectivas áreas, com evidências documentadas?","Planos de área, atas de reunião com gestores, documentos de alinhamento gerencial"],
+["G2","1.2.1.5","Manutenção de carteira de clientes","A lista de clientes dos últimos 3 anos demonstra grau satisfatório de retenção?","Lista de clientes (3 anos), análise de churn, contratos vigentes"],
+["G2","1.2.2.1","Certificação ISO14001 ou Manual de Gestão Ambiental","A empresa possui certificação ISO14001 ou Manual de Gestão Ambiental formalizado?","Certificado ISO14001 vigente ou Manual de Gestão Ambiental aprovado"],
+["G2","1.2.2.2","Controle de emissões – relatórios e registros","Há relatórios e registros de controle de emissões de poluentes e GEE?","Relatórios periódicos de controle de emissões, inventário de GEE"],
+["G2","1.2.2.3","Política de gestão de resíduos e coleta seletiva","A empresa possui política de gestão de resíduos, contratos com empresas especializadas e processo de coleta seletiva?","Política de resíduos documentada, contratos com empresa de reciclagem, registros de coleta seletiva"],
+["G2","1.2.2.8","Publicação de inventário de GEE","A empresa publica inventário anual de Gases de Efeito Estufa (GEE)?","Inventário de GEE publicado ou disponível, com metodologia documentada (ex: GHG Protocol)"],
+["G2","1.2.3.1","Responsabilidade social – políticas e programas","A empresa possui políticas e programas de responsabilidade social documentados e praticados?","Políticas de diversidade, programas de inclusão, aprendizes, estagiários, ações comunitárias"],
+["G3","1.3.1.1","Política comercial documentada","A empresa possui política comercial documentada, incluindo critérios de precificação, SLAs e condições contratuais?","Política comercial aprovada, tabela de preços, modelos de contrato com SLAs"],
+["G3","1.3.2.1","Metodologia de gerenciamento de reclamações","Existe metodologia formalizada de gerenciamento de reclamações de clientes?","Procedimento de gestão de reclamações, software de atendimento, fluxo de escalação"],
+["G3","1.3.2.2","Prazo de resposta a reclamações","A empresa monitora e cumpre prazos de resposta e resolução de reclamações?","Registros de reclamações com datas de abertura e fechamento, SLA de resposta"],
+["G3","1.3.2.3","Indicadores de desempenho do setor de clientes","Existem indicadores de desempenho formalizados para o setor de atendimento ao cliente?","Dashboard ou relatório de KPIs de atendimento: NPS, tempo de resposta, resolutividade"],
+["G3","1.3.3.1","Avaliação de satisfação de clientes","A empresa realiza avaliação periódica de satisfação de clientes com metodologia definida?","Pesquisas de satisfação, NPS, relatórios de resultados com planos de ação"],
+["G4","1.4.1.1","Cláusula de confidencialidade em contratos","Os contratos com clientes e fornecedores possuem cláusula de confidencialidade?","Contratos com cláusula NDA/confidencialidade, política de sigilo documentada"],
+["G4","1.4.1.2","Responsável por segurança de TI","A empresa possui profissional responsável por segurança de TI identificado no organograma?","Organograma com cargo de CISO ou responsável por TI/segurança da informação"],
+["G4","1.4.1.3","Treinamentos de segurança da informação","Existem planos e registros de treinamentos de segurança da informação para funcionários?","Planos de treinamento anuais, registros de participação, avaliações de eficácia"],
+["G4","1.4.1.4","Testes de intrusão (pentest) periódicos","A empresa realiza testes de intrusão periódicos e mantém planos de ação para os pontos identificados?","Relatórios de pentest, planos de ação documentados, periodicidade definida"],
+["G4","1.4.1.5","Procedimentos documentados de segurança de TI","Existem procedimentos documentados de segurança de TI, incluindo envolvimento de terceiros?","Política de segurança da informação, procedimentos de acesso, backup, gestão de terceiros"],
+["G4","1.4.1.6","Indicadores de performance de segurança (KPIs/KGIs)","A empresa monitora indicadores de performance de segurança e os gestores conhecem os KPIs/KGIs?","Dashboard de KPIs de segurança, registros de planos de ação, entrevista com gestores"],
+["G4","1.4.1.7","Equipamentos e ferramentas de suporte à segurança","A empresa possui equipamentos e ferramentas adequadas de suporte à segurança da informação?","Firewall, antivírus, sistemas de monitoramento, controle de acesso físico e lógico"],
+["G5","1.5.1.1","Programa de treinamento e desenvolvimento","A empresa possui programa formal de treinamento e desenvolvimento com plano anual e orçamento aprovado?","Plano de treinamento anual, registros de participação, avaliação de eficácia, orçamento"],
+["G5","1.5.1.2","Mapeamento de competências","Existe mapeamento de competências por cargo, com gap analysis e plano de desenvolvimento?","Matriz de competências por cargo, registros de avaliação e plano de desenvolvimento"],
+["G5","1.5.1.3","Documentação de qualificações e certificações","A documentação de qualificações, certificações e habilitações dos funcionários está mantida e atualizada?","Dossiê de funcionários, cópias de certificados, habilitações e treinamentos obrigatórios"],
+["G5","1.5.2.1","Conformidade com normas laborais","A empresa está em conformidade com as normas laborais aplicáveis (CLT, NRs, acordos coletivos)?","Laudos de conformidade NR, PPRA, PCMSO, acordos coletivos, certidões trabalhistas"],
+["G5","1.5.2.2","Processos seletivos formalizados","A empresa possui processo seletivo documentado e registros de processos seletivos realizados?","Procedimento de recrutamento, registros de processos seletivos, descrições de vaga"],
+["G5","1.5.3.1","Sistema de gestão de segurança no trabalho (OHSAS/ISO45001)","A empresa possui sistema de gestão de saúde e segurança no trabalho (ISO45001 ou OHSAS18001)?","Certificado ISO45001 ou OHSAS18001, ou evidências de sistema equivalente implementado"],
+["G5","1.5.3.2","Planos de comunicação sobre segurança no trabalho","Existem planos e registros de comunicação sobre segurança no trabalho para funcionários?","E-mails, atas de reunião, DDS (Diálogo Diário de Segurança), comunicados de segurança"],
+["G5","1.5.4.1","Responsável por ergonomia identificado","A empresa possui profissional responsável por ergonomia identificado no organograma ou cargo dedicado?","Organograma ou descrição de cargo do responsável por ergonomia / SESMT"],
+["G5","1.5.4.2","Procedimentos ergonômicos documentados e praticados","Existem procedimentos ergonômicos documentados, com evidências de aplicação verificada por amostragem?","NR-17 implementada, laudo ergonômico, procedimentos de posto de trabalho"],
+["G6","1.6.1.1","Compliance – política e programa","A empresa possui política e programa de compliance documentados, com comitê ou responsável designado?","Código de conduta, política anticorrupção, canal de denúncias, treinamentos de compliance"],
+["G6","1.6.1.2","Conformidade regulatória monitorada","A empresa monitora alterações regulatórias aplicáveis (fiscal, trabalhista, ambiental, setorial)?","Processo de monitoramento regulatório, registros de atualização, assessoria jurídica"],
+["G6","1.6.2.1","Apólices de seguro da empresa vigentes","A empresa possui apólices de seguro patrimonial, responsabilidade civil e de carga em vigor?","Apólices de seguro vigentes: patrimonial, RC, carga, interrupção de negócios"],
+["G6","1.6.2.4","Apólices de seguro dos fornecedores verificadas","A empresa verifica e mantém cópias das apólices de seguro dos fornecedores?","Cópias de apólices de fornecedores/transportadoras, controle de vencimentos"],
+["G6","1.6.3.1","Segurança patrimonial – dispositivos e monitoramento","O armazém possui dispositivos de segurança patrimonial adequados e em funcionamento?","CFTV ativo, controle de acesso, alarmes, vigilância, cercas e iluminação perimetral"],
+["G6","1.6.3.7","Comitê de Gestão de Riscos (CGR) constituído","Existe Comitê de Gestão de Riscos constituído com atas de reunião e estudos de vulnerabilidade?","Ata de criação do CGR, atas de reuniões periódicas, mapeamento de vulnerabilidades"],
+["G6","1.6.4.1","Processo de gestão de ocorrências documentado","Existe processo formal de gestão de ocorrências (incidentes, não conformidades) documentado?","Procedimento de registro de ocorrências, sistema de gestão de não conformidades"],
+["G6","1.6.4.2","Indicadores de performance de segurança patrimonial","A empresa monitora indicadores de performance de segurança patrimonial (ocorrências, furtos, avarias)?","Dashboard ou relatório de KPIs de segurança patrimonial, registros históricos"],
+["T1","2.1.1.1","Planejamento de recebimento documentado","Existem procedimentos documentados para o planejamento e programação de recebimentos?","Procedimento de recebimento, agendamento de docas, regras de priorização"],
+["T1","2.1.2.1","Planejamento de pátio e docas","O planejamento de pátio e docas é realizado de forma estruturada com regras documentadas?","Procedimento de gestão de pátio/YMS, regras de agendamento, layout de docas"],
+["T1","2.1.3.1","Conferência e destinação de produtos não conformes","Existe processo de conferência e destinação formal de produtos não conformes no recebimento?","Procedimento de não conformidade no recebimento, área de segregação identificada"],
+["T1","2.1.3.2","Conferência cega no recebimento","A empresa utiliza processo de conferência cega no recebimento?","Evidência do processo de conferência cega: sem quantidade no romaneio ou leitura eletrônica"],
+["T1","2.1.3.3","Etiquetagem das mercadorias recebidas","As mercadorias recebidas são etiquetadas conforme padrão documentado?","Padrão de etiquetagem, amostras de etiquetas, frequência de itens etiquetados"],
+["T1","2.1.3.4","Endereçamento automático no recebimento","O processo de leitura no recebimento resulta em endereçamento automático integrado ao WMS?","Demonstração do processo de leitura + endereçamento automático no WMS"],
+["T1","2.1.4.1","Dispositivos tecnológicos no recebimento e inspeção","Os dispositivos utilizados nas operações de recebimento e inspeção são adequados e integrados ao sistema?","Terminais RF, leitores de código de barras/RFID, balanças integradas ao WMS"],
+["T1","2.1.5.1","Processos operacionais de recebimento documentados","Existe documento descrevendo todas as atividades do processo de recebimento com fluxograma?","POP ou fluxograma do processo de recebimento com todas as etapas descritas"],
+["T2","2.3.1.1","Regras FIFO e FEFO no processo de alocação","O WMS possui regras preestabelecidas de FIFO e FEFO para alocação de materiais?","Configuração de regras FIFO/FEFO no WMS, demonstração do processo"],
+["T2","2.3.2.1","Metodologia ABC e KPIs de alocação","A empresa utiliza metodologia ABC de materiais para alocação e monitora KPIs de performance?","Relatório de curva ABC, configuração no WMS, KPIs de ocupação e giro"],
+["T2","2.3.3.1","Endereçamento e giro de estoque com suporte de sistema","O sistema suporta controle de endereçamento e giro de estoque com informações atualizadas?","Relatório de endereçamento e giro por SKU extraído do WMS"],
+["T2","2.3.4.1","Processo de reorganização de estoques","Existe processo documentado e registros de reorganização periódica dos estoques?","Procedimento de reorganização, registros de execução, critérios de gatilho"],
+["T2","2.4.1.1","Gestão e revisão de localização","O processo de revisão de localização é realizado periodicamente com registros documentados?","Procedimento de revisão de endereçamento, registros e frequência definida"],
+["T2","2.4.2.1","Dados dos produtos e exigências especiais documentados","Os dados dos produtos e exigências especiais de armazenagem (temperatura, fragilidade) estão documentados?","Cadastro de produtos com exigências especiais, áreas segregadas identificadas"],
+["T2","2.4.3.1","Integração WMS – endereçamento e gestão de estoque","O WMS suporta integralmente as operações de endereçamento, armazenagem e gestão de estoque?","Demonstração das funcionalidades de endereçamento e gestão de estoque no WMS"],
+["T2","2.4.5.1","Processo de inventário cíclico","O processo de contagem cíclica está documentado e o sistema suporta a atividade?","Procedimento de inventário cíclico, configuração no WMS, registros de contagens"],
+["T2","2.4.6.1","Estratégia de estoque documentada","A empresa possui estratégia de gestão de estoque documentada com critérios de reposição?","Política de estoques, parâmetros de reposição (ponto de pedido, estoque de segurança)"],
+["T2","2.2.2.1","Condições de limpeza e organização das instalações","As instalações do armazém atendem a padrões de limpeza e organização documentados?","Procedimento de limpeza, check-list de vistoria, histórico de inspeções"],
+["T2","2.2.3.1","Crossdocking – processo e documentação","O processo de crossdocking está documentado e operacionalizado com suporte de sistema?","Procedimento de crossdocking, área dedicada, integração WMS/TMS"],
+["T3","2.5.1.1","Estratégia e metodologia de picking documentada","A empresa possui estratégia e metodologia de picking documentada e alinhada ao perfil de operação?","Documento de estratégia de picking (zona, onda, batch, etc.), justificativa da escolha"],
+["T3","2.5.2.1","Dimensionamento e utilização das áreas de picking","O dimensionamento e a utilização das áreas de picking são avaliados periodicamente?","Layout das áreas de picking, índices de utilização, relatório de dimensionamento"],
+["T3","2.5.2.3","Indicadores de eficiência do picking","Existem índices de eficiência formalizados para o processo de picking?","KPIs de picking: linhas/hora, acuracidade, lead time de separação"],
+["T3","2.5.2.4","Ergonomia na área de picking","A ergonomia da área de picking foi avaliada e implementada conforme NR-17?","Laudo ergonômico da área de picking, adequações implementadas conforme NR-17"],
+["T3","2.5.3.1","Listas de picking e eficiência do processo","A empresa utiliza listas de picking formalizadas com avaliação periódica da eficiência?","Amostras de listas de picking, registros de produtividade, avaliação de eficiência"],
+["T3","2.5.3.2","Documentação de picking formalizada","A emissão da documentação de picking está formalizada e integrada ao sistema?","Processo de emissão de documentação de picking integrado ao WMS"],
+["T3","2.5.3.3","Tecnologia empregada no picking","A tecnologia empregada no picking (RF, voice, put-to-light, etc.) é adequada ao perfil da operação?","Descrição da tecnologia de picking, evidência de uso, integração com WMS"],
+["T3","2.5.4.1","Processamento e disponibilização de informações do picking","O processamento e a disponibilização das informações no picking são eficientes e em tempo real?","Demonstração do processamento de informações no WMS durante o picking"],
+["T4","2.6.1.1","Integração picking–expedição–sistemas","Há integração efetiva entre o processo de picking, expedição e as plataformas de sistema?","Demonstração da integração WMS-TMS, fluxo de informações picking > expedição"],
+["T4","2.6.1.2","Processamento de pedidos para embarque","O processamento dos pedidos para embarque é realizado de forma eficiente e documentada?","Procedimento de processamento de pedidos, integração com WMS/TMS, registro de embarques"],
+["T4","2.6.1.4","Processo de conferência para expedição","O processo de conferência para expedição utiliza dispositivos de acuracidade para evitar erros?","Processo de conferência com leitura eletrônica, registros de erro zero ou desvios"],
+["T4","2.6.3.1","Gestão de exigências do cliente na expedição","As exigências específicas de clientes na expedição estão parametrizadas no sistema?","Configurações de exigências de clientes no WMS, registros de atendimento"],
+["T4","2.7.1.1","Comunicação com transportadoras documentada","A comunicação com transportadoras é documentada e padronizada, com canais formais definidos?","Procedimento de comunicação com transportadoras, canais formais, registros"],
+["T4","2.7.2.1","Programação de transporte formalizada","A programação de transporte é realizada de forma estruturada com suporte do TMS?","Processo de programação de transporte, relatório de programação do TMS"],
+["T4","2.7.3.1","Avaliação de performance de transportadoras","A empresa avalia periodicamente a performance das transportadoras com KPIs documentados?","BSC ou relatório de performance de transportadoras, critérios de avaliação, periodicidade"],
+["T4","2.7.3.3","Programas de incentivo a transportadoras","A empresa possui programas de incentivo à melhoria de performance de transportadoras?","Contrato ou programa de incentivo, registros de bonificações, resultados"],
+["T5","2.8.1.1","Organograma e responsável pela logística reversa","Existe equipe ou responsável identificado para recebimento e triagem de devoluções no organograma?","Organograma com equipe/responsável de logística reversa identificado"],
+["T5","2.8.1.2","Sistema e fluxo de informações da logística reversa","O sistema e o fluxo de informações do processo de logística reversa são adequados e documentados?","Fluxograma do processo de logística reversa, integração com WMS, procedimento"],
+["T5","2.8.1.3","Eficiência e eficácia do processo de logística reversa","A eficiência e eficácia do processo de logística reversa são monitoradas com KPIs?","KPIs de logística reversa: prazo de processamento, % de recuperação, custo unitário"],
+["T5","2.8.1.4","Utilização de RFID na logística reversa","A empresa utiliza tecnologia RFID integrada ao processo de logística reversa (quando aplicável)?","Evidência de uso de RFID no processo de devolução, configuração no WMS"],
+["T6","2.9.1.1","Integração WMS-TMS e outros sistemas","A integração entre WMS, TMS e outros sistemas de gestão é eficiente e documentada?","Arquitetura de sistemas, evidência de integração, tempo de resposta"],
+["T6","2.9.1.2","Velocidade de atualização das informações no sistema","A velocidade de disponibilização e atualização das informações no sistema é adequada?","SLA de atualização de dados, demonstração em ambiente produtivo"],
+["T6","2.9.2.1","Funções-chave do WMS implementadas","O WMS possui as funções-chave implementadas (recebimento, armazenagem, picking, expedição, inventário)?","Demonstração das funcionalidades do WMS nas operações principais"],
+["T6","2.9.3.1","Funções-chave do TMS implementadas","O TMS possui as funções-chave implementadas (programação, rastreamento, auditoria de frete, relatórios)?","Demonstração das funcionalidades do TMS nas operações de transporte"],
+["T6","2.9.4.1","Emissão de documentos no WMS e TMS","O WMS e o TMS suportam a emissão completa de documentos fiscais e operacionais?","Amostras de documentos emitidos: NF-e, CT-e, DANFE, etiquetas, manifestos"],
+["T6","2.9.5.1","Integração WMS com sistemas do cliente e fornecedores","O WMS possui integração com os sistemas do cliente e dos fornecedores (EDI, API, WebService)?","Documentação de integração, contratos de API/EDI, evidência de troca de dados"],
+["T6","2.9.6.1","Relatórios de KPIs emitidos pelo sistema","O sistema suporta a emissão de relatórios de KPIs operacionais de forma automatizada?","Amostras de relatórios de KPIs emitidos pelo WMS/TMS, frequência e destinatários"],
+["T6","2.9.7.1","Gestão de sistemas – manutenção e atualização","A empresa possui processo documentado de gestão de sistemas (atualização, backup, suporte)?","Política de gestão de TI, cronograma de atualização, SLAs com fornecedores de sistema"],
+["T7","2.10.1.1","Política de manutenção documentada","A empresa possui política documentada de manutenção preventiva, preditiva e corretiva?","Política de manutenção, plano anual, cronograma preventivo, ordens de serviço"],
+["T7","2.10.2.1","Inspeção periódica da frota","A frota de veículos é inspecionada periodicamente com registros documentados?","Registros de inspeção de frota, RNTRC, documentação de veículos, laudos de revisão"],
+["T7","2.10.3.1","Inspeção periódica das instalações","As instalações do armazém são inspecionadas periodicamente com laudos técnicos?","Laudos de inspeção de instalações: estrutura, piso, cobertura, elétrica, hidráulica"],
+["T8","2.11.1.1","Processo de contratação de fornecedores – avaliação de cotações","A empresa possui processo documentado de avaliação de cotações e seleção de fornecedores?","Procedimento de compras, registros de cotações, critérios de avaliação"],
+["T8","2.12.1.1","Metodologia de gestão de projetos","A empresa utiliza metodologia estruturada de gestão de projetos (escopo, custo, prazo, risco)?","Metodologia de GP documentada, projetos em andamento com artefatos formalizados"],
+["T8","2.12.1.3","Formalização de projetos de melhoria em contrato","Os projetos de melhoria contínua com clientes estão formalizados em contrato?","Contratos ou aditivos contratuais com cláusulas de melhoria contínua"],
+["T8","2.13.1.1","Visibilidade da operação – plataformas e informações disponíveis","A empresa disponibiliza plataformas de visibilidade da operação em tempo real para os clientes?","Demonstração da plataforma de visibilidade, informações disponíveis por perfil de acesso"],
+["T8","2.14.1.1","Registros de performance por atividade operacional","Existem e são divulgados registros de performance por atividade (recebimento, alocação, picking, expedição)?","Relatórios de performance por processo, frequência de divulgação, destinatários"],
+["T8","2.14.1.4","Métricas formais de performance e SLAs com fornecedores e clientes","A empresa possui métricas formais de performance e SLAs documentados com fornecedores e clientes?","Contratos com SLAs, relatórios de acompanhamento, penalidades e bônus definidos"],
+["T8","2.14.2.1","Monitoramento de performance de fornecedores – BSC ou equivalente","A empresa monitora e mantém registros de performance dos fornecedores usando BSC ou equivalente?","BSC ou ferramenta de avaliação de fornecedores, histórico de avaliações, planos de ação"],
+["K1","KPI-A1","Recebimento na Data (On Time Receipt)","A empresa monitora o % de pedidos recebidos dentro do prazo acordado? Meta definida e acompanhada?","Relatório de On Time Receipt, meta documentada, frequência de medição mensal"],
+["K1","KPI-A2","Acuracidade de inventário","A empresa monitora o % de assertividade entre estoque físico e contábil? Meta e plano de ação definidos?","Relatório de acuracidade de inventário, meta por faixa (ex: >99,5%), plano de ação"],
+["K1","KPI-A3","Avarias no armazém","A empresa monitora o % em valor de itens avariados no armazém? Meta e análise de causa raiz?","Relatório de avarias no armazém, meta definida, análise de causa raiz documentada"],
+["K1","KPI-A4","Acuracidade de picking","A empresa monitora o % de itens separados corretamente? Meta e tratamento de erros documentados?","Relatório de acuracidade de picking, meta definida, análise de erro documentada"],
+["K1","KPI-A5","Expedição na Data (On Time Shipment)","A empresa monitora o % de pedidos expedidos no prazo acordado? Meta e plano de ação definidos?","Relatório de On Time Shipment, meta documentada, análise de desvios"],
+["K1","KPI-A6","Exatidão das notas fiscais","A empresa monitora o % de notas fiscais emitidas sem erros? Meta e processo de controle documentados?","Relatório de exatidão de NF, meta definida, análise de erros fiscais"],
+["K2","KPI-T1","Custo de não conformidades em transportes","A empresa monitora o % de custos de não conformidades em transportes? Meta e análise documentados?","Relatório de custo de não conformidades, detalhamento por tipo, meta e análise de causa"],
+["K2","KPI-T2","Pedidos entregues OTIF (On Time In Full)","A empresa monitora o OTIF (pedidos entregues no prazo, quantidade e especificação corretos)?","Relatório de OTIF por cliente e filial, meta contratual, análise de desvios"],
+["K2","KPI-T3","Pedidos entregues On Time","A empresa monitora o % de pedidos entregues no prazo acordado (On Time)?","Relatório de On Time por cliente e filial, meta documentada, análise de desvios"],
+["K2","KPI-T4","Pedidos integralmente atendidos (In Full)","A empresa monitora o % de pedidos atendidos nas quantidades e especificações (In Full)?","Relatório de In Full por cliente, meta documentada, análise de desvios"],
+["K2","KPI-T5","Avarias e perdas no transporte","A empresa monitora o % em valor de itens avariados ou perdidos durante o transporte?","Relatório de avarias no transporte, meta por transportadora, plano de ação"],
+["K2","KPI-T6","Pedido Perfeito (Perfect Order)","A empresa monitora o Perfect Order (prazo + quantidade + especificação + documentação corretos)?","Relatório de Perfect Order, meta contratual, análise de causa raiz dos desvios"],
+["K3","KPI-F1","Retorno sobre Investimento (ROI)","A empresa calcula e monitora o ROI das operações e investimentos realizados?","Cálculo de ROI documentado, relatório financeiro com evidência de uso gerencial"],
+["K3","KPI-F2","Lucratividade (EBITDA %)","A empresa monitora a lucratividade (EBITDA) com frequência mensal e análise de desvios?","DRE com cálculo de EBITDA, análise mensal de variação, comparativo com meta"],
+["K3","KPI-F3","Endividamento geral","A empresa acompanha o índice de endividamento geral com análise de tendência?","Relatório de endividamento, análise de tendência, limites de endividamento definidos"]
+];
+
+const PLANO_DEFAULT = [
+["Alta","G1 – Qualidade","Formalizar ou renovar certificação ISO9001 / Manual de Qualidade com evidências documentadas de todos os processos","Certificado ISO9001 vigente ou Manual aprovado por diretoria","Gerente de Qualidade","90 dias","Aberto","1.1.1.1/1.1.1.3"],
+["Alta","G6 – Riscos","Constituir Comitê de Gestão de Riscos (CGR) com ata de criação e reuniões periódicas documentadas","Ata de criação do CGR, atas de reuniões, mapeamento de vulnerabilidades","COO / Diretor de Riscos","60 dias","Aberto","1.6.3.7"],
+["Alta","T1 – Recebimento","Implementar processo de conferência cega no recebimento com suporte de sistema e treinamento de equipe","Procedimento documentado, evidência de processo em operação, redução de divergências","Gerente de Operações","60 dias","Aberto","2.1.3.2"],
+["Alta","T2 – Armazenagem","Configurar regras FIFO/FEFO no WMS e treinar equipe operacional nas novas regras de alocação","Configuração ativa no WMS, demonstração do processo, registro de treinamento","Gerente de WMS / TI","45 dias","Aberto","2.3.1.1"],
+["Alta","T6 – Sistemas","Implementar integração WMS-TMS com documentação de arquitetura e SLAs de atualização definidos","Integração ativa, arquitetura documentada, SLAs de disponibilidade e atualização","CTO / Gerente de TI","90 dias","Aberto","2.9.1.1"],
+["Alta","K1 – KPIs Armazém","Implementar monitoramento formal de OTIF, acuracidade de inventário e acuracidade de picking com metas e planos de ação","Dashboard de KPIs ativo, metas documentadas, análise mensal com plano de ação","Gerente de CD","90 dias","Aberto","KPI-A2/A4"],
+["Média","G4 – Confidencialidade","Implementar política de segurança da informação com treinamentos e testes de intrusão periódicos","Política aprovada, registros de treinamento, laudo de pentest anual","CISO / TI","120 dias","Aberto","1.4.1.3/1.4.1.4"],
+["Média","G5 – RH","Elaborar plano anual de treinamento e desenvolvimento com mapeamento de competências por cargo","Plano de treinamento aprovado, matriz de competências, registros de realização","CHRO / RH","120 dias","Aberto","1.5.1.1/1.5.1.2"],
+["Média","T3 – Picking","Formalizar estratégia e metodologia de picking com indicadores de eficiência e ergonomia documentados","Documento de estratégia, KPIs de picking, laudo ergonômico NR-17","Gerente de Operações","120 dias","Aberto","2.5.1.1/2.5.2.4"],
+["Média","T4 – Expedição","Implementar avaliação formal de performance de transportadoras com BSC e programa de incentivo","BSC de transportadoras ativo, histórico de avaliações, contratos com SLA e incentivos","Gerente de Transportes","120 dias","Aberto","2.7.3.1/2.7.3.3"],
+["Média","T8 – Projetos","Implementar plataforma de visibilidade da operação em tempo real para os clientes","Plataforma ativa, evidência de acesso de clientes, SLA de atualização definido","Gerente de TI / Operações","180 dias","Aberto","2.13.1.1"],
+["Baixa","G2 – Sustentabilidade","Elaborar e publicar inventário anual de GEE conforme metodologia GHG Protocol","Inventário de GEE publicado, metodologia documentada, meta de redução definida","Responsável ESG / COO","180 dias","Aberto","1.2.2.8"],
+["Baixa","T5 – Log. Reversa","Formalizar processo de logística reversa com responsável identificado e KPIs de eficiência","Organograma com responsável, fluxograma do processo, KPIs de logística reversa","Gerente de Logística Reversa","180 dias","Aberto","2.8.1.1/2.8.1.3"],
+["Baixa","K2/K3 – KPIs","Implementar monitoramento de Perfect Order, ROI e EBITDA com relatórios mensais formais","Relatórios mensais ativos, análise de desvios documentada, distribuição aos gestores","CFO / Gerente de CD","180 dias","Planejado","KPI-T6/F1/F2"],
+["Baixa","G3 – Clientes","Implementar metodologia formal de gestão de reclamações com SLA de resposta e monitoramento de NPS","Procedimento ativo de reclamações, dashboard de NPS, SLA de resposta documentado","Gerente Comercial / Customer Service","180 dias","Aberto","1.3.2.1/1.3.3.1"]
+];
+
+// ============ STATE ============
+const KEY='galeazzi_assessment_ol_v1';
+let state = load();
+
+function defaultState(){
+  return {empresa:'',data:new Date().toISOString().slice(0,10),auditor:'',notas:{},obs:{},plano:PLANO_DEFAULT.map(r=>[...r])};
+}
+function load(){
+  try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.notas)return s;}catch(e){}
+  return defaultState();
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));updateTopbarProgress();buildNav();}
+
+function resetState(){
+  if(!confirm('Iniciar um novo assessment? Todas as notas e observações serão apagadas.'))return;
+  state=defaultState();save();router();
+}
+
+// ============ CÁLCULOS ============
+function critsOf(code){return C.filter(c=>c[0]===code);}
+function notaCrit(code){return state.notas[code];} // undefined se não preenchido
+function avgSector(code){
+  const crits=critsOf(code);
+  const vals=crits.map(c=>state.notas[c[1]]).filter(v=>typeof v==='number');
+  if(!vals.length)return null;
+  return vals.reduce((a,b)=>a+b,0)/vals.length;
+}
+function progSector(code){
+  const crits=critsOf(code);const done=crits.filter(c=>typeof state.notas[c[1]]==='number').length;
+  return {done,total:crits.length,pct:crits.length?done/crits.length:0};
+}
+function npq(n){return n==null?null:Math.round(n*3/5*100)/100;}
+function level(np){
+  if(np==null)return {label:'—',cls:''};
+  if(np<1)return {label:'Não Certificável',cls:'level-not'};
+  if(np<1.5)return {label:'Nível Básico',cls:'level-bas'};
+  if(np<2)return {label:'Nível Pleno',cls:'level-ple'};
+  return {label:'Nível Avançado',cls:'level-ava'};
+}
+function nivelMaturidade(n){
+  if(n==null)return {label:'—',color:'#BBB'};
+  if(n<1)return {label:'Crítico',color:'#D64545'};
+  if(n<2)return {label:'Inicial',color:'#E8604C'};
+  if(n<3)return {label:'Em Desenvolvimento',color:'#E8A317'};
+  if(n<4)return {label:'Estruturado',color:'#22A06B'};
+  if(n<4.5)return {label:'Gerenciado',color:'#1A5296'};
+  return {label:'Benchmark',color:'#0B2447'};
+}
+function globalScore(){
+  let sum=0,wsum=0;
+  for(const code of SETORES_ORDER){
+    const v=avgSector(code);
+    if(v!=null){sum+=v*S[code].peso;wsum+=S[code].peso}
+  }
+  return wsum?sum/wsum:null;
+}
+function pilarScore(pilar){
+  let sum=0,wsum=0;
+  for(const code of SETORES_ORDER){
+    if(S[code].pilar!==pilar)continue;
+    const v=avgSector(code);
+    if(v!=null){sum+=v*S[code].peso;wsum+=S[code].peso}
+  }
+  return wsum?sum/wsum:null;
+}
+function globalProgress(){
+  const total=C.length;
+  const done=Object.keys(state.notas).length;
+  return {done,total,pct:total?done/total:0};
+}
+
+// ============ NAV ============
+function buildNav(){
+  const nav=document.getElementById('nav');
+  const groups=[
+    {lbl:'',items:[['inicio','Início',''],['instrucoes','Instruções','']]},
+    {lbl:'Governança · 40%',items:SETORES_ORDER.filter(c=>c.startsWith('G')).map(c=>[c.toLowerCase(),`${c} · ${S[c].nome}`,`${S[c].peso}%`])},
+    {lbl:'Critérios Técnicos · 52%',items:SETORES_ORDER.filter(c=>c.startsWith('T')).map(c=>[c.toLowerCase(),`${c} · ${S[c].nome}`,`${S[c].peso}%`])},
+    {lbl:'KPIs · 8%',items:SETORES_ORDER.filter(c=>c.startsWith('K')).map(c=>[c.toLowerCase(),`${c} · ${S[c].nome}`,`${S[c].peso}%`])},
+    {lbl:'',items:[['resumo','Resumo Geral',''],['plano','Plano de Ação','']]}
+  ];
+  const hash=location.hash.replace('#/','')||'inicio';
+  let html='';
+  for(const g of groups){
+    if(g.lbl)html+=`<div class="nav-group">${g.lbl}</div>`;
+    for(const [id,lbl,pct] of g.items){
+      const code=id.toUpperCase();
+      const p=SETORES_ORDER.includes(code)?progSector(code):null;
+      const dotCls=p?(p.pct===1?'ok':p.pct>0?'mid':''):'';
+      html+=`<a href="#/${id}" class="${hash===id?'active':''}"><span>${lbl}</span><span style="display:flex;align-items:center;gap:6px">${pct?`<span class="nav-pct">${pct}</span>`:''}${p?`<span class="nav-dot ${dotCls}"></span>`:''}</span></a>`;
+    }
+  }
+  nav.innerHTML=html;
+}
+
+function updateTopbarProgress(){
+  const p=globalProgress();
+  document.getElementById('tb-progress').textContent=`${p.done} / ${p.total} critérios · ${Math.round(p.pct*100)}%`;
+}
+
+// ============ RENDER ============
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function renderInicio(){
+  const gp=globalProgress();const g=globalScore();const gov=pilarScore('Governança');const tec=pilarScore('Técnico');const kpi=pilarScore('KPIs');
+  const lev=level(npq(g));
+  return `
+    <section class="page">
+      <div class="hero">
+        <div class="hero-eyebrow">Assessment · Operador Logístico · NPQ-OL / ABOL</div>
+        <h1>${state.empresa?escapeHtml(state.empresa):'Assessment de Operador Logístico'}</h1>
+        <div class="hero-meta">
+          <span><b>Data:</b> ${escapeHtml(state.data||'—')}</span>
+          <span><b>Auditor:</b> ${escapeHtml(state.auditor||'—')}</span>
+          <span><b>Progresso:</b> ${gp.done}/${gp.total} critérios (${Math.round(gp.pct*100)}%)</span>
+          <span><b>Nível estimado:</b> ${lev.label}</span>
+        </div>
+        <div class="hero-kpis">
+          <div class="hero-kpi"><div class="lbl">Score Gerencial</div><div class="val">${g==null?'—':g.toFixed(2)}<span class="unit">/ 5,0</span></div></div>
+          <div class="hero-kpi"><div class="lbl">Score NPQ-OL</div><div class="val">${g==null?'—':npq(g).toFixed(2)}<span class="unit">/ 3,0</span></div></div>
+          <div class="hero-kpi"><div class="lbl">Governança · 40%</div><div class="val">${gov==null?'—':gov.toFixed(2)}<span class="unit">/ 5,0</span></div></div>
+          <div class="hero-kpi"><div class="lbl">Técnico+KPIs · 60%</div><div class="val">${(tec==null&&kpi==null)?'—':weightedAvg([['Técnico',tec],['KPIs',kpi]]).toFixed(2)}<span class="unit">/ 5,0</span></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 class="card-title">Identificação do Assessment</h3>
+        <div class="empresa-form">
+          <div class="field"><label>Empresa Avaliada</label><input id="f-empresa" value="${escapeHtml(state.empresa)}" placeholder="Razão social ou fantasia"></div>
+          <div class="field"><label>Data da Avaliação</label><input id="f-data" type="date" value="${escapeHtml(state.data)}"></div>
+          <div class="field"><label>Responsável / Auditor</label><input id="f-auditor" value="${escapeHtml(state.auditor)}" placeholder="Nome completo"></div>
+        </div>
+      </div>
+
+      <h3 style="font-family:'EB Garamond',serif;font-weight:500;font-size:26px;color:var(--g-navy);margin:14px 0 18px;letter-spacing:-.3px">Setores Avaliáveis · 17 dimensões · 119 critérios</h3>
+      <div class="grid-setores">
+        ${SETORES_ORDER.map(code=>{
+          const s=S[code];const p=progSector(code);const avg=avgSector(code);
+          const pilarColor=s.pilar==='Governança'?'#0B2447':s.pilar==='Técnico'?'#1A5296':'#1B5C6B';
+          return `<a class="setor-card" href="#/${code.toLowerCase()}">
+            <div class="head">
+              <div>
+                <div class="pilar-tag" style="color:${pilarColor}">${s.pilar} · ${s.sub}</div>
+                <div class="code">${code}</div>
+              </div>
+              <div class="peso">${s.peso}%</div>
+            </div>
+            <div class="ttl">${s.nome}</div>
+            <div class="progress"><i style="width:${Math.round(p.pct*100)}%"></i></div>
+            <div class="meta"><span>${p.done} / ${p.total} critérios</span><span><b>${avg==null?'—':avg.toFixed(2)}</b> / 5,0</span></div>
+          </a>`;
+        }).join('')}
+      </div>
+    </section>`;
+}
+function weightedAvg(pairs){
+  let s=0,w=0;
+  for(const [pilar,v] of pairs){
+    if(v==null)continue;
+    const peso=SETORES_ORDER.filter(c=>S[c].pilar===pilar).reduce((a,c)=>a+S[c].peso,0);
+    s+=v*peso;w+=peso;
+  }
+  return w?s/w:0;
+}
+
+function renderInstrucoes(){
+  return `
+  <section class="page">
+    <div class="page-head">
+      <div class="page-eyebrow">Instruções + Regras do Auditor</div>
+      <h1 class="page-title">Processo de Certificação ABOL · NPQ-OL</h1>
+      <p class="page-sub">Leia antes de iniciar o assessment. Este guia consolida as regras de conduta do auditor, o processo oficial ABOL de 6 etapas e o sistema de pontuação dupla (escala gerencial 0-5 ↔ escala NPQ-OL 0-3).</p>
+    </div>
+
+    <div class="inst-card">
+      <h2>🔒 Confidencialidade e Conduta do Auditor</h2>
+      <ol>
+        <li><strong>CONFIDENCIALIDADE:</strong> As análises e considerações do relatório de auditoria são restritas e confidenciais. Não comentar com pessoas não diretamente envolvidas.</li>
+        <li><strong>IMPARCIALIDADE:</strong> O auditor deve manter-se imparcial, não interferindo nas operações normais do Operador Logístico.</li>
+        <li><strong>NÃO INTERVENÇÃO:</strong> O auditor NÃO pode aconselhar sobre como corrigir uma não conformidade durante o processo. Deve apontar os pontos de melhoria no relatório para que o solicitante se adeque após a auditoria.</li>
+        <li><strong>ATUALIZAÇÃO:</strong> Manter-se atualizado nas revisões das normas ABOL, ISO9000, ISO14000, ISO31000, OHSAS18001.</li>
+        <li><strong>ACOMPANHAMENTO:</strong> Ao analisar requisitos de segurança, o auditor deve estar acompanhado do engenheiro/técnico de segurança responsável.</li>
+      </ol>
+      <div class="inst-alert"><b>Princípio do conservadorismo:</b> em caso de dúvida entre duas notas, sempre opte pela nota inferior.</div>
+    </div>
+
+    <div class="inst-card">
+      <h2>📋 Processo de Certificação ABOL (6 Etapas)</h2>
+      <ol>
+        <li><strong>SOLICITAÇÃO:</strong> Etapa voluntária pela empresa pleiteante, com envio de documentação inicial à Galeazzi/ABOL.</li>
+        <li><strong>AUTOAVALIAÇÃO:</strong> A empresa realiza autoavaliação interna com base nos critérios NPQ-OL antes da auditoria externa (esta ferramenta apoia esta etapa).</li>
+        <li><strong>AVALIAÇÃO EXTERNA:</strong> Auditoria conduzida por auditor credenciado, verificando documentos e operação in loco.</li>
+        <li><strong>EMISSÃO DO SELO:</strong> Após avaliação positiva, a ABOL emite o Selo de Certificação conforme o nível atingido.</li>
+        <li><strong>ACOMPANHAMENTO:</strong> Monitoramento periódico do cumprimento dos requisitos ao longo da vigência do certificado.</li>
+        <li><strong>RENOVAÇÃO:</strong> Ao final do período, a empresa passa por nova avaliação completa para renovação do selo.</li>
+      </ol>
+    </div>
+
+    <div class="inst-card">
+      <h2>🏆 Pilares e Pesos NPQ-OL</h2>
+      <p>Este assessment integra os <strong>3 pilares</strong> do NPQ-OL conforme material ABOL, totalizando <strong>119 critérios</strong>:</p>
+      <ul>
+        <li><strong>Pilar 1 · Governança (40%)</strong> — G1 Qualidade (8%), G2 Sustentabilidade (7%), G3 Clientes (6%), G4 Confidencialidade (5%), G5 RH (7%), G6 Riscos (7%)</li>
+        <li><strong>Pilar 2 · Critérios Técnicos (52%)</strong> — T1 Recebimento (7%), T2 Armazenagem (10%), T3 Picking (7%), T4 Expedição (9%), T5 Log. Reversa (3%), T6 Sistemas (8%), T7 Manutenção (3%), T8 Projetos (5%)</li>
+        <li><strong>Pilar 3 · KPIs (8%)</strong> — K1 Armazenagem (4%), K2 Transporte (3%), K3 Financeiros (1%)</li>
+      </ul>
+    </div>
+
+    <div class="inst-card">
+      <h2>📊 Sistema de Pontuação Duplo</h2>
+      <h3>Escala Gerencial (0 a 5) — diagnóstico fino</h3>
+      <ul>
+        <li><strong>0</strong> · Inexistente — prática não existe</li>
+        <li><strong>1</strong> · Inicial — esporádica e informal</li>
+        <li><strong>2</strong> · Em Desenvolvimento — baixa consistência</li>
+        <li><strong>3</strong> · Definido — formalizado e aplicado com regularidade</li>
+        <li><strong>4</strong> · Gerenciado — monitorado com métricas e controle</li>
+        <li><strong>5</strong> · Benchmark — referência de mercado, plenamente integrado</li>
+      </ul>
+      <h3>Nota NPQ-OL (0 a 3) — aderência ABOL</h3>
+      <p>Convertida automaticamente: <code>NPQ = ROUND(Nota_0a5 × 3 / 5; 2)</code></p>
+      <h3>Níveis de Certificação NPQ-OL</h3>
+      <ul>
+        <li><strong>Não Certificável</strong>: NPQ &lt; 1,0</li>
+        <li><strong>Nível Básico</strong>: NPQ ≥ 1,0</li>
+        <li><strong>Nível Pleno</strong>: NPQ ≥ 1,5</li>
+        <li><strong>Nível Avançado</strong>: NPQ ≥ 2,0</li>
+      </ul>
+    </div>
+
+    <div class="inst-card">
+      <h2>⚙ Como Preencher</h2>
+      <ol>
+        <li>Acesse a tela <strong>Início</strong> e registre empresa, data e auditor.</li>
+        <li>Para cada setor, leia a pergunta diagnóstica e a evidência esperada.</li>
+        <li>Atribua a nota de 0 a 5 clicando no botão correspondente.</li>
+        <li>Registre observações e evidências no campo de texto (opcional).</li>
+        <li>A nota NPQ (0-3) é calculada automaticamente.</li>
+        <li>Acesse <strong>Resumo Geral</strong> para ver score consolidado e gráficos.</li>
+        <li>Elabore o <strong>Plano de Ação</strong> pós-diagnóstico (não durante a auditoria).</li>
+      </ol>
+      <div class="inst-alert"><b>Persistência:</b> todas as respostas ficam salvas no navegador (localStorage). Use <strong>Exportar JSON</strong> para backup ou envio.</div>
+    </div>
+  </section>`;
+}
+
+function renderSetor(code){
+  const s=S[code];if(!s)return `<section class="page"><div class="card">Setor não encontrado.</div></section>`;
+  const crits=critsOf(code);const avg=avgSector(code);const prog=progSector(code);const mat=nivelMaturidade(avg);const np=npq(avg);
+  return `
+  <section class="page">
+    <div class="page-head">
+      <div class="page-eyebrow">${s.pilar} · Sub ${s.sub} · Peso gerencial ${s.peso}%</div>
+      <h1 class="page-title">${code} · ${s.nome}</h1>
+      <p class="page-sub">${crits.length} critérios de avaliação · Escala 0 a 5 (gerencial) convertida automaticamente para 0 a 3 (NPQ-OL). Preenchimento salvo automaticamente.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead><tr><th class="num">Código</th><th>Ponto de Auditoria · Pergunta · Evidência</th><th class="nota">Nota (0-5)</th><th class="npq">NPQ</th></tr></thead>
+        <tbody>
+        ${crits.map(c=>{
+          const [,cod,ponto,pergunta,evid]=c;
+          const n=state.notas[cod];const obsv=state.obs[cod]||'';
+          const npv=npq(n);
+          return `<tr>
+            <td class="cod">${cod}</td>
+            <td>
+              <div class="ponto">${escapeHtml(ponto)}</div>
+              <div class="pergunta">${escapeHtml(pergunta)}</div>
+              <div class="evid">${escapeHtml(evid)}</div>
+              <textarea class="obs-input" placeholder="Observações do auditor / evidências encontradas…" onblur="setObs('${cod}',this.value)">${escapeHtml(obsv)}</textarea>
+            </td>
+            <td>
+              <div class="nota-input">
+                ${[0,1,2,3,4,5].map(v=>`<button class="nota-btn ${n===v?'sel':''}" onclick="setNota('${cod}',${v})">${v}</button>`).join('')}
+                <button class="nota-btn" style="border-style:dashed;color:var(--g-muted);width:44px;font-size:11px" onclick="setNota('${cod}',null)" title="Limpar">—</button>
+              </div>
+            </td>
+            <td class="npq-cell ${npv==null?'empty':''}">${npv==null?'—':npv.toFixed(2)}</td>
+          </tr>`;
+        }).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sector-footer">
+      <div class="stat"><div class="lbl">Progresso</div><div class="val">${prog.done}<span class="unit">/ ${prog.total}</span></div></div>
+      <div class="stat"><div class="lbl">Nota Setor (0-5)</div><div class="val">${avg==null?'—':avg.toFixed(2)}</div></div>
+      <div class="stat"><div class="lbl">Nota NPQ (0-3)</div><div class="val">${np==null?'—':np.toFixed(2)}</div></div>
+      <div class="stat accent"><div class="lbl">Nível de Maturidade</div><div class="val" style="font-size:22px">${mat.label}</div></div>
+    </div>
+  </section>`;
+}
+
+function renderResumo(){
+  const g=globalScore();const gov=pilarScore('Governança');const tec=pilarScore('Técnico');const kpi=pilarScore('KPIs');
+  const np=npq(g);const lev=level(np);
+  const tecKpiWeighted=weightedAvg([['Técnico',tec],['KPIs',kpi]]);
+
+  // Build radar chart for 17 sectors
+  const radarPoints=SETORES_ORDER.map(c=>({code:c,val:avgSector(c),pilar:S[c].pilar}));
+
+  return `
+  <section class="page">
+    <div class="page-head">
+      <div class="page-eyebrow">Consolidação · Score NPQ-OL + Score Gerencial</div>
+      <h1 class="page-title">Resumo Geral do Assessment</h1>
+      <p class="page-sub">Pesos macro ABOL: <strong>Governança 40% + Técnico+KPIs 60%</strong>. Score NPQ convertido automaticamente (× 3/5, arredondado para 2 casas).</p>
+    </div>
+
+    <div class="pilares-row">
+      <div class="pilar-stat gov"><div class="lbl">Governança · 40%</div><div class="val">${gov==null?'—':gov.toFixed(2)}</div><div class="sub">/ 5,0 · NPQ ${gov==null?'—':npq(gov).toFixed(2)}</div></div>
+      <div class="pilar-stat tec"><div class="lbl">Técnico · 52%</div><div class="val">${tec==null?'—':tec.toFixed(2)}</div><div class="sub">/ 5,0 · NPQ ${tec==null?'—':npq(tec).toFixed(2)}</div></div>
+      <div class="pilar-stat kpi"><div class="lbl">KPIs · 8%</div><div class="val">${kpi==null?'—':kpi.toFixed(2)}</div><div class="sub">/ 5,0 · NPQ ${kpi==null?'—':npq(kpi).toFixed(2)}</div></div>
+    </div>
+
+    <div class="resumo-grid">
+      <div class="chart-card">
+        <h3>Radar · Maturidade por Setor (0-5)</h3>
+        ${buildRadarSVG(radarPoints)}
+      </div>
+      <div class="chart-card">
+        <h3>Nível de Certificação ABOL</h3>
+        <div class="gauge-wrap">
+          ${buildGaugeSVG(np)}
+          <div class="level-tag ${lev.cls}">${lev.label}</div>
+        </div>
+        <table class="niveis-tbl">
+          <thead><tr><th>Nível NPQ-OL</th><th>Pontuação Mínima</th></tr></thead>
+          <tbody>
+            <tr><td>Não Certificável</td><td>&lt; 1,00</td></tr>
+            <tr><td>Nível Básico</td><td>≥ 1,00</td></tr>
+            <tr><td>Nível Pleno</td><td>≥ 1,50</td></tr>
+            <tr><td>Nível Avançado</td><td>≥ 2,00</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Contribuição Ponderada por Setor</h3>
+      ${buildBarsSVG()}
+    </div>
+
+    <div class="sector-footer">
+      <div class="stat"><div class="lbl">Score Gerencial Final</div><div class="val">${g==null?'—':g.toFixed(2)}<span class="unit">/ 5,0</span></div></div>
+      <div class="stat"><div class="lbl">Score NPQ Final</div><div class="val">${np==null?'—':np.toFixed(2)}<span class="unit">/ 3,0</span></div></div>
+      <div class="stat"><div class="lbl">Técnico+KPIs (ABOL 60%)</div><div class="val">${tecKpiWeighted.toFixed(2)}<span class="unit">/ 5,0</span></div></div>
+      <div class="stat accent"><div class="lbl">Nível Atingido</div><div class="val" style="font-size:22px">${lev.label}</div></div>
+    </div>
+  </section>`;
+}
+
+// SVG charts
+function buildRadarSVG(points){
+  const size=420,cx=size/2,cy=size/2,rMax=165;
+  const n=points.length;
+  const angle=i=>(-Math.PI/2)+(i*2*Math.PI/n);
+  const ring=(v)=>{
+    return points.map((p,i)=>{
+      const a=angle(i);const r=rMax*v/5;
+      return [cx+r*Math.cos(a),cy+r*Math.sin(a)];
+    });
+  };
+  const toPath=arr=>'M'+arr.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' L')+' Z';
+  let html=`<svg viewBox="0 0 ${size} ${size}" style="width:100%;height:auto;display:block">`;
+  // grid rings
+  for(let v=1;v<=5;v++){
+    html+=`<polygon fill="none" stroke="#E0E4EA" stroke-width="1" points="${ring(v).map(p=>p.join(',')).join(' ')}"/>`;
+  }
+  // axis lines
+  for(let i=0;i<n;i++){
+    const a=angle(i);const x2=cx+rMax*Math.cos(a),y2=cy+rMax*Math.sin(a);
+    html+=`<line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#E0E4EA" stroke-width="1"/>`;
+  }
+  // data polygon
+  const vals=points.map(p=>p.val==null?0:p.val);
+  const pts=vals.map((v,i)=>{const a=angle(i);const r=rMax*v/5;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];});
+  html+=`<polygon fill="rgba(26,82,150,.18)" stroke="#1A5296" stroke-width="2" points="${pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}"/>`;
+  for(const p of pts){html+=`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.5" fill="#1A5296"/>`;}
+  // labels
+  for(let i=0;i<n;i++){
+    const a=angle(i);const r=rMax+22;const x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);
+    const c=points[i].code;const color=S[c].pilar==='Governança'?'#0B2447':S[c].pilar==='Técnico'?'#1A5296':'#1B5C6B';
+    html+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="${color}">${c}</text>`;
+  }
+  // center label
+  html+=`<text x="${cx}" y="${cy-4}" text-anchor="middle" font-family="EB Garamond,serif" font-size="13" font-weight="500" fill="#777">0-5</text>`;
+  html+=`</svg>`;
+  return html;
+}
+function buildGaugeSVG(np){
+  const size=260,cx=size/2,cy=160,r=110;
+  // semicircle from 180° to 360°
+  const arc=(start,end,color,width)=>{
+    const a1=Math.PI+start*Math.PI/3,a2=Math.PI+end*Math.PI/3;
+    const x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+    const x2=cx+r*Math.cos(a2),y2=cy+r*Math.sin(a2);
+    return `<path d="M${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 0,1 ${x2.toFixed(1)},${y2.toFixed(1)}" stroke="${color}" stroke-width="${width}" fill="none" stroke-linecap="round"/>`;
+  };
+  let html=`<svg viewBox="0 0 ${size} 200" style="width:100%;max-width:320px;height:auto;display:block">`;
+  // segments: 0-1 red, 1-1.5 orange, 1.5-2 blue, 2-3 green
+  html+=arc(0,1,'#D64545',18);
+  html+=arc(1,1.5,'#E8A317',18);
+  html+=arc(1.5,2,'#1A5296',18);
+  html+=arc(2,3,'#127548',18);
+  // pointer
+  const v=np==null?0:Math.min(3,Math.max(0,np));
+  const ang=Math.PI+v*Math.PI/3;
+  const px=cx+(r-10)*Math.cos(ang),py=cy+(r-10)*Math.sin(ang);
+  html+=`<line x1="${cx}" y1="${cy}" x2="${px.toFixed(1)}" y2="${py.toFixed(1)}" stroke="#0B2447" stroke-width="3" stroke-linecap="round"/>`;
+  html+=`<circle cx="${cx}" cy="${cy}" r="8" fill="#0B2447"/>`;
+  // ticks
+  for(let i=0;i<=3;i++){
+    const a=Math.PI+i*Math.PI/3;const x=cx+(r+14)*Math.cos(a),y=cy+(r+14)*Math.sin(a);
+    html+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" dominant-baseline="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="600" fill="#555">${i}</text>`;
+  }
+  // central value
+  html+=`<text x="${cx}" y="${cy+38}" text-anchor="middle" font-family="EB Garamond,serif" font-size="40" font-weight="500" fill="#0B2447">${np==null?'—':np.toFixed(2)}</text>`;
+  html+=`<text x="${cx}" y="${cy+58}" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="600" fill="#999" letter-spacing="1">NPQ-OL / 3,0</text>`;
+  html+=`</svg>`;
+  return html;
+}
+function buildBarsSVG(){
+  const abrev={
+    G1:'Qualidade',G2:'Sustentab.',G3:'Clientes',G4:'Confid./TI',G5:'RH',G6:'Riscos',
+    T1:'Recebim.',T2:'Armazen.',T3:'Picking',T4:'Expedição',T5:'Log. Rev.',T6:'Sistemas',T7:'Manut.',T8:'Projetos',
+    K1:'KPI Armaz.',K2:'KPI Transp.',K3:'KPI Finan.'
+  };
+  const pilarColor={'Governança':'#0B2447','Técnico':'#1A5296','KPIs':'#1B5C6B'};
+  const pilarBg={'Governança':'rgba(11,36,71,.05)','Técnico':'rgba(26,82,150,.05)','KPIs':'rgba(27,92,107,.07)'};
+  const pilarPeso={'Governança':'40%','Técnico':'52%','KPIs':'8%'};
+
+  const items=SETORES_ORDER.map(c=>{const v=avgSector(c);return {code:c,val:v==null?0:v,peso:S[c].peso,pilar:S[c].pilar,nome:S[c].nome,contrib:v==null?0:v*S[c].peso/100};});
+  const maxContrib=Math.max(0.01,...items.map(i=>i.contrib),1);
+
+  const W=1100,H=420,padL=62,padR=28,padT=58,padB=150;
+  const innerW=W-padL-padR,innerH=H-padT-padB;
+  const bw=innerW/items.length*.74;const gap=innerW/items.length*.26;
+
+  // Agrupar por pilar (consecutivos)
+  const groups=[];let curr=null;
+  items.forEach((it,i)=>{
+    if(!curr||curr.pilar!==it.pilar){if(curr)groups.push(curr);curr={pilar:it.pilar,start:i,end:i};}
+    else curr.end=i;
+  });
+  if(curr)groups.push(curr);
+
+  let html=`<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block" font-family="DM Sans,sans-serif">`;
+
+  // --- Faixas de fundo por pilar ---
+  groups.forEach(g=>{
+    const x1=padL+g.start*(bw+gap);
+    const x2=padL+(g.end+1)*(bw+gap);
+    const bandW=x2-x1;
+    html+=`<rect x="${x1.toFixed(1)}" y="${(padT-6).toFixed(1)}" width="${bandW.toFixed(1)}" height="${(innerH+14).toFixed(1)}" fill="${pilarBg[g.pilar]}" rx="8"/>`;
+    // Etiqueta do pilar no topo
+    const cX=x1+bandW/2;
+    const labelW=Math.min(bandW-12,280);
+    html+=`<rect x="${(cX-labelW/2).toFixed(1)}" y="${(padT-38).toFixed(1)}" width="${labelW.toFixed(1)}" height="24" fill="${pilarColor[g.pilar]}" rx="12"/>`;
+    html+=`<text x="${cX.toFixed(1)}" y="${(padT-22).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" letter-spacing="1.5">${g.pilar.toUpperCase()} · ${pilarPeso[g.pilar]}</text>`;
+  });
+
+  // --- Eixo Y ---
+  for(let i=0;i<=4;i++){
+    const y=padT+innerH-(innerH*i/4);
+    html+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="#E8ECF2" stroke-width="1" stroke-dasharray="3,4"/>`;
+    html+=`<text x="${(padL-8).toFixed(1)}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="10" fill="#999">${(maxContrib*i/4).toFixed(2)}</text>`;
+  }
+
+  // --- Separadores verticais entre pilares ---
+  for(let i=1;i<groups.length;i++){
+    const x=padL+groups[i].start*(bw+gap)-gap/2;
+    html+=`<line x1="${x.toFixed(1)}" y1="${(padT-10).toFixed(1)}" x2="${x.toFixed(1)}" y2="${(padT+innerH+12).toFixed(1)}" stroke="#B6BFCF" stroke-width="1.2" stroke-dasharray="5,4"/>`;
+  }
+
+  // --- Barras + rótulos inferiores ---
+  items.forEach((it,idx)=>{
+    const x=padL+idx*(bw+gap)+gap/2;
+    const h=innerH*it.contrib/maxContrib;
+    const y=padT+innerH-h;
+    const color=pilarColor[it.pilar];
+    html+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${h.toFixed(1)}" fill="${color}" rx="4" opacity="0.92"/>`;
+    if(h>3){
+      html+=`<text x="${(x+bw/2).toFixed(1)}" y="${(y-6).toFixed(1)}" text-anchor="middle" font-size="11" font-weight="700" fill="${color}">${it.contrib.toFixed(2)}</text>`;
+    }
+    const cX=(x+bw/2).toFixed(1);
+    const baseY=padT+innerH;
+    html+=`<line x1="${cX}" y1="${(baseY+2).toFixed(1)}" x2="${cX}" y2="${(baseY+10).toFixed(1)}" stroke="${color}" stroke-width="1.2"/>`;
+    html+=`<text x="${cX}" y="${(baseY+24).toFixed(1)}" text-anchor="middle" font-size="12" font-weight="700" fill="${color}">${it.code}</text>`;
+    html+=`<text x="${cX}" y="${(baseY+40).toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="500" fill="#333">${abrev[it.code]}</text>`;
+    html+=`<text x="${cX}" y="${(baseY+54).toFixed(1)}" text-anchor="middle" font-size="10" font-weight="600" fill="#999">${it.peso}%</text>`;
+  });
+
+  // --- Título e legenda ---
+  html+=`<text x="${padL}" y="20" font-size="11" font-weight="700" fill="#0B2447" letter-spacing=".5">Contribuição Ponderada por Setor</text>`;
+  html+=`<text x="${padL}" y="36" font-size="10" fill="#777">Valor = Nota (0-5) × Peso (%) / 100 · agrupado pelos 3 pilares NPQ-OL</text>`;
+  // Eixo Y label
+  html+=`<text x="18" y="${(padT+innerH/2).toFixed(1)}" font-size="10" font-weight="600" fill="#999" transform="rotate(-90 18 ${(padT+innerH/2).toFixed(1)})" text-anchor="middle">Contribuição</text>`;
+
+  html+=`</svg>`;
+  return html;
+}
+
+function renderPlano(){
+  return `
+  <section class="page">
+    <div class="page-head">
+      <div class="page-eyebrow">Matriz de Iniciativas · Pós-Diagnóstico</div>
+      <h1 class="page-title">Plano de Ação · 15 Iniciativas Priorizadas</h1>
+      <p class="page-sub"><strong>Atenção:</strong> por norma NPQ-OL, o auditor não deve aconselhar correções DURANTE a auditoria. Este plano é elaborado APÓS a conclusão do diagnóstico.</p>
+    </div>
+    <div class="table-wrap">
+      <table class="plano-tbl">
+        <thead><tr>
+          <th style="width:78px">Prior.</th>
+          <th style="width:150px">Setor</th>
+          <th>Ação Corretiva / Iniciativa de Melhoria</th>
+          <th>Resultado Esperado</th>
+          <th style="width:150px">Responsável</th>
+          <th style="width:80px">Prazo</th>
+          <th style="width:90px">Status</th>
+          <th style="width:100px">Critério NPQ</th>
+        </tr></thead>
+        <tbody>
+        ${state.plano.map((r,i)=>{
+          const prioCls=r[0]==='Alta'?'prio-alta':r[0]==='Média'?'prio-media':'prio-baixa';
+          return `<tr>
+            <td><span class="prio ${prioCls}">${r[0]}</span></td>
+            <td><b style="color:var(--g-navy)">${escapeHtml(r[1])}</b></td>
+            <td contenteditable="true" onblur="updPlano(${i},2,this.innerText)">${escapeHtml(r[2])}</td>
+            <td contenteditable="true" onblur="updPlano(${i},3,this.innerText)" style="color:var(--g-gray)">${escapeHtml(r[3])}</td>
+            <td contenteditable="true" onblur="updPlano(${i},4,this.innerText)">${escapeHtml(r[4])}</td>
+            <td contenteditable="true" onblur="updPlano(${i},5,this.innerText)">${escapeHtml(r[5])}</td>
+            <td contenteditable="true" onblur="updPlano(${i},6,this.innerText)">${escapeHtml(r[6])}</td>
+            <td style="font-family:monospace;font-size:11px">${escapeHtml(r[7])}</td>
+          </tr>`;
+        }).join('')}
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:14px;font-size:12px;color:var(--g-muted);text-align:center">Clique nas células brancas para editar · Alterações salvas automaticamente no navegador</p>
+  </section>`;
+}
+
+// ============ HANDLERS ============
+function setNota(cod,v){
+  if(v===null||v===undefined)delete state.notas[cod];
+  else state.notas[cod]=v;
+  save();
+  // Rerender só a linha afetada não é trivial com string HTML; re-render toda a tela setor
+  router();
+}
+function setObs(cod,v){
+  if(!v||!v.trim())delete state.obs[cod];
+  else state.obs[cod]=v.trim();
+  save();
+}
+function updPlano(i,col,v){state.plano[i][col]=v.trim();save();}
+function bindEmpresaForm(){
+  const fe=document.getElementById('f-empresa');if(fe)fe.addEventListener('blur',e=>{state.empresa=e.target.value;save();});
+  const fd=document.getElementById('f-data');if(fd)fd.addEventListener('blur',e=>{state.data=e.target.value;save();});
+  const fa=document.getElementById('f-auditor');if(fa)fa.addEventListener('blur',e=>{state.auditor=e.target.value;save();});
+}
+
+// ============ EXPORT / IMPORT ============
+function exportJSON(){
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  const nome=(state.empresa||'assessment').replace(/[^a-z0-9]+/gi,'_');
+  a.download=`assessment_ol_${nome}_${state.data}.json`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+function importFile(){
+  const inp=document.createElement('input');inp.type='file';inp.accept='.json,.html,application/json,text/html';
+  inp.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+    r.onload=ev=>{
+      try{
+        let data;const content=ev.target.result;
+        if(/\.html?$/i.test(f.name)||/<!DOCTYPE/i.test(content.slice(0,200))){
+          const m=content.match(/<script[^>]+id=["']galeazzi-state["'][^>]*>([\s\S]*?)<\/script>/i);
+          if(!m){alert('Este HTML não contém estado Galeazzi incorporado.\nUse o Relatório exportado por esta aplicação.');return;}
+          data=JSON.parse(m[1]);
+        } else {
+          data=JSON.parse(content);
+        }
+        if(data&&data.notas){
+          state=Object.assign(defaultState(),data);
+          save();router();
+          alert(`✓ Importado com sucesso.\n${Object.keys(state.notas).length} / ${C.length} critérios restaurados.`);
+        } else alert('Arquivo sem dados válidos do assessment.');
+      }catch(er){alert('Erro ao ler: '+er.message);}
+    };
+    r.readAsText(f);
+  };
+  inp.click();
+}
+
+// ===== Gera recomendações direcionadas baseadas nas notas =====
+function generateTargetedFindings(){
+  const findings=[];
+  for(const code of SETORES_ORDER){
+    const crits=critsOf(code);
+    const avg=avgSector(code);
+    const lowCrits=crits.filter(c=>{const n=state.notas[c[1]];return typeof n==='number'&&n<=2;})
+      .sort((a,b)=>(state.notas[a[1]]??99)-(state.notas[b[1]]??99));
+    if(lowCrits.length===0)continue;
+    findings.push({setor:code,nome:S[code].nome,pilar:S[code].pilar,peso:S[code].peso,avg:avg,crits:lowCrits});
+  }
+  // Ordenar setores pelo pior score primeiro
+  findings.sort((a,b)=>(a.avg??99)-(b.avg??99));
+  return findings;
+}
+
+// ===== Texto de recomendação por faixa de nota =====
+function recomendaPor(n){
+  if(n===0)return {titulo:'AÇÃO CRÍTICA · Implantação do zero',prazo:'30-60 dias',prio:'CRÍTICA'};
+  if(n===1)return {titulo:'AÇÃO URGENTE · Formalizar e documentar',prazo:'60-90 dias',prio:'ALTA'};
+  if(n===2)return {titulo:'AÇÃO PRIORITÁRIA · Estruturar e padronizar',prazo:'90-120 dias',prio:'ALTA'};
+  if(n===3)return {titulo:'Ação de melhoria · Monitorar com métricas',prazo:'120-180 dias',prio:'MÉDIA'};
+  return {titulo:'Ação de excelência · Integrar e otimizar',prazo:'180+ dias',prio:'BAIXA'};
+}
+
+// ============ EXPORT RELATÓRIO HTML ============
+function exportHTMLReport(){
+  const g=globalScore();const np=npq(g);const lev=level(np);
+  const gov=pilarScore('Governança');const tec=pilarScore('Técnico');const kpi=pilarScore('KPIs');
+  const gp=globalProgress();
+  const findings=generateTargetedFindings();
+  const now=new Date();const geradoEm=now.toLocaleString('pt-BR',{dateStyle:'long',timeStyle:'short'});
+  const radarPoints=SETORES_ORDER.map(c=>({code:c,val:avgSector(c),pilar:S[c].pilar}));
+
+  // Sumariza estatísticas por faixa
+  const faixas={0:0,1:0,2:0,3:0,4:0,5:0};let total=0;
+  for(const c of C){const n=state.notas[c[1]];if(typeof n==='number'){faixas[n]++;total++;}}
+  const pctByFaixa=f=>total?Math.round(faixas[f]/total*100):0;
+
+  const css=`
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{background:#F5F7FA}
+    body{font-family:'DM Sans',-apple-system,Segoe UI,sans-serif;color:#333;font-size:10.5px;line-height:1.35}
+    .report{max-width:900px;margin:0 auto;padding:14px 18px;background:#fff}
+    a{color:#1A5296;text-decoration:none;font-weight:600}
+    h1,h2,h3,h4{font-weight:500}
+
+    /* ====== PAGE SHEETS (visualização na tela) ====== */
+    .sheet{background:#fff;page-break-after:always;break-after:page;padding-bottom:8px;border-bottom:1px dashed #D0D6E0;margin-bottom:12px}
+    .sheet:last-child{page-break-after:auto;break-after:auto;border-bottom:none;margin-bottom:0}
+
+    /* ====== HEADER ====== */
+    .header{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:2.5px solid #0B2447;margin-bottom:12px}
+    .brand-mono{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500;letter-spacing:-1px;line-height:1}
+    .brand-mono .g{color:#979797}.brand-mono .a{color:#005B6D}
+    .brand-box{display:flex;align-items:center;gap:10px}
+    .brand-lbl{font-size:10.5px;font-weight:700;letter-spacing:2px;color:#0B2447}
+    .brand-sub{font-size:8px;font-weight:700;letter-spacing:3px;color:#2A7B88;margin-top:1px}
+    .header-right{text-align:right;font-size:9px;color:#777;line-height:1.5}
+    .header-right .tag{display:inline-block;background:#0B2447;color:#fff;padding:3px 10px;border-radius:99px;font-weight:700;letter-spacing:.8px;font-size:9px;margin-bottom:3px}
+    .header-right .conf{color:#B23030;font-weight:700;font-size:9px;letter-spacing:.5px}
+
+    h1{font-family:'EB Garamond',Georgia,serif;font-size:26px;color:#0B2447;letter-spacing:-.4px;line-height:1.05;margin-bottom:3px}
+    h2{font-family:'EB Garamond',Georgia,serif;font-size:17px;color:#0B2447;margin:10px 0 6px;letter-spacing:-.2px;padding-bottom:3px;border-bottom:1px solid #E0E4EA;display:flex;align-items:center;gap:8px}
+    h2 .sec-n{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:#0B2447;color:#fff;border-radius:50%;font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px}
+    h3{font-family:'DM Sans',sans-serif;font-weight:700;font-size:9.5px;letter-spacing:1.5px;color:#2A7B88;text-transform:uppercase;margin:8px 0 5px}
+    .subline{color:#777;font-size:10px;margin-bottom:8px;line-height:1.4}
+
+    /* ====== IDENTIFICAÇÃO ====== */
+    .id-card{background:linear-gradient(135deg,#0B2447,#163A6B 60%,#1A5296);color:#fff;border-radius:9px;padding:12px 16px;margin-bottom:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .id-card .lbl{font-size:8.5px;letter-spacing:2px;color:#7ECBFF;font-weight:700;text-transform:uppercase;margin-bottom:1px}
+    .id-card .val{font-family:'EB Garamond',serif;font-size:16px;font-weight:500;line-height:1.1}
+
+    /* ====== KPIs ====== */
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+    .kpi{background:#fff;border:1px solid #E0E4EA;border-radius:8px;padding:9px 12px;position:relative}
+    .kpi .lbl{font-size:8.5px;letter-spacing:1.2px;text-transform:uppercase;color:#777;font-weight:700;margin-bottom:2px}
+    .kpi .val{font-family:'EB Garamond',serif;font-size:26px;font-weight:500;color:#0B2447;line-height:1}
+    .kpi .unit{font-size:11px;color:#999;margin-left:2px}
+    .kpi .aux{font-size:9px;color:#999;margin-top:2px;font-weight:500}
+    .kpi.lev-not{border-top:3px solid #D64545}.kpi.lev-bas{border-top:3px solid #E8A317}
+    .kpi.lev-ple{border-top:3px solid #1A5296}.kpi.lev-ava{border-top:3px solid #127548}
+    .level-tag{display:inline-block;padding:2px 8px;border-radius:99px;font-weight:700;font-size:8.5px;letter-spacing:.5px;text-transform:uppercase;margin-top:3px}
+    .level-not{background:#FCE8E8;color:#B23030}.level-bas{background:#FFF3D6;color:#8A5A00}
+    .level-ple{background:#DEF0FF;color:#0F4F82}.level-ava{background:#D4F4E4;color:#127548}
+
+    /* ====== PILARES ====== */
+    .pilares{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+    .pilar{border:1px solid #E0E4EA;border-top:3px solid #1A5296;border-radius:8px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center}
+    .pilar.gov{border-top-color:#0B2447}.pilar.tec{border-top-color:#1A5296}.pilar.kpi{border-top-color:#1B5C6B}
+    .pilar .lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#666;font-weight:700}
+    .pilar .v{text-align:right}
+    .pilar .val{font-family:'EB Garamond',serif;font-size:22px;font-weight:500;color:#0B2447;line-height:1}
+    .pilar .sub{font-size:9px;color:#999;margin-top:1px}
+
+    /* ====== TABELAS COMPACTAS ====== */
+    table{width:100%;border-collapse:collapse;font-size:10px;margin:4px 0 8px;border-radius:6px;overflow:hidden}
+    table th{background:#0B2447;color:#fff;padding:5px 8px;text-align:left;font-weight:600;font-size:9px;letter-spacing:.5px;text-transform:uppercase}
+    table td{padding:4px 8px;border-bottom:1px solid #EEF1F5;vertical-align:middle}
+    table tr:nth-child(even) td{background:#F8FAFC}
+    table tr:last-child td{border-bottom:none}
+
+    /* ====== BADGES ====== */
+    .n-badge{display:inline-block;padding:2px 7px;border-radius:99px;font-weight:700;font-size:9px;min-width:22px;text-align:center}
+    .n-0{background:#FCE8E8;color:#B23030}.n-1{background:#FFE5D9;color:#C04F1E}.n-2{background:#FFF3D6;color:#8A5A00}
+    .n-3{background:#E0EDFF;color:#0F4F82}.n-4{background:#D4F4E4;color:#127548}.n-5{background:#C8EDFB;color:#004D6B}
+    .n-na{background:#EEE;color:#999}
+    .prio{display:inline-block;padding:2px 8px;border-radius:99px;font-size:8.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap}
+    .prio-ALTA{background:#FCE8E8;color:#B23030}
+    .prio-MÉDIA{background:#FFF3D6;color:#8A5A00}
+    .prio-BAIXA{background:#DEF0FF;color:#0F4F82}
+
+    /* ====== GRID SUMÁRIO (gauge + distribuição lado a lado) ====== */
+    .sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}
+    .panel{border:1px solid #E0E4EA;border-radius:8px;padding:10px 12px;background:#fff}
+    .panel-gauge{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .panel-gauge svg{max-width:220px;width:100%;height:auto}
+    .level-bar{display:flex;gap:3px;margin-top:6px;font-size:8.5px}
+    .level-bar span{flex:1;padding:3px 4px;border-radius:4px;font-weight:600;text-align:center;border:1px solid transparent}
+    .level-bar .active{border-color:currentColor;transform:scale(1.04)}
+
+    /* ====== GRÁFICOS (página 2) ====== */
+    .charts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+    .chart{border:1px solid #E0E4EA;border-radius:8px;padding:10px 12px;background:#fff}
+    .chart h3{margin-top:0;margin-bottom:4px}
+    .chart svg{display:block;width:100%;height:auto;max-height:290px}
+    .chart-full{grid-column:1/-1}
+    .chart-full svg{max-height:300px}
+
+    /* ====== MATRIZ CONDENSADA (3 colunas) ====== */
+    .matrix-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:2px 0 10px}
+    .matrix-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:2px 0 10px}
+    .mx-card{border:1px solid #D6DCE6;border-radius:6px;overflow:hidden;break-inside:avoid;page-break-inside:avoid;background:#fff}
+    .mx-head{display:flex;justify-content:space-between;align-items:center;padding:4px 8px;color:#fff;font-size:8.8px;gap:4px}
+    .mx-head .l{font-family:'DM Sans',sans-serif;font-weight:700;letter-spacing:.2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mx-head .l b{font-size:10px;margin-right:3px}
+    .mx-head .r{font-size:8.5px;opacity:.96;font-weight:600;white-space:nowrap}
+    .mx-body{background:#fff}
+    .mx-row{display:grid;grid-template-columns:50px 1fr 22px;gap:5px;padding:2.5px 6px;font-size:8.8px;border-bottom:1px solid #F0F2F6;align-items:center}
+    .mx-row:last-child{border-bottom:none}
+    .mx-row:nth-child(even){background:#F8FAFC}
+    .mx-cod{font-family:'DM Sans',sans-serif;font-weight:700;font-size:8px;color:#2A7B88;white-space:nowrap;letter-spacing:.1px}
+    .mx-ponto{color:#333;font-weight:500;line-height:1.25;font-size:8.8px;overflow-wrap:anywhere}
+    .mx-row .n-badge{font-size:8px;padding:1px 5px;min-width:18px}
+    .mx-obs-icon{margin-left:2px;color:#E8A317;font-size:8px}
+    .mx-leg{display:flex;gap:6px;font-size:8.8px;color:#666;margin:4px 0 6px;flex-wrap:wrap;align-items:center}
+    .mx-leg b{color:#0B2447}
+    .mx-leg span{display:inline-flex;align-items:center;gap:3px}
+
+    /* ====== PLANO DE AÇÃO ====== */
+    .plan-tbl{font-size:9.5px}
+    .plan-tbl th{padding:5px 7px;font-size:8.5px}
+    .plan-tbl td{padding:4px 7px;vertical-align:top;line-height:1.3}
+    .plan-tbl td b{color:#0B2447;font-weight:700}
+
+    /* ====== CONCLUSÃO ====== */
+    .concl{background:linear-gradient(135deg,#F2F5F9,#EAF0F7);padding:11px 14px;border-radius:8px;border-left:3px solid #1A5296;font-size:10px;line-height:1.5}
+    .concl p{margin-bottom:5px}
+    .concl p:last-child{margin-bottom:0}
+    .concl b{color:#0B2447}
+    .concl .warn{color:#B23030;font-weight:700}
+
+    /* ====== BOX PONTOS CRÍTICOS OK ====== */
+    .finding-box{background:#D4F4E4;border-left:3px solid #127548;padding:10px 14px;border-radius:4px;margin:6px 0;font-size:10.5px}
+    .finding-box h4{font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;color:#127548;margin-bottom:3px}
+
+    /* ====== FOOTER ====== */
+    .footer-report{margin-top:14px;padding-top:10px;border-top:1.5px solid #0B2447;text-align:center}
+    .footer-report .brand-line{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;letter-spacing:-.5px;line-height:1}
+    .footer-report .co-name{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:#0B2447;margin-top:2px}
+    .footer-report .co-tag{font-size:8px;letter-spacing:2.5px;color:#2A7B88;font-weight:700;margin:1px 0 6px}
+    .footer-report .addr{font-size:9.5px;color:#555;line-height:1.55}
+    .footer-report .conf{font-size:8px;color:#999;margin-top:5px;letter-spacing:.4px}
+
+    /* ====== PRINT ====== */
+    @page{size:A4 portrait;margin:1cm 1cm}
+    @media print{
+      html,body{background:#fff}
+      body{font-size:9.5px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+      .report{max-width:100%;padding:0;margin:0}
+      .sheet{border-bottom:none;margin-bottom:0;padding-bottom:0;page-break-after:always;break-after:page}
+      .sheet:last-child{page-break-after:auto;break-after:auto}
+      h1{font-size:22px}
+      h2{font-size:15px;page-break-after:avoid;break-after:avoid;margin:6px 0 4px}
+      h3{page-break-after:avoid;break-after:avoid}
+      .mx-card,.finding-box,.chart,.panel,.concl{page-break-inside:avoid;break-inside:avoid}
+      .mx-row{padding:1.8px 5px;font-size:8px}
+      .mx-ponto{font-size:8px}
+      .mx-cod{font-size:7.5px}
+      .kpi{padding:6px 9px}.kpi .val{font-size:22px}
+      .pilar{padding:7px 10px}.pilar .val{font-size:18px}
+      .id-card{padding:9px 13px}.id-card .val{font-size:14px}
+      .plan-tbl{font-size:8.5px}.plan-tbl td{padding:3px 6px}
+      .chart svg{max-height:250px}
+      .chart-full svg{max-height:230px}
+      .charts{gap:6px}
+      .matrix-grid,.matrix-grid-2{gap:4px}
+    }
+  `;
+
+  const htmlRep=`<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><title>Relatório de Assessment NPQ-OL · ${escapeHtml(state.empresa||'—')}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>${css}</style></head><body>
+<div class="report">
+
+  <!-- ========== PÁGINA 1 — CAPA + SUMÁRIO EXECUTIVO ========== -->
+  <div class="sheet">
+    <div class="header">
+      <div class="brand-box">
+        <div class="brand-mono"><span class="g">G</span><span class="a">A</span></div>
+        <div>
+          <div class="brand-lbl">GALEAZZI &amp; ASSOCIADOS</div>
+          <div class="brand-sub">ENTERPRISE PLATFORM</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="tag">RELATÓRIO NPQ-OL / ABOL</span><br>
+        119 critérios · Gerado ${geradoEm}<br>
+        <span class="conf">CONFIDENCIAL — Uso Restrito</span>
+      </div>
+    </div>
+
+    <h1>${escapeHtml(state.empresa||'Assessment de Operador Logístico')}</h1>
+    <div class="subline">Relatório consolidado de avaliação de maturidade operacional · Norma de Pré-Qualificação do Operador Logístico (NPQ-OL) / ABOL</div>
+
+    <div class="id-card">
+      <div><div class="lbl">Empresa Avaliada</div><div class="val">${escapeHtml(state.empresa||'— não informado —')}</div></div>
+      <div><div class="lbl">Data da Avaliação</div><div class="val">${escapeHtml(state.data||'—')}</div></div>
+      <div><div class="lbl">Responsável / Auditor</div><div class="val">${escapeHtml(state.auditor||'—')}</div></div>
+    </div>
+
+    <h2><span class="sec-n">1</span>Sumário Executivo</h2>
+
+    <div class="kpis">
+      <div class="kpi"><div class="lbl">Score Gerencial</div><div class="val">${g==null?'—':g.toFixed(2)}<span class="unit">/ 5</span></div><div class="aux">escala 0 a 5</div></div>
+      <div class="kpi lev-${lev.cls.replace('level-','')||'not'}"><div class="lbl">Score NPQ-OL</div><div class="val">${np==null?'—':np.toFixed(2)}<span class="unit">/ 3</span></div><div class="level-tag ${lev.cls}">${lev.label}</div></div>
+      <div class="kpi"><div class="lbl">Progresso</div><div class="val">${gp.done}<span class="unit">/ ${gp.total}</span></div><div class="aux">${Math.round(gp.pct*100)}% avaliado</div></div>
+      <div class="kpi"><div class="lbl">Pontos Críticos</div><div class="val" style="color:${(faixas[0]+faixas[1])>0?'#B23030':'#127548'}">${faixas[0]+faixas[1]}<span class="unit">/ ${total}</span></div><div class="aux" style="color:#B23030;font-weight:600">notas 0 ou 1</div></div>
+    </div>
+
+    <div class="pilares">
+      <div class="pilar gov"><div><div class="lbl">Governança · 40%</div><div class="sub">NPQ ${gov==null?'—':npq(gov).toFixed(2)}</div></div><div class="v"><div class="val">${gov==null?'—':gov.toFixed(2)}</div></div></div>
+      <div class="pilar tec"><div><div class="lbl">Técnico · 52%</div><div class="sub">NPQ ${tec==null?'—':npq(tec).toFixed(2)}</div></div><div class="v"><div class="val">${tec==null?'—':tec.toFixed(2)}</div></div></div>
+      <div class="pilar kpi"><div><div class="lbl">KPIs · 8%</div><div class="sub">NPQ ${kpi==null?'—':npq(kpi).toFixed(2)}</div></div><div class="v"><div class="val">${kpi==null?'—':kpi.toFixed(2)}</div></div></div>
+    </div>
+
+    <div class="sum-grid">
+      <div class="panel panel-gauge">
+        <h3 style="margin:0 0 4px">Nível NPQ-OL Atingido</h3>
+        ${buildGaugeSVG(np)}
+        <div class="level-bar">
+          <span class="level-not ${np!=null&&np<1?'active':''}">Não Certif.<br><small>&lt; 1,0</small></span>
+          <span class="level-bas ${np!=null&&np>=1&&np<1.5?'active':''}">Básico<br><small>≥ 1,0</small></span>
+          <span class="level-ple ${np!=null&&np>=1.5&&np<2?'active':''}">Pleno<br><small>≥ 1,5</small></span>
+          <span class="level-ava ${np!=null&&np>=2?'active':''}">Avançado<br><small>≥ 2,0</small></span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3 style="margin:0 0 4px">Distribuição das Notas Atribuídas</h3>
+        <table>
+          <thead><tr><th style="width:36px">Nota</th><th>Nível de Maturidade</th><th style="width:48px;text-align:center">Qtd</th><th style="width:48px;text-align:center">%</th></tr></thead>
+          <tbody>
+            ${[5,4,3,2,1,0].map(f=>{const n=nivelMaturidade(f);return `<tr><td><span class="n-badge n-${f}">${f}</span></td><td>${n.label}</td><td style="text-align:center">${faixas[f]}</td><td style="text-align:center">${pctByFaixa(f)}%</td></tr>`;}).join('')}
+            <tr style="font-weight:700;background:#EFF3F8"><td>—</td><td>Total avaliado</td><td style="text-align:center">${total}/${C.length}</td><td style="text-align:center">${Math.round(gp.pct*100)}%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="concl" style="margin-top:6px">
+      <p><b>Diagnóstico:</b> nível atingido <span class="level-tag ${lev.cls}">${lev.label}</span> com Score NPQ-OL ${np==null?'—':np.toFixed(2)}/3,0 (${g==null?'—':g.toFixed(2)}/5,0 gerencial). Governança ${gov==null?'—':gov.toFixed(2)} · Técnico ${tec==null?'—':tec.toFixed(2)} · KPIs ${kpi==null?'—':kpi.toFixed(2)}.</p>
+      ${gp.pct<1?`<p class="warn">⚠ Assessment incompleto — ${gp.total-gp.done} critérios pendentes. Score final poderá variar após preenchimento total.</p>`:''}
+    </div>
+  </div>
+
+  <!-- ========== PÁGINA 2 — GRÁFICOS ========== -->
+  <div class="sheet">
+    <h2><span class="sec-n">2</span>Visão Gráfica · Maturidade e Contribuição</h2>
+    <div class="subline">Radar de maturidade por setor (escala 0-5) e contribuição ponderada de cada setor ao score final ABOL.</div>
+
+    <div class="chart chart-full">
+      <h3>Radar · Maturidade por Setor (0-5)</h3>
+      ${buildRadarSVG(radarPoints)}
+    </div>
+
+    <div class="chart chart-full" style="margin-top:8px">
+      <h3>Contribuição Ponderada por Setor · Agrupada pelos 3 Pilares NPQ-OL</h3>
+      ${buildBarsSVG()}
+    </div>
+
+    <div class="mx-leg" style="margin-top:6px">
+      <b>Legenda de notas:</b>
+      <span><span class="n-badge n-0">0</span> Inexistente</span>
+      <span><span class="n-badge n-1">1</span> Inicial</span>
+      <span><span class="n-badge n-2">2</span> Em desenvolvimento</span>
+      <span><span class="n-badge n-3">3</span> Definido</span>
+      <span><span class="n-badge n-4">4</span> Gerenciado</span>
+      <span><span class="n-badge n-5">5</span> Benchmark</span>
+      <span><span class="n-badge n-na">—</span> Não avaliado</span>
+    </div>
+  </div>
+
+  <!-- ========== PÁGINA 3 — MATRIZ DOS 119 CRITÉRIOS ========== -->
+  <div class="sheet">
+    <h2><span class="sec-n">3</span>Avaliação Detalhada · 119 Critérios NPQ-OL</h2>
+    <div class="subline">Matriz condensada — código · ponto de auditoria · nota. O símbolo <span class="mx-obs-icon">◆</span> indica observação do auditor registrada (disponível via re-importação do HTML).</div>
+    <div class="matrix-grid">
+    ${SETORES_ORDER.map(code=>{
+      const s=S[code];const crits=critsOf(code);const avg=avgSector(code);const np2=npq(avg);
+      const pilarColor=s.pilar==='Governança'?'#0B2447':s.pilar==='Técnico'?'#1A5296':'#1B5C6B';
+      return `<div class="mx-card">
+        <div class="mx-head" style="background:${pilarColor}">
+          <div class="l"><b>${code}</b>${escapeHtml(s.nome)}</div>
+          <div class="r">${s.peso}% · ${avg==null?'—':avg.toFixed(2)}</div>
+        </div>
+        <div class="mx-body">
+        ${crits.map(c=>{
+          const [,cod,ponto]=c;const n=state.notas[cod];const hasObs=!!(state.obs[cod]||'').trim();
+          return `<div class="mx-row">
+            <span class="mx-cod">${cod}</span>
+            <span class="mx-ponto">${escapeHtml(ponto)}${hasObs?' <span class="mx-obs-icon">◆</span>':''}</span>
+            <span style="text-align:center">${typeof n==='number'?`<span class="n-badge n-${n}">${n}</span>`:'<span class="n-badge n-na">—</span>'}</span>
+          </div>`;
+        }).join('')}
+        </div>
+      </div>`;
+    }).join('')}
+    </div>
+  </div>
+
+  <!-- ========== PÁGINA 4 — PONTOS CRÍTICOS + PLANO DE AÇÃO + CONCLUSÃO + FOOTER ========== -->
+  <div class="sheet">
+    <h2><span class="sec-n">4</span>Pontos Críticos · Plano de Ação · Conclusão</h2>
+
+    <h3 style="color:#B23030;margin-top:4px">Pontos Críticos Identificados (nota ≤ 2)</h3>
+    ${(()=>{
+      const critAll=[];
+      for(const code of SETORES_ORDER){
+        const crits=critsOf(code);
+        for(const c of crits){const n=state.notas[c[1]];if(typeof n==='number'&&n<=2)critAll.push({code,setor:S[code].nome,pilar:S[code].pilar,peso:S[code].peso,cod:c[1],ponto:c[2],nota:n});}
+      }
+      if(critAll.length===0)return `<div class="finding-box"><h4>✓ Nenhum ponto crítico identificado</h4>Todos os critérios avaliados atingiram nota ≥ 3 (Definido). Mantenha os controles existentes e implemente ciclos de melhoria contínua.</div>`;
+      critAll.sort((a,b)=>a.nota-b.nota||SETORES_ORDER.indexOf(a.code)-SETORES_ORDER.indexOf(b.code));
+      const qt0=critAll.filter(x=>x.nota===0).length;
+      const qt1=critAll.filter(x=>x.nota===1).length;
+      const qt2=critAll.filter(x=>x.nota===2).length;
+      const bySetor={};critAll.forEach(x=>{(bySetor[x.code]=bySetor[x.code]||[]).push(x);});
+      const setoresAfetados=Object.keys(bySetor);
+      return `<div class="subline" style="margin-bottom:4px">${critAll.length} critérios com nota ≤ 2 em ${setoresAfetados.length} setores · <b style="color:#B23030">${qt0} críticos (0)</b> · <b style="color:#C04F1E">${qt1} urgentes (1)</b> · <b style="color:#8A5A00">${qt2} prioritários (2)</b></div>
+      <div class="matrix-grid-2">
+      ${setoresAfetados.map(code=>{
+        const items=bySetor[code];const s=S[code];
+        const pilarColor=s.pilar==='Governança'?'#0B2447':s.pilar==='Técnico'?'#1A5296':'#1B5C6B';
+        return `<div class="mx-card">
+          <div class="mx-head" style="background:${pilarColor}">
+            <div class="l"><b>${code}</b>${escapeHtml(s.nome)}</div>
+            <div class="r">${items.length} crítico${items.length>1?'s':''} · ${s.peso}%</div>
+          </div>
+          <div class="mx-body">
+          ${items.map(x=>`<div class="mx-row">
+            <span class="mx-cod">${x.cod}</span>
+            <span class="mx-ponto">${escapeHtml(x.ponto)}</span>
+            <span style="text-align:center"><span class="n-badge n-${x.nota}">${x.nota}</span></span>
+          </div>`).join('')}
+          </div>
+        </div>`;
+      }).join('')}
+      </div>`;
+    })()}
+
+    <h3 style="color:#1A5296;margin-top:10px">Plano de Ação · ${state.plano.length} Iniciativas Priorizadas</h3>
+    <div class="subline" style="margin-bottom:4px"><b>Atenção:</b> elaborar APÓS conclusão do diagnóstico — por norma NPQ-OL, o auditor não deve aconselhar correções durante a auditoria.</div>
+    <table class="plan-tbl">
+      <thead><tr><th style="width:52px">Prior.</th><th style="width:96px">Setor</th><th>Iniciativa</th><th style="width:100px">Responsável</th><th style="width:50px">Prazo</th><th style="width:70px">Critério</th></tr></thead>
+      <tbody>
+      ${state.plano.map(r=>{
+        const prioCls=r[0]==='Alta'?'prio-ALTA':r[0]==='Média'?'prio-MÉDIA':'prio-BAIXA';
+        return `<tr>
+          <td><span class="prio ${prioCls}">${escapeHtml(r[0])}</span></td>
+          <td><b>${escapeHtml(r[1])}</b></td>
+          <td>${escapeHtml(r[2])}</td>
+          <td>${escapeHtml(r[4])}</td>
+          <td>${escapeHtml(r[5])}</td>
+          <td style="font-family:monospace;font-size:8.5px">${escapeHtml(r[7])}</td>
+        </tr>`;
+      }).join('')}
+      </tbody>
+    </table>
+
+    <h3 style="color:#0B2447;margin-top:8px">Conclusão e Próximos Passos</h3>
+    <div class="concl">
+      <p><b>Nível atingido:</b> <span class="level-tag ${lev.cls}">${lev.label}</span> · Score NPQ ${np==null?'—':np.toFixed(2)}/3,0 · Gerencial ${g==null?'—':g.toFixed(2)}/5,0 · Cobertura ${Math.round(gp.pct*100)}%.</p>
+      <p>Recomendamos revisão das iniciativas acima com a diretoria e alocação formal de responsáveis e prazos. <b>Reavaliação sugerida em 3-6 meses</b> para medir evolução da maturidade operacional e preparar a certificação ABOL definitiva.</p>
+    </div>
+
+    <div class="footer-report">
+      <div class="brand-line"><span style="color:#979797">G</span><span style="color:#005B6D">A</span></div>
+      <div class="co-name">GALEAZZI &amp; ASSOCIADOS</div>
+      <div class="co-tag">ENTERPRISE PLATFORM</div>
+      <div class="addr">
+        Consultoria em Transformação Operacional · 38 anos em supply chain, logística e reestruturação<br>
+        Av. Brigadeiro Faria Lima, 2081, 10º andar · Pinheiros, São Paulo · SP · Brasil<br>
+        <b>+55 11 3383 9600</b> · <a href="mailto:galeazzi@galeazzi.com.br">galeazzi@galeazzi.com.br</a> · <a href="https://www.galeazzi.com.br">www.galeazzi.com.br</a>
+      </div>
+      <div class="conf">Assessment de Operador Logístico · NPQ-OL / ABOL · 119 critérios · CONFIDENCIAL — Uso Interno e Clientes Galeazzi</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Estado incorporado para re-importação -->
+<script id="galeazzi-state" type="application/json">${JSON.stringify(state).replace(/</g,'\\u003c')}<\/script>
+</body></html>`;
+
+  const blob=new Blob([htmlRep],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  const nome=(state.empresa||'assessment').replace(/[^a-z0-9]+/gi,'_');
+  a.download=`Relatorio_NPQ-OL_${nome}_${state.data}.html`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+
+// ============ ROUTER ============
+function router(){
+  const hash=(location.hash.replace('#/','')||'inicio').toLowerCase();
+  const app=document.getElementById('app');
+  let html='';
+  if(hash==='inicio')html=renderInicio();
+  else if(hash==='instrucoes')html=renderInstrucoes();
+  else if(hash==='resumo')html=renderResumo();
+  else if(hash==='plano')html=renderPlano();
+  else{const code=hash.toUpperCase();if(S[code])html=renderSetor(code);else html=renderInicio();}
+  app.innerHTML=html;
+  window.scrollTo({top:0,behavior:'smooth'});
+  buildNav();
+  updateTopbarProgress();
+  bindEmpresaForm();
+}
+
+window.addEventListener('hashchange',router);
+buildNav();updateTopbarProgress();router();
+</script>
+</body>
+</html>

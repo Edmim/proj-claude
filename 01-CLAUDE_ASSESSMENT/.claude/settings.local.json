@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc --track-changes=all \"C:\\\\Users\\\\emoll\\\\Galeazzi & Associados Dropbox\\\\Controle Técnico\\\\17-Operador Logístico_Assessment\\\\Manual_Assessment_Operador Logístico_Galeazzi.docx\" -o /tmp/manual.md)",
+      "Bash(python -c ' *)",
+      "Bash(where python *)",
+      "Bash(where py *)",
+      "Bash(where python3 *)",
+      "Bash(where unzip *)",
+      "Bash(mkdir -p /tmp/docx_extract)",
+      "Bash(unzip -o \"C:\\\\Users\\\\emoll\\\\Galeazzi & Associados Dropbox\\\\Controle Técnico\\\\17-Operador Logístico_Assessment\\\\Manual_Assessment_Operador Logístico_Galeazzi.docx\" -d /tmp/docx_extract)",
+      "Read(//tmp/docx_extract/**)",
+      "Bash(mkdir -p /tmp/xlsx_extract)",
+      "Bash(unzip -o \"C:\\\\Users\\\\emoll\\\\Galeazzi & Associados Dropbox\\\\Controle Técnico\\\\17-Operador Logístico_Assessment\\\\Assessment_OperadorLogistico_Galeazzi.xlsx\" -d /tmp/xlsx_extract)",
+      "Read(//tmp/xlsx_extract/**)",
+      "Bash(grep -v '^$')",
+      "Bash(where zip *)",
+      "Bash(where 7z)",
+      "Read(//c/Program Files/Git/usr/**)",
+      "Bash(7z\" 2>&1)",
+      "Bash(where jar *)",
+      "Bash(where 7z.exe)",
+      "Bash(where tar *)",
+      "Read(//c/Program Files/**)",
+      "PowerShell(Get-Command Compress-Archive)",
+      "PowerShell(if \\(Get-Command Compress-Archive -ErrorAction SilentlyContinue\\) { \"YES\" } else { \"NO\" }; if \\(Get-Command [System.IO.Compression.ZipFile] -ErrorAction SilentlyContinue\\) { \"NET-ZIP-YES\" }; Add-Type -AssemblyName System.IO.Compression.FileSystem; \"NET-ZIP loaded\")",
+      "Bash(cp 'C:/Users/emoll/Galeazzi & Associados Dropbox/Controle Técnico/17-Operador Logístico_Assessment/Assessment_OperadorLogistico_Galeazzi.xlsx' 'C:/Users/emoll/Galeazzi & Associados Dropbox/Controle Técnico/17-Operador Logístico_Assessment/Assessment_OperadorLogistico_Galeazzi_BACKUP.xlsx')",
+      "Bash(cp 'C:/Users/emoll/Galeazzi & Associados Dropbox/Controle Técnico/17-Operador Logístico_Assessment/Manual_Assessment_Operador Logístico_Galeazzi.docx' 'C:/Users/emoll/Galeazzi & Associados Dropbox/Controle Técnico/17-Operador Logístico_Assessment/Manual_Assessment_Operador Logístico_Galeazzi_BACKUP.docx')",
+      "Bash(rm -rf /tmp/docx_work /tmp/xlsx_work)",
+      "Bash(mkdir -p /tmp/docx_work /tmp/xlsx_work)",
+      "Bash(unzip -o 'C:/Users/emoll/Galeazzi & Associados Dropbox/Controle Técnico/17-Operador Logístico_Assessment/Manual_Assessment_Operador Logístico_Galeazzi.docx' -d /tmp/docx_work)",
+      "Bash(cd /tmp)",
+      "Bash(pwd -W)",
+      "Bash(pwd ls *)",
+      "Bash(grep -oE '[^<>]{0,5}\\(3 Etapas|3 ETAPAS|tapas\\\\\\)\\)[^<>]{0,5}' word/document.xml)",
+      "PowerShell($xml = [xml]\\(Get-Content 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\docx_work\\\\word\\\\document.xml' -Encoding UTF8 -Raw\\); $sw = New-Object System.IO.StringWriter; $xmlw = New-Object System.Xml.XmlTextWriter\\($sw\\); $xmlw.Formatting = 'Indented'; $xml.WriteTo\\($xmlw\\); $sw.ToString\\(\\) | Out-File 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\docx_work\\\\word\\\\document.xml' -Encoding utf8; \"DOCX pretty OK\"; $xml2 = [xml]\\(Get-Content 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\xlsx_work\\\\xl\\\\sharedStrings.xml' -Encoding UTF8 -Raw\\); $sw2 = New-Object System.IO.StringWriter; $xmlw2 = New-Object System.Xml.XmlTextWriter\\($sw2\\); $xmlw2.Formatting = 'Indented'; $xml2.WriteTo\\($xmlw2\\); $sw2.ToString\\(\\) | Out-File 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\xlsx_work\\\\xl\\\\sharedStrings.xml' -Encoding utf8; \"XLSX sharedStrings pretty OK\")",
+      "Bash(awk '/<w:t>G1 . Qualidade<\\\\/w:t>/,/Gestão da qualidade/' word/document.xml)",
+      "Bash(awk '/<w:t>K3 . KPIs Financeiros<\\\\/w:t>/,/TOTAL 100/' word/document.xml)",
+      "PowerShell($xml = [xml]\\(Get-Content 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\xlsx_work\\\\xl\\\\worksheets\\\\sheet20.xml' -Encoding UTF8 -Raw\\); $sw = New-Object System.IO.StringWriter; $xmlw = New-Object System.Xml.XmlTextWriter\\($sw\\); $xmlw.Formatting = 'Indented'; $xml.WriteTo\\($xmlw\\); $sw.ToString\\(\\) | Out-File 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\xlsx_work\\\\xl\\\\worksheets\\\\sheet20.xml' -Encoding utf8; $xml2 = [xml]\\(Get-Content 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\xlsx_work\\\\xl\\\\worksheets\\\\sheet21.xml' -Encoding UTF8 -Raw\\); $sw2 = New-Object System.IO.StringWriter; $xmlw2 = New-Object System.Xml.XmlTextWriter\\($sw2\\); $xmlw2.Formatting = 'Indented'; $xml2.WriteTo\\($xmlw2\\); $sw2.ToString\\(\\) | Out-File 'C:\\\\Users\\\\emoll\\\\AppData\\\\Local\\\\Temp\\\\xlsx_work\\\\xl\\\\worksheets\\\\sheet21.xml' -Encoding utf8; \"Pretty printed\")"
+    ]
+  }
+}

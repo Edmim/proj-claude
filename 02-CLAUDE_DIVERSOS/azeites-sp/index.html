@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Azeites Saborizados de São Paulo — Produtores</title>
+<!-- Google Maps é carregado no final do <body> -->
+<style>
+  :root {
+    --verde-escuro: #2d4a2b;
+    --verde-oliva: #556b2f;
+    --verde-claro: #8fa968;
+    --dourado: #c9a227;
+    --creme: #f5f1e6;
+    --branco: #fffefa;
+    --cinza-texto: #3a3a3a;
+    --cinza-claro: #e8e4d6;
+    --sombra: 0 2px 12px rgba(45, 74, 43, 0.08);
+
+    --cor-produtor: #2d4a2b;
+    --cor-direta:   #6abf4b;
+    --cor-emporio:  #c9a227;
+    --cor-super:    #e87722;
+    --cor-restaurante: #8e44ad;
+    --cor-feira:    #d0342c;
+    --cor-ecommerce: #2680c2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: var(--creme);
+    color: var(--cinza-texto);
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--verde-escuro), var(--verde-oliva));
+    color: var(--branco);
+    padding: 1.2rem 2rem;
+    box-shadow: var(--sombra);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  header h1 { font-size: 1.4rem; font-weight: 600; letter-spacing: 0.3px; }
+  header h1 span { color: var(--dourado); }
+
+  .btn-exportar {
+    background: var(--dourado);
+    color: #3a2e00;
+    border: none;
+    padding: 0.6rem 1.1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .btn-exportar:hover {
+    background: #e0b82c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  }
+  .btn-exportar:active { transform: translateY(0); }
+
+  .aviso {
+    background: #fff6d6;
+    border-left: 4px solid var(--dourado);
+    padding: 0.75rem 1.2rem;
+    font-size: 0.88rem;
+    color: #5a4a10;
+  }
+  .aviso a { color: var(--verde-escuro); font-weight: 600; }
+
+  .container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    min-height: calc(100vh - 120px);
+  }
+
+  aside {
+    background: var(--branco);
+    border-right: 1px solid var(--cinza-claro);
+    padding: 1.5rem 1.2rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+  }
+
+  aside h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--verde-oliva);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+
+  .regiao-lista, .produtor-lista { list-style: none; margin-bottom: 1.5rem; }
+
+  .regiao-lista li, .produtor-lista li {
+    padding: 0.55rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.15s, color 0.15s;
+    border: 1px solid transparent;
+  }
+  .regiao-lista li:hover, .produtor-lista li:hover { background: var(--creme); }
+  .regiao-lista li.ativo, .produtor-lista li.ativo {
+    background: var(--verde-escuro);
+    color: var(--branco);
+    font-weight: 500;
+  }
+  .produtor-lista li small { display: block; font-size: 0.73rem; opacity: 0.75; margin-top: 2px; }
+
+  .legenda {
+    border-top: 1px solid var(--cinza-claro);
+    padding-top: 1rem;
+    font-size: 0.82rem;
+  }
+  .legenda-item { display: flex; align-items: center; gap: 0.5rem; padding: 3px 0; }
+  .legenda-cor {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+    flex-shrink: 0;
+  }
+
+  main {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+  }
+
+  .placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; color: #9a9a8a; padding: 2rem;
+  }
+  .placeholder svg { margin-bottom: 1rem; opacity: 0.4; }
+
+  .detalhe-header {
+    border-bottom: 2px solid var(--dourado);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .detalhe-header h2 { font-size: 1.6rem; color: var(--verde-escuro); margin-bottom: 0.2rem; }
+  .detalhe-header .localizacao { color: var(--verde-oliva); font-size: 0.92rem; }
+  .mapa-selo {
+    display: inline-block; background: var(--verde-escuro); color: var(--branco);
+    padding: 3px 10px; border-radius: 12px; font-size: 0.7rem;
+    margin-left: 0.6rem; vertical-align: middle; font-weight: 600; letter-spacing: 0.5px;
+  }
+
+  #mapa {
+    height: 420px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--sombra);
+    margin-bottom: 1.2rem;
+    border: 1px solid var(--cinza-claro);
+    z-index: 0;
+  }
+
+  .grid-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .card {
+    background: var(--branco);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    box-shadow: var(--sombra);
+    border: 1px solid var(--cinza-claro);
+  }
+  .card h3 {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--verde-oliva);
+    margin-bottom: 0.7rem;
+    font-weight: 600;
+  }
+  .card ul { list-style: none; }
+  .card li { padding: 0.3rem 0; font-size: 0.9rem; border-bottom: 1px dotted var(--cinza-claro); }
+  .card li:last-child { border-bottom: none; }
+  .card li strong { color: var(--verde-escuro); }
+
+  .sabores-lista { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+  .sabor-tag {
+    background: linear-gradient(135deg, #fdf6d6, #f0e4a8);
+    color: #5a4a10;
+    padding: 3px 10px;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    border: 1px solid var(--dourado);
+  }
+
+  .descricao {
+    background: var(--branco);
+    border-left: 4px solid var(--verde-claro);
+    padding: 0.8rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-size: 0.92rem;
+    font-style: italic;
+    color: #555;
+  }
+
+  .canal-lista { list-style: none; }
+  .canal-lista li {
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    padding: 0.35rem 0;
+    font-size: 0.88rem;
+  }
+  .canal-ponto {
+    width: 12px; height: 12px; border-radius: 50%;
+    margin-top: 4px; flex-shrink: 0;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.2);
+  }
+
+  .preco-destaque { font-size: 1.2rem; color: var(--verde-escuro); font-weight: 600; }
+  .preco-destaque small { font-size: 0.75rem; color: #888; font-weight: normal; font-style: italic; }
+
+  .link-externo {
+    display: inline-block; margin-top: 0.5rem;
+    color: var(--verde-escuro); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500;
+  }
+  .link-externo:hover { text-decoration: underline; }
+
+  footer {
+    background: var(--verde-escuro);
+    color: #cfd8c6;
+    text-align: center;
+    padding: 0.7rem;
+    font-size: 0.78rem;
+  }
+
+  @media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+    aside { max-height: none; border-right: none; border-bottom: 1px solid var(--cinza-claro); }
+    main { padding: 1rem; }
+    #mapa { height: 320px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🫒 MAO-Oliveira <span>·</span> Azeites Saborizados de SP</h1>
+    <small style="opacity:0.9;display:block;margin-top:3px;">Guia de produtores · Registro MAPA/SIPEAGRO · 📞 (011) 99331-9114</small>
+  </div>
+  <button id="btn-exportar" class="btn-exportar" title="Gerar um arquivo HTML da visualização atual para download">
+    ⬇ Exportar HTML
+  </button>
+</header>
+
+<div class="aviso">
+  <strong>Atenção:</strong> dados ilustrativos. Valide cadastros e números no
+  <a href="https://sistemasweb.agricultura.gov.br/sipeagro/" target="_blank" rel="noopener">SIPEAGRO/MAPA</a> antes de uso oficial.
+  Coordenadas dos pontos de venda são aproximadas (centro das cidades).
+</div>
+
+<div class="container">
+  <aside>
+    <h2>Região do Estado</h2>
+    <ul class="regiao-lista" id="regiao-lista"></ul>
+
+    <h2>Produtores</h2>
+    <ul class="produtor-lista" id="produtor-lista"></ul>
+
+    <div class="legenda">
+      <h2 style="margin-bottom:0.5rem;">Legenda do Mapa</h2>
+      <div class="legenda-item"><span class="legenda-cor" style="background:var(--cor-produtor)"></span> Produtor (olival)</div>
+      <div class="legenda-item"><span class="legenda-cor" style="background:var(--cor-direta)"></span> Venda direta</div>
+      <div class="legenda-item"><span class="legenda-cor" style="background:var(--cor-emporio)"></span> Empório / Loja gourmet</div>
+      <div class="legenda-item"><span class="legenda-cor" style="background:var(--cor-super)"></span> Supermercado / Distribuidor</div>
+      <div class="legenda-item"><span class="legenda-cor" style="background:var(--cor-restaurante)"></span> Restaurante / Hotel</div>
+      <div class="legenda-item"><span class="legenda-cor" style="background:var(--cor-feira)"></span> Feira / Evento</div>
+      <div class="legenda-item"><span class="legenda-cor" style="background:var(--cor-ecommerce)"></span> E-commerce (online)</div>
+    </div>
+  </aside>
+
+  <main id="detalhe">
+    <div class="placeholder">
+      <svg width="70" height="70" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
+      </svg>
+      <h3>Escolha uma região ou produtor</h3>
+      <p>Clique em uma região para ver os produtores no mapa, ou em um produtor para detalhes e pontos de venda coloridos.</p>
+    </div>
+    <div id="mapa-container" style="display:none;">
+      <div id="mapa"></div>
+      <div id="conteudo-detalhe"></div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <strong>MAO-Oliveira</strong> · 📞 (011) 99331-9114 ·
+  Fonte oficial: <a href="https://www.gov.br/agricultura/pt-br" target="_blank" rel="noopener" style="color:var(--dourado);">MAPA</a>
+  · Mapa: Google Maps
+</footer>
+
+<!--
+  Google Maps JavaScript API - INSIRA SUA CHAVE ABAIXO no parâmetro "key=".
+  Obtenha em: https://console.cloud.google.com/google/maps-apis/
+  Sem chave válida o mapa não carrega.
+-->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_GOOGLE_MAPS_AQUI&callback=initGoogleMaps&libraries=&v=weekly"></script>
+<script>
+/* ============================================================
+   BASE DE DADOS — PRODUTORES DE AZEITE SABORIZADO EM SÃO PAULO
+   Dados ilustrativos. Coordenadas aproximadas.
+   ============================================================ */
+const CORES = {
+  produtor: '#2d4a2b',
+  direta: '#6abf4b',
+  emporio: '#c9a227',
+  supermercado: '#e87722',
+  restaurante: '#8e44ad',
+  feira: '#d0342c',
+  ecommerce: '#2680c2'
+};
+
+const produtores = [
+  {
+    id: 'irarema',
+    nome: 'Fazenda Irarema',
+    regiao: 'Serra da Mantiqueira',
+    cidade: 'Cunha - SP',
+    coords: [-23.076, -44.963],
+    registroMapa: 'SIPEAGRO (consultar nº atual)',
+    descricao: 'Pioneira no cultivo de oliveiras no Alto Paraíba. Produz azeites extra-virgens e versões saborizadas em pequenos lotes artesanais.',
+    variedades: ['Arbequina', 'Grappolo', 'Koroneiki'],
+    sabores: ['Alecrim', 'Limão Siciliano', 'Pimenta Biquinho', 'Alho Assado'],
+    acidez: '≤ 0,3%',
+    envase: 'Garrafas de 250 ml (vidro âmbar)',
+    producaoAnual: '~4.000 L',
+    colheita: 'Março a maio (manual)',
+    extracao: 'A frio (< 27°C) em até 4h após a colheita',
+    canais: [
+      { nome: 'Venda direta na fazenda',  tipo: 'direta',       cidade: 'Cunha - SP',     coords: [-23.076, -44.963] },
+      { nome: 'Empório Santa Luzia',      tipo: 'emporio',      cidade: 'São Paulo - SP', coords: [-23.5675, -46.6491] },
+      { nome: 'Empório Mantovani',        tipo: 'emporio',      cidade: 'Rio de Janeiro - RJ', coords: [-22.9707, -43.1822] },
+      { nome: 'E-commerce próprio',       tipo: 'ecommerce',    cidade: 'Online',         coords: null }
+    ],
+    preco: 'R$ 95 – R$ 140 (250 ml saborizado)',
+    site: 'https://www.fazendairarema.com.br'
+  },
+  {
+    id: 'olivas-gaia',
+    nome: 'Olivas de Gaia',
+    regiao: 'Serra da Mantiqueira',
+    cidade: 'São Bento do Sapucaí - SP',
+    coords: [-22.690, -45.731],
+    registroMapa: 'SIPEAGRO (consultar nº atual)',
+    descricao: 'Olival em altitude elevada (>1.200 m), com foco em azeites aromatizados por co-extração (frutos prensados juntos com a erva/cítrico fresco).',
+    variedades: ['Arbequina', 'Koroneiki', 'Picual'],
+    sabores: ['Manjericão', 'Laranja Bahia', 'Alecrim Fresco', 'Tomilho-Limão'],
+    acidez: '≤ 0,2%',
+    envase: 'Garrafas de 100 ml e 250 ml',
+    producaoAnual: '~2.500 L',
+    colheita: 'Abril a maio',
+    extracao: 'Co-extração a frio em centrífuga de 2 fases',
+    canais: [
+      { nome: 'Loja na propriedade',        tipo: 'direta',       cidade: 'São Bento do Sapucaí - SP', coords: [-22.690, -45.731] },
+      { nome: 'Lojas gourmet (Jardins)',    tipo: 'emporio',      cidade: 'São Paulo - SP', coords: [-23.5657, -46.6700] },
+      { nome: 'Hotéis parceiros',           tipo: 'restaurante',  cidade: 'Campos do Jordão - SP', coords: [-22.7393, -45.5912] },
+      { nome: 'Site próprio',               tipo: 'ecommerce',    cidade: 'Online',         coords: null }
+    ],
+    preco: 'R$ 110 – R$ 160 (250 ml saborizado)',
+    site: ''
+  },
+  {
+    id: 'prosperato-sp',
+    nome: 'Prosperato (unidade SP)',
+    regiao: 'Sul de Minas / Divisa SP',
+    cidade: 'São João da Boa Vista - SP',
+    coords: [-21.970, -46.797],
+    registroMapa: 'SIPEAGRO (consultar nº atual)',
+    descricao: 'Unidade de produção com olival próprio e lagar a frio. Produz linhas saborizadas usando insumos naturais da região.',
+    variedades: ['Arbequina', 'Koroneiki', 'Arbosana'],
+    sabores: ['Pimenta', 'Alho', 'Alecrim', 'Limão Siciliano', 'Manjericão'],
+    acidez: '≤ 0,25%',
+    envase: '250 ml e 500 ml',
+    producaoAnual: '~20.000 L (linha total)',
+    colheita: 'Fevereiro a abril',
+    extracao: 'A frio, moega climatizada',
+    canais: [
+      { nome: 'Venda no lagar',             tipo: 'direta',       cidade: 'São João da Boa Vista - SP', coords: [-21.970, -46.797] },
+      { nome: 'E-commerce próprio',         tipo: 'ecommerce',    cidade: 'Online',         coords: null },
+      { nome: 'Rede supermercados premium', tipo: 'supermercado', cidade: 'São Paulo - SP', coords: [-23.5869, -46.6850] },
+      { nome: 'Distribuidor Campinas',      tipo: 'supermercado', cidade: 'Campinas - SP',  coords: [-22.9099, -47.0626] },
+      { nome: 'Empório Ribeirão',           tipo: 'emporio',      cidade: 'Ribeirão Preto - SP', coords: [-21.1775, -47.8208] }
+    ],
+    preco: 'R$ 70 – R$ 120 (250 ml saborizado)',
+    site: 'https://www.prosperato.com.br'
+  },
+  {
+    id: 'fazenda-barreiro',
+    nome: 'Fazenda Barreiro',
+    regiao: 'Alta Mogiana',
+    cidade: 'Espírito Santo do Pinhal - SP',
+    coords: [-22.188, -46.748],
+    registroMapa: 'SIPEAGRO (consultar nº atual)',
+    descricao: 'Integração de produção de café e azeite. Linha saborizada feita com co-extração e infusão a frio em pequenos lotes.',
+    variedades: ['Arbequina', 'Picual'],
+    sabores: ['Pimenta Dedo-de-Moça', 'Alecrim', 'Alho Negro'],
+    acidez: '≤ 0,3%',
+    envase: '250 ml',
+    producaoAnual: '~1.800 L',
+    colheita: 'Março a abril',
+    extracao: 'A frio, extração contínua',
+    canais: [
+      { nome: 'Venda direta na fazenda',    tipo: 'direta',       cidade: 'Espírito Santo do Pinhal - SP', coords: [-22.188, -46.748] },
+      { nome: 'Feira Gastronômica Mogiana', tipo: 'feira',        cidade: 'Poços de Caldas - MG', coords: [-21.7879, -46.5611] },
+      { nome: 'Empório Vila Madalena',      tipo: 'emporio',      cidade: 'São Paulo - SP', coords: [-23.5465, -46.6916] }
+    ],
+    preco: 'R$ 85 – R$ 125 (250 ml saborizado)',
+    site: ''
+  },
+  {
+    id: 'olivas-mantiqueira',
+    nome: 'Olivas da Mantiqueira',
+    regiao: 'Serra da Mantiqueira',
+    cidade: 'Santo Antônio do Pinhal - SP',
+    coords: [-22.827, -45.663],
+    registroMapa: 'SIPEAGRO (consultar nº atual)',
+    descricao: 'Produção artesanal com foco em blends saborizados de perfil mediterrâneo. Lotes numerados e safra declarada no rótulo.',
+    variedades: ['Arbequina', 'Koroneiki', 'Grappolo'],
+    sabores: ['Ervas Finas', 'Limão Siciliano', 'Trufa Negra (infusão)', 'Pimenta Rosa'],
+    acidez: '≤ 0,2%',
+    envase: '100 ml e 250 ml',
+    producaoAnual: '~1.200 L',
+    colheita: 'Abril a maio',
+    extracao: 'A frio (< 25°C)',
+    canais: [
+      { nome: 'Loja física no município',   tipo: 'direta',       cidade: 'Santo Antônio do Pinhal - SP', coords: [-22.827, -45.663] },
+      { nome: 'Site próprio',               tipo: 'ecommerce',    cidade: 'Online',         coords: null },
+      { nome: 'Hotéis-boutique da região',  tipo: 'restaurante',  cidade: 'Campos do Jordão - SP', coords: [-22.7393, -45.5912] },
+      { nome: 'Restaurantes Jardins',       tipo: 'restaurante',  cidade: 'São Paulo - SP', coords: [-23.5657, -46.6700] }
+    ],
+    preco: 'R$ 120 – R$ 220 (250 ml linha trufa)',
+    site: ''
+  },
+  {
+    id: 'olivar-paraiba',
+    nome: 'Olivar Vale do Paraíba',
+    regiao: 'Vale do Paraíba',
+    cidade: 'São Luiz do Paraitinga - SP',
+    coords: [-23.222, -45.312],
+    registroMapa: 'SIPEAGRO (consultar nº atual)',
+    descricao: 'Projeto de pequenos produtores organizados em associação. Linha saborizada baseada em ervas nativas e frutas cítricas locais.',
+    variedades: ['Arbequina', 'Maria da Fé'],
+    sabores: ['Bergamota', 'Alecrim', 'Manjericão Roxo'],
+    acidez: '≤ 0,3%',
+    envase: '250 ml',
+    producaoAnual: '~900 L (associação)',
+    colheita: 'Março a maio',
+    extracao: 'Centralizada em lagar cooperativo a frio',
+    canais: [
+      { nome: 'Feira da cidade (sábados)',  tipo: 'feira',        cidade: 'São Luiz do Paraitinga - SP', coords: [-23.222, -45.312] },
+      { nome: 'Venda direta associados',    tipo: 'direta',       cidade: 'Taubaté - SP',   coords: [-23.0265, -45.5551] },
+      { nome: 'Pequeno e-commerce',         tipo: 'ecommerce',    cidade: 'Online',         coords: null }
+    ],
+    preco: 'R$ 80 – R$ 110 (250 ml saborizado)',
+    site: ''
+  },
+  {
+    id: 'ouro-verde-pinhal',
+    nome: 'Ouro Verde do Pinhal',
+    regiao: 'Alta Mogiana',
+    cidade: 'Espírito Santo do Pinhal - SP',
+    coords: [-22.195, -46.756],
+    registroMapa: 'SIPEAGRO (consultar nº atual)',
+    descricao: 'Produtor familiar especializado em azeites monovarietais e saborizados por maceração natural.',
+    variedades: ['Koroneiki', 'Arbosana'],
+    sabores: ['Alho e Ervas', 'Pimenta Calabresa', 'Limão Siciliano'],
+    acidez: '≤ 0,25%',
+    envase: '250 ml e 500 ml',
+    producaoAnual: '~3.000 L',
+    colheita: 'Fevereiro a abril',
+    extracao: 'A frio',
+    canais: [
+      { nome: 'Venda direta',               tipo: 'direta',       cidade: 'Espírito Santo do Pinhal - SP', coords: [-22.195, -46.756] },
+      { nome: 'Empórios regionais',         tipo: 'emporio',      cidade: 'Mogi Mirim - SP',     coords: [-22.4321, -46.9577] },
+      { nome: 'Supermercado premium',       tipo: 'supermercado', cidade: 'Campinas - SP',       coords: [-22.9099, -47.0626] },
+      { nome: 'Encomenda online',           tipo: 'ecommerce',    cidade: 'Online',              coords: null }
+    ],
+    preco: 'R$ 75 – R$ 115 (250 ml saborizado)',
+    site: ''
+  }
+];
+
+/* ========== MAPA (Google Maps) ========== */
+let mapa = null;
+let marcadores = [];
+let infoWindow = null;
+let mapaPronto = false;
+let pendenteRender = null;
+
+function initGoogleMaps() {
+  mapaPronto = true;
+  if (pendenteRender) { pendenteRender(); pendenteRender = null; }
+}
+window.initGoogleMaps = initGoogleMaps;
+
+function inicializaMapa() {
+  if (mapa || !mapaPronto) return;
+  mapa = new google.maps.Map(document.getElementById('mapa'), {
+    center: { lat: -22.5, lng: -46.5 },
+    zoom: 7,
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: true
+  });
+  infoWindow = new google.maps.InfoWindow();
+}
+
+function limpaMarcadores() {
+  marcadores.forEach(m => m.setMap(null));
+  marcadores = [];
+}
+
+function criaMarcador(lat, lng, cor, titulo, popupHtml, escala = 9) {
+  const m = new google.maps.Marker({
+    position: { lat, lng },
+    map: mapa,
+    title: titulo,
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      fillColor: cor,
+      fillOpacity: 0.95,
+      strokeColor: '#ffffff',
+      strokeWeight: 2,
+      scale: escala
+    }
+  });
+  m.addListener('click', () => {
+    infoWindow.setContent(popupHtml);
+    infoWindow.open(mapa, m);
+  });
+  marcadores.push(m);
+  return m;
+}
+
+function ajustaEnquadramento(pontos) {
+  if (pontos.length === 0) return;
+  if (pontos.length === 1) {
+    mapa.setCenter({ lat: pontos[0][0], lng: pontos[0][1] });
+    mapa.setZoom(10);
+    return;
+  }
+  const bounds = new google.maps.LatLngBounds();
+  pontos.forEach(p => bounds.extend({ lat: p[0], lng: p[1] }));
+  mapa.fitBounds(bounds, 60);
+}
+
+function exibeMapaRegiao(regiao) {
+  const render = () => {
+    inicializaMapa();
+    limpaMarcadores();
+    const lista = regiao === 'Todas'
+      ? produtores
+      : produtores.filter(p => p.regiao === regiao);
+
+    const pontos = [];
+    lista.forEach(p => {
+      criaMarcador(p.coords[0], p.coords[1], CORES.produtor, p.nome,
+        `<strong>${p.nome}</strong><br>${p.cidade}<br><em>${p.regiao}</em>`, 11);
+      pontos.push(p.coords);
+    });
+    ajustaEnquadramento(pontos);
+  };
+  if (mapaPronto) render(); else pendenteRender = render;
+}
+
+function exibeMapaProdutor(p) {
+  const render = () => {
+    inicializaMapa();
+    limpaMarcadores();
+
+    const pontos = [p.coords];
+    criaMarcador(p.coords[0], p.coords[1], CORES.produtor, p.nome,
+      `<strong>🫒 ${p.nome}</strong><br>${p.cidade}<br><em>Produtor</em>`, 12);
+
+    p.canais.forEach(c => {
+      if (!c.coords) return;
+      const cor = CORES[c.tipo] || '#555';
+      criaMarcador(c.coords[0], c.coords[1], cor, c.nome,
+        `<strong>${c.nome}</strong><br>${c.cidade}<br><em>${rotuloTipo(c.tipo)}</em>`, 8);
+      pontos.push(c.coords);
+    });
+    ajustaEnquadramento(pontos);
+  };
+  if (mapaPronto) render(); else pendenteRender = render;
+}
+
+function rotuloTipo(t) {
+  const r = {
+    direta: 'Venda direta', emporio: 'Empório / loja gourmet',
+    supermercado: 'Supermercado / distribuidor', restaurante: 'Restaurante / hotel',
+    feira: 'Feira / evento', ecommerce: 'E-commerce'
+  };
+  return r[t] || t;
+}
+
+/* ========== ESTADO E UI ========== */
+let regiaoAtiva = 'Todas';
+let produtorAtivo = null;
+
+const regiaoLista = document.getElementById('regiao-lista');
+const produtorLista = document.getElementById('produtor-lista');
+const detalhe = document.getElementById('detalhe');
+const mapaContainer = document.getElementById('mapa-container');
+const conteudoDetalhe = document.getElementById('conteudo-detalhe');
+
+function regioesUnicas() {
+  const set = new Set(produtores.map(p => p.regiao));
+  return ['Todas', ...[...set].sort()];
+}
+
+function renderRegioes() {
+  regiaoLista.innerHTML = '';
+  regioesUnicas().forEach(r => {
+    const li = document.createElement('li');
+    li.textContent = r;
+    if (r === regiaoAtiva) li.classList.add('ativo');
+    li.onclick = () => {
+      regiaoAtiva = r;
+      produtorAtivo = null;
+      renderRegioes();
+      renderProdutores();
+      renderPainelRegiao();
+    };
+    regiaoLista.appendChild(li);
+  });
+}
+
+function renderProdutores() {
+  produtorLista.innerHTML = '';
+  const lista = regiaoAtiva === 'Todas' ? produtores : produtores.filter(p => p.regiao === regiaoAtiva);
+
+  if (lista.length === 0) {
+    produtorLista.innerHTML = '<li style="color:#999;font-style:italic;cursor:default;">Nenhum produtor nesta região.</li>';
+    return;
+  }
+
+  lista.forEach(p => {
+    const li = document.createElement('li');
+    li.innerHTML = `${p.nome}<small>${p.cidade}</small>`;
+    if (produtorAtivo && produtorAtivo.id === p.id) li.classList.add('ativo');
+    li.onclick = () => {
+      produtorAtivo = p;
+      renderProdutores();
+      renderPainelProdutor();
+    };
+    produtorLista.appendChild(li);
+  });
+}
+
+function mostraPainel() {
+  mapaContainer.style.display = 'block';
+  const ph = detalhe.querySelector('.placeholder');
+  if (ph) ph.style.display = 'none';
+}
+
+function renderPainelRegiao() {
+  mostraPainel();
+  const lista = regiaoAtiva === 'Todas' ? produtores : produtores.filter(p => p.regiao === regiaoAtiva);
+
+  conteudoDetalhe.innerHTML = `
+    <div class="detalhe-header">
+      <h2>Região: ${regiaoAtiva}</h2>
+      <div class="localizacao">${lista.length} produtor(es) identificado(s)</div>
+    </div>
+    <div class="descricao">
+      Pontos verde-escuros no mapa mostram a localização dos olivais desta região.
+      Clique em um produtor na lateral para ver os pontos de venda coloridos por tipo.
+    </div>
+    <div class="grid-info">
+      ${lista.map(p => `
+        <div class="card">
+          <h3>${p.nome}</h3>
+          <ul>
+            <li><strong>Cidade:</strong> ${p.cidade}</li>
+            <li><strong>Variedades:</strong> ${p.variedades.join(', ')}</li>
+            <li><strong>Produção anual:</strong> ${p.producaoAnual}</li>
+            <li><strong>Preço médio:</strong> ${p.preco}</li>
+          </ul>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  exibeMapaRegiao(regiaoAtiva);
+}
+
+function renderPainelProdutor() {
+  mostraPainel();
+  const p = produtorAtivo;
+  const siteHtml = p.site
+    ? `<a class="link-externo" href="${p.site}" target="_blank" rel="noopener">🌐 Visitar site oficial →</a>`
+    : '<small style="color:#999;">Site oficial não informado.</small>';
+
+  const canaisHtml = p.canais.map(c => `
+    <li>
+      <span class="canal-ponto" style="background:${CORES[c.tipo] || '#555'}"></span>
+      <div>
+        <strong>${c.nome}</strong><br>
+        <small style="color:#777;">${rotuloTipo(c.tipo)}${c.cidade && c.cidade !== 'Online' ? ' · ' + c.cidade : ''}</small>
+      </div>
+    </li>
+  `).join('');
+
+  conteudoDetalhe.innerHTML = `
+    <div class="detalhe-header">
+      <h2>${p.nome} <span class="mapa-selo">MAPA</span></h2>
+      <div class="localizacao">📍 ${p.cidade} · Região ${p.regiao}</div>
+    </div>
+
+    <div class="descricao">${p.descricao}</div>
+
+    <div class="grid-info">
+      <div class="card">
+        <h3>Características do Azeite</h3>
+        <ul>
+          <li><strong>Variedades:</strong> ${p.variedades.join(', ')}</li>
+          <li><strong>Acidez livre:</strong> ${p.acidez}</li>
+          <li><strong>Classificação:</strong> Extra-virgem saborizado</li>
+          <li><strong>Envase:</strong> ${p.envase}</li>
+        </ul>
+        <div style="margin-top:0.7rem;">
+          <strong style="color:var(--verde-escuro);font-size:0.85rem;">Sabores/aromatizações:</strong>
+          <div class="sabores-lista">
+            ${p.sabores.map(s => `<span class="sabor-tag">${s}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Produção</h3>
+        <ul>
+          <li><strong>Volume anual:</strong> ${p.producaoAnual}</li>
+          <li><strong>Colheita:</strong> ${p.colheita}</li>
+          <li><strong>Extração:</strong> ${p.extracao}</li>
+          <li><strong>Registro:</strong> ${p.registroMapa}</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Pontos de Venda</h3>
+        <ul class="canal-lista">${canaisHtml}</ul>
+      </div>
+
+      <div class="card">
+        <h3>Mercado</h3>
+        <ul>
+          <li>
+            <strong>Custo médio:</strong><br>
+            <span class="preco-destaque">${p.preco}<br><small>Referência — varia por lote e canal.</small></span>
+          </li>
+        </ul>
+        ${siteHtml}
+      </div>
+    </div>
+  `;
+  exibeMapaProdutor(p);
+}
+
+/* ========== EXPORTAR HTML ========== */
+function exportarHTML() {
+  const titulo = produtorAtivo
+    ? `Relatorio-${produtorAtivo.nome.replace(/\s+/g, '_')}`
+    : `Relatorio-Regiao-${regiaoAtiva.replace(/\s+/g, '_')}`;
+  const dataHoje = new Date().toLocaleString('pt-BR');
+  const conteudo = conteudoDetalhe.innerHTML || '<p><em>Nenhum conteúdo selecionado.</em></p>';
+
+  const html = `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>${titulo} — MAO-Oliveira</title>
+<style>
+  body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f5f1e6; color: #3a3a3a; padding: 2rem; line-height: 1.5; }
+  .cabecalho { border-bottom: 3px solid #c9a227; padding-bottom: 1rem; margin-bottom: 1.5rem; }
+  .cabecalho h1 { color: #2d4a2b; margin: 0; font-size: 1.6rem; }
+  .cabecalho small { color: #556b2f; }
+  .detalhe-header { border-bottom: 2px solid #c9a227; padding-bottom: 0.8rem; margin-bottom: 1rem; }
+  .detalhe-header h2 { color: #2d4a2b; font-size: 1.5rem; margin: 0 0 0.3rem 0; }
+  .mapa-selo { display: inline-block; background: #2d4a2b; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; margin-left: 0.6rem; font-weight: 600; }
+  .localizacao { color: #556b2f; font-size: 0.92rem; }
+  .descricao { background: #fff; border-left: 4px solid #8fa968; padding: 0.8rem 1rem; border-radius: 6px; margin-bottom: 1rem; font-style: italic; color: #555; }
+  .grid-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .card { background: #fff; border: 1px solid #e8e4d6; border-radius: 10px; padding: 1rem; }
+  .card h3 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: #556b2f; margin-bottom: 0.6rem; }
+  .card ul { list-style: none; padding: 0; margin: 0; }
+  .card li { padding: 0.3rem 0; font-size: 0.9rem; border-bottom: 1px dotted #e8e4d6; }
+  .card li:last-child { border-bottom: none; }
+  .card li strong { color: #2d4a2b; }
+  .sabores-lista { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.4rem; }
+  .sabor-tag { background: #fdf6d6; color: #5a4a10; padding: 3px 10px; border-radius: 14px; font-size: 0.8rem; border: 1px solid #c9a227; }
+  .canal-lista { list-style: none; padding: 0; }
+  .canal-lista li { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.35rem 0; font-size: 0.88rem; }
+  .canal-ponto { width: 12px; height: 12px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0,0,0,0.2); }
+  .preco-destaque { font-size: 1.2rem; color: #2d4a2b; font-weight: 600; }
+  .preco-destaque small { font-size: 0.75rem; color: #888; font-weight: normal; font-style: italic; }
+  .link-externo { color: #2d4a2b; font-weight: 500; font-size: 0.85rem; }
+  .rodape { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e8e4d6; font-size: 0.8rem; color: #777; text-align: center; }
+</style>
+</head>
+<body>
+<div class="cabecalho">
+  <h1>🫒 MAO-Oliveira</h1>
+  <small>Azeites Saborizados de SP · 📞 (011) 99331-9114</small>
+</div>
+${conteudo}
+<div class="rodape">
+  Relatório gerado em ${dataHoje} · Dados ilustrativos · Valide no SIPEAGRO/MAPA<br>
+  <strong>MAO-Oliveira</strong> · (011) 99331-9114
+</div>
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = titulo + '.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById('btn-exportar').addEventListener('click', exportarHTML);
+
+/* Inicialização */
+renderRegioes();
+renderProdutores();
+</script>
+</body>
+</html>

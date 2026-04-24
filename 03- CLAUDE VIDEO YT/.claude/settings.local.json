@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm list *)",
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(python --version)",
+      "PowerShell(python -c \"import docx; print\\('python-docx OK:', docx.__version__\\)\" 2>&1)",
+      "PowerShell(try { $word = New-Object -ComObject Word.Application; Write-Output \"Word COM OK: version $\\($word.Version\\)\"; $word.Quit\\(\\) } catch { Write-Output \"Word COM FAIL: $_\" })",
+      "PowerShell(& \"C:\\\\Users\\\\emoll\\\\OneDrive\\\\Documentos\\\\23- CLAUDE VIDEO YT\\\\generate_roteiro.ps1\")",
+      "PowerShell(powershell.exe -ExecutionPolicy Bypass -File \"C:\\\\Users\\\\emoll\\\\OneDrive\\\\Documentos\\\\23- CLAUDE VIDEO YT\\\\generate_roteiro.ps1\")"
+    ]
+  }
+}

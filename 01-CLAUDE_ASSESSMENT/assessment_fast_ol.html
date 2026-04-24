@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diagnóstico Rápido · Operador Logístico · Galeazzi &amp; Associados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --g-black:#1A1A1A;--g-charcoal:#333333;--g-dark:#555555;--g-gray:#777777;--g-muted:#999999;
+  --g-silver:#BBBBBB;--g-light:#D9D9D9;--g-border:#E0E4EA;--g-surface:#F5F7FA;--g-white:#FFFFFF;
+  --g-navy:#0B2447;--g-navy-mid:#163A6B;--g-blue:#1A5296;--g-blue-mid:#2878C8;
+  --g-blue-light:#3D9BE9;--g-blue-bright:#5BB5F5;--g-blue-sky:#7ECBFF;
+  --g-teal:#1B5C6B;--g-logo-teal:#005B6D;--g-logo-gray:#979797;--g-teal-accent:#2A7B88;
+  --shadow-card:0 0 0 1px rgba(0,0,0,.04),0 4px 8px rgba(0,0,0,.03),0 16px 40px rgba(0,0,0,.08);
+  --shadow-btn:0 4px 12px rgba(26,82,150,.3);
+  --shadow-cta:0 12px 40px rgba(26,82,150,.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#FFF;color:var(--g-charcoal);font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;font-weight:400;font-size:15px;line-height:1.55;overflow-x:hidden;scroll-behavior:smooth}
+a{color:var(--g-blue);text-decoration:none;font-weight:600}
+a:hover{color:var(--g-navy-mid)}
+
+/* ===== Background decorativo ===== */
+.bg-deco{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg-deco::before{content:"";position:absolute;right:-10%;top:-5%;width:70%;height:110%;background:linear-gradient(135deg,#F3F8FE,#E6F1FB 50%,#D7F0FF);border-radius:55% 40% 0 50%;opacity:.5}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.5;animation:float 18s ease-in-out infinite}
+.blob-1{width:520px;height:520px;background:radial-gradient(circle,#2878C8,transparent 70%);top:-80px;right:-40px}
+.blob-2{width:420px;height:420px;background:radial-gradient(circle,#3D9BE9,transparent 70%);top:35%;right:5%;animation-duration:22s;animation-delay:-4s}
+.blob-3{width:360px;height:360px;background:radial-gradient(circle,#5BB5F5,transparent 70%);bottom:15%;right:10%;animation-duration:15s;animation-delay:-8s}
+.blob-4{width:480px;height:480px;background:radial-gradient(circle,#081A35,transparent 65%);bottom:-120px;right:-80px;animation-duration:24s;animation-delay:-2s;opacity:.22}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1);opacity:.5}33%{transform:translate(-30px,-20px) scale(1.05);opacity:.6}66%{transform:translate(20px,30px) scale(.97);opacity:.45}}
+.waves{position:absolute;right:-5%;top:0;width:80%;height:100%;opacity:.32;clip-path:ellipse(75% 95% at 75% 50%)}
+
+/* ===== Topbar ===== */
+.topbar{position:fixed;top:0;left:0;right:0;height:70px;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--g-border);display:flex;align-items:center;padding:0 36px;z-index:30;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mono{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:36px;letter-spacing:-1px;line-height:1}
+.brand-mono .g{color:var(--g-logo-gray)}
+.brand-mono .a{color:var(--g-logo-teal)}
+.brand-txt{display:flex;flex-direction:column;line-height:1.05}
+.brand-txt .line1{font-weight:700;font-size:12px;letter-spacing:2px;color:var(--g-charcoal)}
+.brand-txt .line2{font-weight:700;font-size:9.5px;letter-spacing:3px;color:var(--g-teal-accent);margin-top:2px}
+.topbar-spacer{flex:1}
+.topbar-right{display:flex;align-items:center;gap:12px;font-size:13px}
+.score-live{display:flex;align-items:center;gap:10px;padding:6px 12px;background:var(--g-surface);border-radius:99px;border:1px solid var(--g-border);font-size:12px;color:var(--g-gray)}
+.score-live b{color:var(--g-navy);font-variant-numeric:tabular-nums}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;font-weight:600;font-size:14px;cursor:pointer;border:none;transition:all .2s ease;white-space:nowrap;font-family:inherit}
+.btn-primary{background:var(--g-blue);color:#FFF}
+.btn-primary:hover{background:var(--g-navy-mid);box-shadow:var(--shadow-btn)}
+.btn-ghost{background:transparent;color:var(--g-blue);border:1.5px solid var(--g-border)}
+.btn-ghost:hover{background:var(--g-surface);border-color:var(--g-blue)}
+
+/* ===== Layout principal ===== */
+main{padding:100px 40px 60px;max-width:1180px;margin:0 auto}
+
+/* ===== Hero ===== */
+.hero{background:linear-gradient(135deg,#0B2447 0%,#163A6B 55%,#1A5296 100%);color:#FFF;border-radius:22px;padding:44px 48px;margin-bottom:28px;position:relative;overflow:hidden;box-shadow:var(--shadow-cta)}
+.hero::after{content:"";position:absolute;right:-100px;top:-100px;width:420px;height:420px;background:radial-gradient(circle,rgba(125,203,255,.35),transparent 70%);border-radius:50%}
+.hero-eyebrow{font-weight:700;font-size:11px;letter-spacing:3.5px;color:#7ECBFF;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.hero-eyebrow .badge-fast{background:#7ECBFF;color:#0B2447;padding:3px 10px;border-radius:99px;font-weight:800;letter-spacing:1px;font-size:10px}
+.hero h1{font-family:'EB Garamond',serif;font-weight:500;font-size:48px;line-height:1.05;margin:12px 0 8px;letter-spacing:-.6px;max-width:720px;position:relative;z-index:1}
+.hero p.lead{font-size:17px;color:rgba(255,255,255,.85);max-width:640px;position:relative;z-index:1;margin-bottom:22px}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:1;margin-top:10px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px 18px}
+.hero-stat .lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#BCE0FF;font-weight:700}
+.hero-stat .val{font-family:'EB Garamond',serif;font-weight:500;font-size:30px;margin-top:3px;letter-spacing:-.3px;line-height:1}
+.hero-stat .unit{font-size:13px;color:#BCE0FF;font-weight:500;margin-left:3px}
+
+/* ===== Identificação ===== */
+.id-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;background:#FFF;border-radius:16px;padding:24px;box-shadow:var(--shadow-card);margin-bottom:26px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--g-dark);margin-bottom:5px;letter-spacing:.3px}
+.field input{width:100%;padding:11px 14px;border:1.5px solid var(--g-border);border-radius:8px;font-family:inherit;font-size:14.5px;color:var(--g-charcoal);background:#FFF}
+.field input:focus{outline:none;border-color:var(--g-blue);box-shadow:0 0 0 3px rgba(26,82,150,.12)}
+
+/* ===== Section headers ===== */
+.section-title{font-family:'EB Garamond',serif;font-weight:500;font-size:28px;color:var(--g-navy);margin:10px 0 6px;letter-spacing:-.3px;display:flex;align-items:center;gap:14px}
+.section-title::before{content:"";display:inline-block;width:36px;height:3px;background:var(--g-blue);border-radius:99px}
+.section-sub{color:var(--g-gray);font-size:15px;margin-bottom:18px;max-width:760px}
+
+/* ===== Pillar groups ===== */
+.pillar-group{margin-bottom:26px}
+.pillar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:8px 18px;border-radius:12px;background:#FFF;box-shadow:var(--shadow-card)}
+.pillar-head .lbl{font-weight:700;font-size:11px;letter-spacing:2.5px;text-transform:uppercase}
+.pillar-head .pct{font-family:'EB Garamond',serif;font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
+.pillar-gov .lbl{color:#0B2447}.pillar-gov .pct{color:#0B2447}
+.pillar-tec .lbl{color:#1A5296}.pillar-tec .pct{color:#1A5296}
+.pillar-kpi .lbl{color:#1B5C6B}.pillar-kpi .pct{color:#1B5C6B}
+
+.pilar-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:14px}
+.setor-card{background:#FFF;border-radius:14px;padding:20px 22px;box-shadow:var(--shadow-card);border-top:3px solid var(--g-blue)}
+.setor-card.gov{border-top-color:#0B2447}
+.setor-card.tec{border-top-color:#1A5296}
+.setor-card.kpi{border-top-color:#1B5C6B}
+.setor-card .head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:10px}
+.setor-card .head .code{font-weight:700;font-size:11px;letter-spacing:1.5px;color:var(--g-teal-accent)}
+.setor-card .head .peso{font-size:11px;color:var(--g-muted);font-weight:600}
+.setor-card h3{font-family:'EB Garamond',serif;font-weight:500;font-size:22px;color:var(--g-navy);line-height:1.15;margin-bottom:14px}
+.q-block{margin-top:14px;padding-top:14px;border-top:1px dashed var(--g-border)}
+.q-block:first-of-type{margin-top:0;padding-top:0;border-top:none}
+.q-title{font-weight:600;color:var(--g-navy);font-size:14px;margin-bottom:3px}
+.q-text{font-size:13px;color:var(--g-dark);margin-bottom:9px;line-height:1.45}
+.nota-row{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.nota-btn{width:38px;height:38px;border:1.5px solid var(--g-border);background:#FFF;border-radius:8px;font-weight:600;font-size:14px;color:var(--g-gray);cursor:pointer;transition:all .15s ease;display:flex;align-items:center;justify-content:center;font-family:inherit}
+.nota-btn:hover{border-color:var(--g-blue);color:var(--g-blue)}
+.nota-btn.sel{background:var(--g-blue);color:#FFF;border-color:var(--g-blue);box-shadow:0 2px 8px rgba(26,82,150,.25);transform:scale(1.05)}
+.nota-btn.clear{width:auto;padding:0 10px;border-style:dashed;color:var(--g-muted);font-size:11px}
+.q-npq{margin-left:auto;font-size:11px;color:var(--g-muted);font-weight:600}
+.q-npq b{color:var(--g-navy);font-family:'EB Garamond',serif;font-size:16px}
+
+/* ===== Escala lateral ===== */
+.escala-card{background:linear-gradient(135deg,#F2F5F9,#EAF0F7);border-radius:14px;padding:16px 20px;margin-bottom:22px;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;font-size:11px}
+.escala-item{text-align:center}
+.escala-item .n{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;font-weight:700;font-size:14px;margin-bottom:4px}
+.escala-item:nth-child(1) .n{background:#FCE8E8;color:#B23030}
+.escala-item:nth-child(2) .n{background:#FFE5D9;color:#C04F1E}
+.escala-item:nth-child(3) .n{background:#FFF3D6;color:#8A5A00}
+.escala-item:nth-child(4) .n{background:#E0EDFF;color:#0F4F82}
+.escala-item:nth-child(5) .n{background:#D4F4E4;color:#127548}
+.escala-item:nth-child(6) .n{background:#C8EDFB;color:#004D6B}
+.escala-item .lbl{color:var(--g-dark);font-weight:600}
+.escala-item .desc{color:var(--g-gray);font-size:10px;margin-top:2px;line-height:1.3}
+
+/* ===== Resultado ===== */
+.resultado{background:linear-gradient(135deg,#0B2447,#163A6B 60%,#1A5296);color:#FFF;border-radius:22px;padding:40px 44px;margin:32px 0 28px;box-shadow:var(--shadow-cta);position:relative;overflow:hidden}
+.resultado::after{content:"";position:absolute;right:-80px;bottom:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(125,203,255,.22),transparent 70%);border-radius:50%}
+.resultado h2{font-family:'EB Garamond',serif;font-weight:500;font-size:36px;margin-bottom:6px;letter-spacing:-.4px;position:relative;z-index:1}
+.resultado .sub{font-size:15px;color:rgba(255,255,255,.82);max-width:640px;margin-bottom:26px;position:relative;z-index:1}
+.res-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;position:relative;z-index:1}
+.res-left{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:22px 24px}
+.res-scores{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.res-score{text-align:center}
+.res-score .lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#BCE0FF;font-weight:700;margin-bottom:4px}
+.res-score .val{font-family:'EB Garamond',serif;font-size:52px;font-weight:500;line-height:1;letter-spacing:-.5px}
+.res-score .val .unit{font-size:18px;color:#BCE0FF;font-weight:500;margin-left:3px}
+.res-nivel{text-align:center;padding:12px;border-radius:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-size:15px}
+.level-not{background:#FCE8E8;color:#B23030}
+.level-bas{background:#FFF3D6;color:#8A5A00}
+.level-ple{background:#DEF0FF;color:#0F4F82}
+.level-ava{background:#D4F4E4;color:#127548}
+.res-right{display:flex;flex-direction:column;gap:14px}
+.res-pilar{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.res-pilar .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#BCE0FF;font-weight:700}
+.res-pilar .val{font-family:'EB Garamond',serif;font-size:28px;font-weight:500}
+
+.res-highlights{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px;position:relative;z-index:1}
+.hl-box{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:18px 20px}
+.hl-box h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+.hl-box h4.forca{color:#7ECBFF}
+.hl-box h4.atenc{color:#FFB074}
+.hl-box ul{list-style:none;padding:0}
+.hl-box li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.1);font-size:13px}
+.hl-box li:last-child{border-bottom:none}
+.hl-box li b{font-weight:600;color:#FFF}
+.hl-box li .nota{font-family:'EB Garamond',serif;font-size:18px;font-weight:500;color:#BCE0FF}
+
+/* ===== CTA Final ===== */
+.cta-final{background:#FFF;border-radius:22px;padding:44px 48px;margin-bottom:28px;box-shadow:var(--shadow-cta);border-top:6px solid var(--g-teal-accent);position:relative;overflow:hidden}
+.cta-final::before{content:"";position:absolute;left:-60px;top:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(42,123,136,.10),transparent 70%);border-radius:50%}
+.cta-final-eyebrow{font-weight:700;font-size:11px;letter-spacing:3.5px;color:var(--g-teal-accent);text-transform:uppercase;margin-bottom:8px}
+.cta-final h2{font-family:'EB Garamond',serif;font-weight:500;font-size:40px;color:var(--g-navy);line-height:1.1;letter-spacing:-.5px;margin-bottom:14px;max-width:760px}
+.cta-final p{font-size:16px;color:var(--g-dark);max-width:760px;margin-bottom:16px;line-height:1.6}
+.cta-final p b{color:var(--g-navy)}
+.cta-gap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0;position:relative;z-index:1}
+.cta-feature{padding:18px 20px;border:1px solid var(--g-border);border-radius:12px;background:var(--g-surface)}
+.cta-feature .ico{font-size:22px;margin-bottom:8px;color:var(--g-teal-accent)}
+.cta-feature h4{font-family:'DM Sans',sans-serif;font-weight:700;font-size:14px;color:var(--g-navy);margin-bottom:4px}
+.cta-feature p{font-size:13px;color:var(--g-gray);margin:0;line-height:1.4}
+.cta-contact{background:linear-gradient(135deg,#0B2447,#163A6B);color:#FFF;border-radius:16px;padding:28px 32px;margin-top:22px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+.cta-contact .info{font-size:14px;line-height:1.7}
+.cta-contact .info b{font-size:17px;color:#7ECBFF;font-weight:600;display:block;margin-bottom:6px;font-family:'DM Sans',sans-serif;letter-spacing:1px}
+.cta-contact .info a{color:#BCE0FF}
+.cta-contact .info a:hover{color:#FFF}
+.cta-contact .btn{background:#7ECBFF;color:#0B2447;padding:14px 24px;font-weight:700;font-size:15px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.cta-contact .btn:hover{background:#FFF;transform:translateY(-2px)}
+
+/* ===== Footer ===== */
+footer{padding:30px 40px 50px;font-size:13px;color:var(--g-muted);text-align:center;border-top:1px solid var(--g-border);background:rgba(255,255,255,.5);max-width:1180px;margin:0 auto}
+footer .brand-line{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;letter-spacing:-.5px;margin-bottom:4px}
+footer .co-name{font-weight:700;font-size:13px;letter-spacing:2.5px;color:var(--g-charcoal)}
+footer .co-tag{font-size:10.5px;letter-spacing:3px;color:var(--g-teal-accent);font-weight:700;margin:4px 0 10px}
+footer .addr{color:var(--g-dark);line-height:1.7}
+footer .conf{font-size:11px;color:var(--g-muted);margin-top:10px;opacity:.9}
+
+/* ===== Progress ribbon sticky ===== */
+.ribbon{position:sticky;top:70px;z-index:20;background:linear-gradient(90deg,rgba(255,255,255,.95),rgba(245,247,250,.95));backdrop-filter:blur(10px);border-bottom:1px solid var(--g-border);padding:12px 40px;margin:-30px -40px 22px;display:flex;align-items:center;gap:18px;border-radius:0}
+.ribbon .progress{flex:1;height:10px;background:var(--g-border);border-radius:99px;overflow:hidden}
+.ribbon .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--g-blue),var(--g-blue-light));border-radius:99px;transition:width .3s ease}
+.ribbon .pct{font-weight:700;font-variant-numeric:tabular-nums;color:var(--g-navy);font-size:14px;min-width:50px;text-align:right}
+.ribbon .txt{font-size:13px;color:var(--g-gray);min-width:180px}
+.ribbon .txt b{color:var(--g-navy);font-weight:700}
+
+/* ===== Responsivo ===== */
+@media (max-width:960px){
+  main{padding:90px 20px 40px}
+  .hero{padding:30px 26px}
+  .hero h1{font-size:34px}
+  .hero-stats,.id-row,.res-grid,.res-highlights,.res-scores,.cta-gap{grid-template-columns:1fr}
+  .cta-contact{grid-template-columns:1fr}
+  .pilar-cards{grid-template-columns:1fr}
+  .ribbon{margin:-20px -20px 16px;padding:10px 20px}
+}
+@media print{
+  .topbar,.ribbon,.btn,.bg-deco{display:none!important}
+  body{padding:0}main{padding:20px}
+  .hero,.resultado,.cta-final{break-inside:avoid;page-break-inside:avoid;box-shadow:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-deco">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <svg class="waves" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+    <path fill="none" stroke-width="1.2" stroke="#5BB5F5" d="M0,200 Q250,180 500,220 T1000,200"/>
+    <path fill="none" stroke-width="1.2" stroke="#3D9BE9" d="M0,400 Q250,360 500,420 T1000,400"/>
+    <path fill="none" stroke-width="1.2" stroke="#2878C8" d="M0,600 Q250,560 500,620 T1000,600"/>
+    <path fill="none" stroke-width="1.2" stroke="#1A5296" d="M0,800 Q250,760 500,820 T1000,800"/>
+  </svg>
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mono"><span class="g">G</span><span class="a">A</span></div>
+    <div class="brand-txt">
+      <span class="line1">GALEAZZI &amp; ASSOCIADOS</span>
+      <span class="line2">ENTERPRISE PLATFORM · DIAGNÓSTICO RÁPIDO</span>
+    </div>
+  </div>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-right">
+    <span class="score-live" id="tbScore">0 / 26 respondidas</span>
+    <button class="btn btn-ghost" onclick="exportReport()">📄 Relatório</button>
+    <button class="btn btn-ghost" onclick="resetAll()">↺ Novo</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <span class="badge-fast">FAST · 15 MIN</span>
+      <span>Diagnóstico Preliminar · Operador Logístico · NPQ-OL / ABOL</span>
+    </div>
+    <h1>Descubra em minutos o nível de maturidade operacional da sua empresa</h1>
+    <p class="lead">Ferramenta gratuita baseada na norma ABOL · NPQ-OL. Responda <b>26 perguntas rápidas</b> cobrindo os 17 setores críticos da operação logística e receba um raio-X preliminar da sua maturidade. Conexão direta para a auditoria completa Galeazzi.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="lbl">Perguntas</div><div class="val">26</div></div>
+      <div class="hero-stat"><div class="lbl">Setores</div><div class="val">17</div></div>
+      <div class="hero-stat"><div class="lbl">Tempo médio</div><div class="val">15<span class="unit">min</span></div></div>
+      <div class="hero-stat"><div class="lbl">Norma</div><div class="val" style="font-size:22px">NPQ-OL<span class="unit" style="font-size:13px"> / ABOL</span></div></div>
+    </div>
+  </div>
+
+  <!-- Progress sticky -->
+  <div class="ribbon">
+    <span class="txt" id="rbText">Progresso · <b>0 / 26</b> perguntas</span>
+    <div class="progress"><i id="rbBar" style="width:0%"></i></div>
+    <span class="pct" id="rbPct">0%</span>
+  </div>
+
+  <!-- IDENTIFICAÇÃO -->
+  <div class="id-row">
+    <div class="field"><label>Empresa</label><input id="fEmp" placeholder="Nome ou razão social"></div>
+    <div class="field"><label>Data</label><input id="fData" type="date"></div>
+    <div class="field"><label>Responsável</label><input id="fResp" placeholder="Seu nome"></div>
+  </div>
+
+  <!-- ESCALA -->
+  <div class="escala-card">
+    <div class="escala-item"><div class="n">0</div><div class="lbl">Inexistente</div><div class="desc">Prática não existe</div></div>
+    <div class="escala-item"><div class="n">1</div><div class="lbl">Inicial</div><div class="desc">Esporádica, informal</div></div>
+    <div class="escala-item"><div class="n">2</div><div class="lbl">Em Desenv.</div><div class="desc">Baixa consistência</div></div>
+    <div class="escala-item"><div class="n">3</div><div class="lbl">Definido</div><div class="desc">Formalizado, regular</div></div>
+    <div class="escala-item"><div class="n">4</div><div class="lbl">Gerenciado</div><div class="desc">Métricas, controle</div></div>
+    <div class="escala-item"><div class="n">5</div><div class="lbl">Benchmark</div><div class="desc">Referência de mercado</div></div>
+  </div>
+
+  <h2 class="section-title">Questionário</h2>
+  <p class="section-sub">Avalie cada item com uma nota de 0 a 5. A resposta é salva automaticamente no navegador. Caso precise interromper, pode voltar depois e continuar.</p>
+
+  <!-- FORMULÁRIO (preenchido via JS) -->
+  <div id="form-area"></div>
+
+  <!-- RESULTADO -->
+  <div id="resultado"></div>
+
+  <!-- CTA FINAL -->
+  <div class="cta-final">
+    <div class="cta-final-eyebrow">Próximo passo · Auditoria completa NPQ-OL / ABOL</div>
+    <h2>Quer o diagnóstico completo para obter a certificação ABOL?</h2>
+    <p>Este <b>diagnóstico rápido</b> avaliou 26 dos <b>119 critérios</b> da norma NPQ-OL. Para a auditoria completa de certificação ABOL — com visita ao CD, entrevistas setoriais, plano de ação executivo e relatório para o C-Level — entre em contato com a consultoria <b>Galeazzi &amp; Associados</b>.</p>
+
+    <div class="cta-gap">
+      <div class="cta-feature">
+        <div class="ico">📋</div>
+        <h4>Diagnóstico Completo</h4>
+        <p>119 critérios oficiais NPQ-OL em 17 setores · 3 pilares ponderados (Governança 40% · Técnico 52% · KPIs 8%)</p>
+      </div>
+      <div class="cta-feature">
+        <div class="ico">🏢</div>
+        <h4>Auditoria In Loco</h4>
+        <p>Visita ao CD · Walk-through operacional · Entrevistas com gestores · Verificação documental</p>
+      </div>
+      <div class="cta-feature">
+        <div class="ico">🎯</div>
+        <h4>Plano de Ação Executivo</h4>
+        <p>Relatório em PPT · Apresentação ao C-Level · 15 iniciativas priorizadas · Preparação para certificação</p>
+      </div>
+    </div>
+
+    <div class="cta-contact">
+      <div class="info">
+        <b>FALE COM A GALEAZZI</b>
+        Consultoria em Transformação Operacional · 38 anos de experiência em supply chain e logística<br>
+        📞 <b style="font-family:inherit;letter-spacing:normal;font-size:14px;display:inline;color:#FFF"> +55 11 3383 9600</b><br>
+        ✉ <a href="mailto:galeazzi@galeazzi.com.br?subject=Auditoria%20completa%20NPQ-OL%2FABOL&amp;body=Ol%C3%A1%2C%20gostaria%20de%20receber%20uma%20proposta%20para%20auditoria%20completa%20de%20Operador%20Log%C3%ADstico%20NPQ-OL%2FABOL.">galeazzi@galeazzi.com.br</a><br>
+        🌐 <a href="https://www.galeazzi.com.br" target="_blank" rel="noopener">www.galeazzi.com.br</a>
+      </div>
+      <a class="btn" href="mailto:galeazzi@galeazzi.com.br?subject=Auditoria%20completa%20NPQ-OL%2FABOL&amp;body=Ol%C3%A1%2C%20gostaria%20de%20receber%20uma%20proposta%20para%20auditoria%20completa%20de%20Operador%20Log%C3%ADstico%20NPQ-OL%2FABOL.%20Empresa%3A%20">Solicitar Auditoria Completa →</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="brand-line"><span style="color:var(--g-logo-gray)">G</span><span style="color:var(--g-logo-teal)">A</span></div>
+  <div class="co-name">GALEAZZI &amp; ASSOCIADOS</div>
+  <div class="co-tag">ENTERPRISE PLATFORM</div>
+  <div class="addr">
+    Consultoria em Transformação Operacional · 38 anos de experiência em supply chain, logística e reestruturação<br>
+    Av. Brigadeiro Faria Lima, 2081, 10º andar · Pinheiros, São Paulo, SP · Brasil<br>
+    <b>+55 11 3383 9600</b> · <a href="mailto:galeazzi@galeazzi.com.br">galeazzi@galeazzi.com.br</a> · <a href="https://www.galeazzi.com.br" target="_blank" rel="noopener">www.galeazzi.com.br</a>
+  </div>
+  <div class="conf">Diagnóstico Rápido · Operador Logístico · Baseado em NPQ-OL / ABOL · Confidencial — Uso Exclusivo do Respondente</div>
+</footer>
+
+<script>
+// ============ DADOS ============
+const S = {
+  G1:{nome:"Gestão da Qualidade",pilar:"Governança",peso:8,sub:"1.1"},
+  G2:{nome:"Sustentabilidade",pilar:"Governança",peso:7,sub:"1.2"},
+  G3:{nome:"Gestão de Clientes",pilar:"Governança",peso:6,sub:"1.3"},
+  G4:{nome:"Confidencialidade e TI",pilar:"Governança",peso:5,sub:"1.4"},
+  G5:{nome:"Recursos Humanos",pilar:"Governança",peso:7,sub:"1.5"},
+  G6:{nome:"Gestão de Riscos",pilar:"Governança",peso:7,sub:"1.6"},
+  T1:{nome:"Recebimento e Inspeção",pilar:"Técnico",peso:7,sub:"2.1"},
+  T2:{nome:"Armazenagem e Estoque",pilar:"Técnico",peso:10,sub:"2.3-2.4"},
+  T3:{nome:"Picking e Preparação",pilar:"Técnico",peso:7,sub:"2.5"},
+  T4:{nome:"Expedição e Transportes",pilar:"Técnico",peso:9,sub:"2.6-2.7"},
+  T5:{nome:"Logística Reversa",pilar:"Técnico",peso:3,sub:"2.8"},
+  T6:{nome:"Sistemas de Informação",pilar:"Técnico",peso:8,sub:"2.9"},
+  T7:{nome:"Manutenção",pilar:"Técnico",peso:3,sub:"2.10"},
+  T8:{nome:"Projetos e Melhoria",pilar:"Técnico",peso:5,sub:"2.11-2.14"},
+  K1:{nome:"KPIs de Armazenagem",pilar:"KPIs",peso:4,sub:"3.2.1"},
+  K2:{nome:"KPIs de Transporte",pilar:"KPIs",peso:3,sub:"3.2.2"},
+  K3:{nome:"KPIs Financeiros",pilar:"KPIs",peso:1,sub:"3.2.3"}
+};
+const SETORES_ORDER=['G1','G2','G3','G4','G5','G6','T1','T2','T3','T4','T5','T6','T7','T8','K1','K2','K3'];
+
+// Seleção enxuta: 1-2 perguntas por setor = 26 perguntas total
+const QUESTIONS = [
+  // GOVERNANÇA (40%)
+  ["G1","1.1.1.1","ISO9001 ou Manual de Qualidade","A empresa possui certificação ISO9001 vigente ou Manual de Qualidade formalizado?"],
+  ["G1","1.1.1.4","Processos operacionais documentados","Os processos críticos estão documentados com registros e gestores responsáveis identificados?"],
+  ["G2","1.2.1.1","Sustentabilidade financeira","DRE, balanço e fluxo de caixa dos últimos 2 anos estão disponíveis e demonstram solidez?"],
+  ["G2","1.2.2.1","Gestão ambiental (ISO14001)","A empresa possui ISO14001 ou Manual de Gestão Ambiental formalizado?"],
+  ["G3","1.3.2.1","Gestão de reclamações","Existe metodologia formal de gerenciamento de reclamações de clientes com SLA de resposta?"],
+  ["G4","1.4.1.5","Segurança da informação","Existem procedimentos documentados de segurança de TI (política, acesso, backup, pentest)?"],
+  ["G5","1.5.1.1","Treinamento e desenvolvimento","Programa anual de treinamento formalizado com plano aprovado e orçamento dedicado?"],
+  ["G5","1.5.3.1","Segurança no trabalho","A empresa possui ISO45001/OHSAS18001 ou sistema equivalente de gestão de SST?"],
+  ["G6","1.6.2.1","Apólices de seguro","Apólices vigentes de seguro patrimonial, RC, carga e interrupção de negócios?"],
+  ["G6","1.6.3.7","Comitê de Gestão de Riscos","Existe CGR constituído com atas de reunião e estudos de vulnerabilidade?"],
+  // TÉCNICO (52%)
+  ["T1","2.1.3.1","Conferência no recebimento","Existe processo documentado de conferência e destinação formal de não conformidades no recebimento?"],
+  ["T1","2.1.4.1","Tecnologia no recebimento","Uso de terminais RF, leitores de código de barras/RFID, balanças integradas ao WMS?"],
+  ["T2","2.3.1.1","FIFO / FEFO no WMS","WMS possui regras preestabelecidas de FIFO e FEFO para alocação de materiais?"],
+  ["T2","2.4.5.1","Inventário cíclico","Processo de contagem cíclica documentado e suportado pelo sistema?"],
+  ["T3","2.5.1.1","Estratégia de picking","Metodologia de picking (zona/onda/batch) documentada e alinhada ao perfil da operação?"],
+  ["T3","2.5.2.3","KPIs de picking","Indicadores formalizados: linhas/hora, acuracidade, lead time de separação?"],
+  ["T4","2.6.1.1","Integração picking → expedição","Há integração efetiva entre picking, expedição e plataformas WMS-TMS?"],
+  ["T4","2.7.3.1","Performance de transportadoras","Avaliação periódica de transportadoras com KPIs documentados (BSC ou equivalente)?"],
+  ["T5","2.8.1.1","Logística reversa estruturada","Equipe ou responsável identificado no organograma para devoluções e triagem?"],
+  ["T6","2.9.1.1","Integração WMS-TMS","A integração entre WMS, TMS e outros sistemas é eficiente e documentada?"],
+  ["T6","2.9.2.1","Funções-chave do WMS","WMS com funções implementadas: recebimento, armazenagem, picking, expedição e inventário?"],
+  ["T7","2.10.1.1","Política de manutenção","Política documentada de manutenção preventiva, preditiva e corretiva?"],
+  ["T8","2.13.1.1","Visibilidade para o cliente","Plataforma de visibilidade da operação em tempo real disponibilizada aos clientes?"],
+  // KPIs (8%)
+  ["K1","KPI-A2","Acuracidade de inventário","Monitora % de assertividade entre estoque físico e contábil? Meta e plano de ação definidos?"],
+  ["K2","KPI-T2","OTIF","Monitora OTIF (On Time In Full) por cliente e filial? Meta contratual e análise de desvios?"],
+  ["K3","KPI-F2","EBITDA","Monitora lucratividade (EBITDA) com frequência mensal e análise de desvios?"]
+];
+
+// ============ STATE ============
+const KEY='galeazzi_fast_ol_v1';
+let state=load();
+function defaultState(){return {empresa:'',data:new Date().toISOString().slice(0,10),auditor:'',notas:{}};}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&s.notas)return s;}catch(e){}return defaultState();}
+function save(){localStorage.setItem(KEY,JSON.stringify(state));updateUI();}
+function resetAll(){if(!confirm('Iniciar novo diagnóstico? Todas as respostas serão apagadas.'))return;state=defaultState();save();render();}
+
+// ============ CÁLCULOS ============
+function qsOf(code){return QUESTIONS.filter(q=>q[0]===code);}
+function avgSector(code){const qs=qsOf(code);const vs=qs.map(q=>state.notas[q[1]]).filter(v=>typeof v==='number');if(!vs.length)return null;return vs.reduce((a,b)=>a+b,0)/vs.length;}
+function npq(n){return n==null?null:Math.round(n*3/5*100)/100;}
+function level(np){if(np==null)return {label:'—',cls:''};if(np<1)return {label:'Não Certificável',cls:'level-not'};if(np<1.5)return {label:'Nível Básico',cls:'level-bas'};if(np<2)return {label:'Nível Pleno',cls:'level-ple'};return {label:'Nível Avançado',cls:'level-ava'};}
+function globalScore(){let s=0,w=0;for(const c of SETORES_ORDER){const v=avgSector(c);if(v!=null){s+=v*S[c].peso;w+=S[c].peso;}}return w?s/w:null;}
+function pilarScore(p){let s=0,w=0;for(const c of SETORES_ORDER){if(S[c].pilar!==p)continue;const v=avgSector(c);if(v!=null){s+=v*S[c].peso;w+=S[c].peso;}}return w?s/w:null;}
+function done(){return Object.keys(state.notas).length;}
+function pct(){return Math.round(done()/QUESTIONS.length*100);}
+
+// ============ RENDER ============
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function renderForm(){
+  const groups={'Governança':{lbl:'GOVERNANÇA · 40%',cls:'pillar-gov',codes:['G1','G2','G3','G4','G5','G6']},
+    'Técnico':{lbl:'CRITÉRIOS TÉCNICOS · 52%',cls:'pillar-tec',codes:['T1','T2','T3','T4','T5','T6','T7','T8']},
+    'KPIs':{lbl:'KPIs · 8%',cls:'pillar-kpi',codes:['K1','K2','K3']}};
+  let html='';
+  for(const k of Object.keys(groups)){
+    const g=groups[k];
+    const somaNotas=g.codes.reduce((acc,c)=>{const v=avgSector(c);return acc+(v==null?0:v*S[c].peso);},0);
+    const somaPesos=g.codes.reduce((acc,c)=>{const v=avgSector(c);return acc+(v==null?0:S[c].peso);},0);
+    const avgPilar=somaPesos?somaNotas/somaPesos:null;
+    html+=`<div class="pillar-group">
+      <div class="pillar-head ${g.cls}">
+        <span class="lbl">${g.lbl}</span>
+        <span class="pct">${avgPilar==null?'—':avgPilar.toFixed(2)} <small style="font-size:13px;color:var(--g-muted);font-family:inherit">/ 5,0</small></span>
+      </div>
+      <div class="pilar-cards">
+      ${g.codes.map(code=>{
+        const s=S[code];const qs=qsOf(code);const avg=avgSector(code);const np=npq(avg);
+        const cls=s.pilar==='Governança'?'gov':s.pilar==='Técnico'?'tec':'kpi';
+        return `<div class="setor-card ${cls}">
+          <div class="head"><span class="code">${code} · ${s.pilar}</span><span class="peso">Peso ${s.peso}% · Média ${avg==null?'—':avg.toFixed(2)}</span></div>
+          <h3>${escapeHtml(s.nome)}</h3>
+          ${qs.map(q=>{
+            const [,id,titulo,pergunta]=q;const n=state.notas[id];
+            return `<div class="q-block">
+              <div class="q-title">${escapeHtml(titulo)}</div>
+              <div class="q-text">${escapeHtml(pergunta)}</div>
+              <div class="nota-row">
+                ${[0,1,2,3,4,5].map(v=>`<button class="nota-btn ${n===v?'sel':''}" onclick="setNota('${id}',${v})">${v}</button>`).join('')}
+                <button class="nota-btn clear" onclick="setNota('${id}',null)" title="Limpar">limpar</button>
+                <span class="q-npq">NPQ <b>${typeof n==='number'?npq(n).toFixed(2):'—'}</b></span>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>`;
+      }).join('')}
+      </div>
+    </div>`;
+  }
+  document.getElementById('form-area').innerHTML=html;
+}
+
+function renderResultado(){
+  const g=globalScore();const np=npq(g);const lev=level(np);const gov=pilarScore('Governança');const tec=pilarScore('Técnico');const kpi=pilarScore('KPIs');
+  const d=done();
+  if(d===0){document.getElementById('resultado').innerHTML='';return;}
+  const ranks=SETORES_ORDER.map(c=>({code:c,nome:S[c].nome,peso:S[c].peso,avg:avgSector(c)})).filter(x=>x.avg!=null).sort((a,b)=>b.avg-a.avg);
+  const forcas=ranks.slice(0,3);
+  const atencoes=[...ranks].sort((a,b)=>a.avg-b.avg).slice(0,3);
+  const completo=d===QUESTIONS.length;
+  document.getElementById('resultado').innerHTML=`
+    <div class="resultado" id="resultado-box">
+      <h2>${completo?'Seu Diagnóstico Preliminar':'Resultado Parcial'}</h2>
+      <div class="sub">${completo?`Com base nas 26 respostas, seu score ABOL preliminar está abaixo. ${lev.label==='Nível Avançado'||lev.label==='Nível Pleno'?'Resultado muito bom — vale formalizar com a certificação completa.':'Há oportunidades concretas de evolução — veja o contato abaixo.'}`:`${d} de 26 perguntas respondidas. Complete todas para ver o diagnóstico final.`}</div>
+      <div class="res-grid">
+        <div class="res-left">
+          <div class="res-scores">
+            <div class="res-score"><div class="lbl">Score Gerencial</div><div class="val">${g==null?'—':g.toFixed(2)}<span class="unit">/5</span></div></div>
+            <div class="res-score"><div class="lbl">Score NPQ-OL</div><div class="val">${np==null?'—':np.toFixed(2)}<span class="unit">/3</span></div></div>
+          </div>
+          <div class="res-nivel ${lev.cls}">${lev.label}</div>
+        </div>
+        <div class="res-right">
+          <div class="res-pilar"><span class="lbl">Governança · 40%</span><span class="val">${gov==null?'—':gov.toFixed(2)}</span></div>
+          <div class="res-pilar"><span class="lbl">Técnico · 52%</span><span class="val">${tec==null?'—':tec.toFixed(2)}</span></div>
+          <div class="res-pilar"><span class="lbl">KPIs · 8%</span><span class="val">${kpi==null?'—':kpi.toFixed(2)}</span></div>
+        </div>
+      </div>
+      <div class="res-highlights">
+        <div class="hl-box"><h4 class="forca">🟢 Top 3 · Pontos Fortes</h4>
+          <ul>${forcas.map(x=>`<li><b>${x.code} · ${escapeHtml(x.nome)}</b><span class="nota">${x.avg.toFixed(2)}</span></li>`).join('')||'<li style="opacity:.6">Complete mais perguntas para ver</li>'}</ul>
+        </div>
+        <div class="hl-box"><h4 class="atenc">🟠 Top 3 · Pontos de Atenção</h4>
+          <ul>${atencoes.map(x=>`<li><b>${x.code} · ${escapeHtml(x.nome)}</b><span class="nota">${x.avg.toFixed(2)}</span></li>`).join('')||'<li style="opacity:.6">Complete mais perguntas para ver</li>'}</ul>
+        </div>
+      </div>
+    </div>`;
+}
+
+function updateUI(){
+  renderResultado();
+  const d=done();const p=pct();
+  document.getElementById('tbScore').innerHTML=`<b>${d}</b> / ${QUESTIONS.length} respondidas`;
+  document.getElementById('rbBar').style.width=p+'%';
+  document.getElementById('rbPct').textContent=p+'%';
+  document.getElementById('rbText').innerHTML=`Progresso · <b>${d} / ${QUESTIONS.length}</b> perguntas`;
+  // Atualiza pilar-head scores ao vivo (mais leve do que re-renderizar tudo)
+  renderForm();
+}
+
+// ============ HANDLERS ============
+function setNota(id,v){if(v===null||v===undefined)delete state.notas[id];else state.notas[id]=v;save();}
+
+function render(){
+  document.getElementById('fEmp').value=state.empresa||'';
+  document.getElementById('fData').value=state.data||'';
+  document.getElementById('fResp').value=state.auditor||'';
+  renderForm();renderResultado();updateUI();
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('fEmp').addEventListener('blur',e=>{state.empresa=e.target.value;save();});
+  document.getElementById('fData').addEventListener('blur',e=>{state.data=e.target.value;save();});
+  document.getElementById('fResp').addEventListener('blur',e=>{state.auditor=e.target.value;save();});
+  render();
+});
+
+// ============ EXPORT RELATÓRIO ============
+function exportReport(){
+  const g=globalScore();const np=npq(g);const lev=level(np);
+  const gov=pilarScore('Governança');const tec=pilarScore('Técnico');const kpi=pilarScore('KPIs');
+  const d=done();const p=pct();
+  const now=new Date();const geradoEm=now.toLocaleString('pt-BR',{dateStyle:'long',timeStyle:'short'});
+  const ranks=SETORES_ORDER.map(c=>({code:c,nome:S[c].nome,peso:S[c].peso,pilar:S[c].pilar,avg:avgSector(c)})).filter(x=>x.avg!=null).sort((a,b)=>b.avg-a.avg);
+  const forcas=ranks.slice(0,3);const atencoes=[...ranks].sort((a,b)=>a.avg-b.avg).slice(0,3);
+  const criticos=QUESTIONS.filter(q=>{const n=state.notas[q[1]];return typeof n==='number'&&n<=2;}).map(q=>({code:q[0],nome:S[q[0]].nome,id:q[1],titulo:q[2],nota:state.notas[q[1]]})).sort((a,b)=>a.nota-b.nota);
+
+  const rep=`<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><title>Diagnóstico Rápido NPQ-OL · ${escapeHtml(state.empresa||'—')}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500;600;700&family=EB+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',-apple-system,sans-serif;color:#333;font-size:11px;line-height:1.4;background:#F5F7FA}
+.rep{max-width:880px;margin:0 auto;padding:18px 22px;background:#fff}
+a{color:#1A5296;text-decoration:none;font-weight:600}
+.sheet{page-break-after:always;padding-bottom:8px;border-bottom:1px dashed #D0D6E0;margin-bottom:12px}
+.sheet:last-child{page-break-after:auto;border-bottom:none}
+.head{display:flex;justify-content:space-between;align-items:center;padding-bottom:8px;border-bottom:2.5px solid #0B2447;margin-bottom:12px}
+.brand-mono{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;line-height:1;letter-spacing:-1px}
+.brand-mono .g{color:#979797}.brand-mono .a{color:#005B6D}
+.brand-box{display:flex;gap:10px;align-items:center}
+.brand-lbl{font-size:11px;font-weight:700;letter-spacing:2px;color:#0B2447}
+.brand-sub{font-size:8.5px;font-weight:700;letter-spacing:3px;color:#2A7B88;margin-top:1px}
+.head-r{text-align:right;font-size:9.5px;color:#777}
+.tag{display:inline-block;background:#0B2447;color:#fff;padding:3px 10px;border-radius:99px;font-weight:700;letter-spacing:.8px;font-size:9px;margin-bottom:3px}
+h1{font-family:'EB Garamond',serif;font-weight:500;font-size:28px;color:#0B2447;line-height:1.05;letter-spacing:-.4px}
+h2{font-family:'EB Garamond',serif;font-weight:500;font-size:18px;color:#0B2447;margin:10px 0 6px;padding-bottom:3px;border-bottom:1px solid #E0E4EA;display:flex;align-items:center;gap:8px}
+h2 .n{display:inline-flex;width:22px;height:22px;background:#0B2447;color:#fff;border-radius:50%;font-family:'DM Sans',sans-serif;font-weight:700;font-size:11px;align-items:center;justify-content:center}
+h3{font-weight:700;font-size:10px;letter-spacing:1.5px;color:#2A7B88;text-transform:uppercase;margin:8px 0 5px}
+.sub{color:#777;font-size:10.5px;margin-bottom:8px;line-height:1.45}
+.id{background:linear-gradient(135deg,#0B2447,#163A6B 60%,#1A5296);color:#fff;border-radius:9px;padding:12px 16px;margin-bottom:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.id .lbl{font-size:8.5px;letter-spacing:2px;color:#7ECBFF;font-weight:700;text-transform:uppercase}
+.id .val{font-family:'EB Garamond',serif;font-size:16px;font-weight:500;margin-top:1px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.kpi{border:1px solid #E0E4EA;border-radius:8px;padding:9px 12px;background:#fff}
+.kpi .lbl{font-size:8.5px;letter-spacing:1.2px;text-transform:uppercase;color:#777;font-weight:700}
+.kpi .val{font-family:'EB Garamond',serif;font-size:26px;font-weight:500;color:#0B2447;line-height:1;margin-top:2px}
+.kpi .unit{font-size:11px;color:#999;margin-left:2px}
+.kpi.lev-not{border-top:3px solid #D64545}.kpi.lev-bas{border-top:3px solid #E8A317}
+.kpi.lev-ple{border-top:3px solid #1A5296}.kpi.lev-ava{border-top:3px solid #127548}
+.lv{display:inline-block;padding:2px 8px;border-radius:99px;font-weight:700;font-size:9px;letter-spacing:.5px;text-transform:uppercase;margin-top:3px}
+.lv-not{background:#FCE8E8;color:#B23030}.lv-bas{background:#FFF3D6;color:#8A5A00}
+.lv-ple{background:#DEF0FF;color:#0F4F82}.lv-ava{background:#D4F4E4;color:#127548}
+.pil{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.pil-c{border:1px solid #E0E4EA;border-top:3px solid #1A5296;border-radius:8px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;background:#fff}
+.pil-c.gov{border-top-color:#0B2447}.pil-c.tec{border-top-color:#1A5296}.pil-c.kpi{border-top-color:#1B5C6B}
+.pil-c .lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#666;font-weight:700}
+.pil-c .val{font-family:'EB Garamond',serif;font-size:22px;font-weight:500;color:#0B2447}
+.pil-c .sub{font-size:9px;color:#999;margin-top:1px}
+.hl{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.hl-card{border:1px solid #E0E4EA;border-radius:8px;padding:10px 14px;background:#fff}
+.hl-card h3{margin-top:0;font-size:10px}
+.hl-card h3.fc{color:#127548}.hl-card h3.at{color:#C04F1E}
+.hl-card li{list-style:none;display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed #EEF1F5;font-size:10.5px}
+.hl-card li:last-child{border-bottom:none}
+.hl-card li b{color:#0B2447}
+.hl-card li .nt{font-family:'EB Garamond',serif;font-size:17px;font-weight:500;color:#1A5296}
+.matrix{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;margin-bottom:10px}
+.mxc{border:1px solid #D6DCE6;border-radius:6px;overflow:hidden;background:#fff;break-inside:avoid}
+.mxh{padding:4px 8px;color:#fff;font-size:9px;display:flex;justify-content:space-between;gap:4px}
+.mxh b{font-size:10.5px;margin-right:3px}
+.mxr{display:grid;grid-template-columns:54px 1fr 24px;gap:5px;padding:3px 7px;font-size:9px;border-bottom:1px solid #F0F2F6;align-items:center}
+.mxr:last-child{border-bottom:none}
+.mxr:nth-child(even){background:#F8FAFC}
+.mxc-cod{font-weight:700;font-size:8.5px;color:#2A7B88}
+.mxc-ponto{color:#333;line-height:1.25;font-size:9px;overflow-wrap:anywhere}
+.nb{display:inline-block;padding:1px 6px;border-radius:99px;font-weight:700;font-size:8.5px;min-width:20px;text-align:center}
+.nb-0{background:#FCE8E8;color:#B23030}.nb-1{background:#FFE5D9;color:#C04F1E}.nb-2{background:#FFF3D6;color:#8A5A00}
+.nb-3{background:#E0EDFF;color:#0F4F82}.nb-4{background:#D4F4E4;color:#127548}.nb-5{background:#C8EDFB;color:#004D6B}
+.nb-na{background:#EEE;color:#999}
+.cta{background:linear-gradient(135deg,#0B2447,#163A6B 60%,#1A5296);color:#fff;border-radius:12px;padding:20px 24px;margin-top:10px;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;right:-60px;bottom:-60px;width:240px;height:240px;background:radial-gradient(circle,rgba(125,203,255,.25),transparent 70%);border-radius:50%}
+.cta h2{color:#fff;border:none;margin:0;font-size:22px;position:relative;z-index:1}
+.cta h2 .n{background:#7ECBFF;color:#0B2447}
+.cta p{font-size:11.5px;line-height:1.5;margin:8px 0;color:rgba(255,255,255,.9);position:relative;z-index:1}
+.cta b{color:#fff}
+.cta .box{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;position:relative;z-index:1}
+.cta .it{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:10px 12px}
+.cta .it h4{font-size:10.5px;color:#7ECBFF;font-weight:700;margin-bottom:3px;letter-spacing:.5px}
+.cta .it p{font-size:10px;color:rgba(255,255,255,.85);margin:0;line-height:1.4}
+.cta-box{background:rgba(255,255,255,.12);border-radius:10px;padding:14px 18px;margin-top:10px;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;position:relative;z-index:1}
+.cta-box .info{font-size:11px;line-height:1.6;color:#fff}
+.cta-box .info b{display:block;font-size:12px;color:#7ECBFF;margin-bottom:4px;letter-spacing:1.5px}
+.cta-box a{color:#BCE0FF}
+.cta-btn{background:#7ECBFF;color:#0B2447;padding:11px 18px;border-radius:8px;font-weight:700;font-size:12px;letter-spacing:.3px;white-space:nowrap}
+.foot{margin-top:16px;padding-top:10px;border-top:1.5px solid #0B2447;text-align:center}
+.foot .bl{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1}
+.foot .co{font-weight:700;font-size:10px;letter-spacing:2px;color:#0B2447;margin-top:2px}
+.foot .ct{font-size:8.5px;letter-spacing:2.5px;color:#2A7B88;font-weight:700;margin:1px 0 6px}
+.foot .ad{font-size:10px;color:#555;line-height:1.55}
+.foot .cf{font-size:8.5px;color:#999;margin-top:5px}
+@page{size:A4 portrait;margin:1cm}
+@media print{
+  html,body{background:#fff}
+  body{-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:9.5px}
+  .rep{max-width:100%;padding:0;margin:0}
+  .sheet{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .mxc,.cta,.hl-card,.pil-c,.kpi,.id{break-inside:avoid;page-break-inside:avoid}
+  h2{page-break-after:avoid}
+}
+</style></head><body>
+<div class="rep">
+
+  <!-- ===== PÁGINA 1 ===== -->
+  <div class="sheet">
+    <div class="head">
+      <div class="brand-box">
+        <div class="brand-mono"><span class="g">G</span><span class="a">A</span></div>
+        <div><div class="brand-lbl">GALEAZZI &amp; ASSOCIADOS</div><div class="brand-sub">ENTERPRISE PLATFORM · DIAGNÓSTICO RÁPIDO</div></div>
+      </div>
+      <div class="head-r"><span class="tag">DIAGNÓSTICO RÁPIDO · 15 MIN</span><br>26 perguntas · Gerado ${geradoEm}</div>
+    </div>
+
+    <h1>${escapeHtml(state.empresa||'Diagnóstico Rápido · Operador Logístico')}</h1>
+    <div class="sub">Raio-X preliminar da maturidade operacional · Baseado na norma NPQ-OL / ABOL (26 de 119 critérios) · Serve como porta de entrada para o assessment completo Galeazzi.</div>
+
+    <div class="id">
+      <div><div class="lbl">Empresa</div><div class="val">${escapeHtml(state.empresa||'—')}</div></div>
+      <div><div class="lbl">Data</div><div class="val">${escapeHtml(state.data||'—')}</div></div>
+      <div><div class="lbl">Responsável</div><div class="val">${escapeHtml(state.auditor||'—')}</div></div>
+    </div>
+
+    <h2><span class="n">1</span>Resultado do Diagnóstico</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="lbl">Score Gerencial</div><div class="val">${g==null?'—':g.toFixed(2)}<span class="unit">/5</span></div></div>
+      <div class="kpi lev-${lev.cls.replace('level-','')||'not'}"><div class="lbl">Score NPQ-OL</div><div class="val">${np==null?'—':np.toFixed(2)}<span class="unit">/3</span></div><div class="lv lv-${lev.cls.replace('level-','')||'not'}">${lev.label}</div></div>
+      <div class="kpi"><div class="lbl">Progresso</div><div class="val">${d}<span class="unit">/ 26</span></div><div style="font-size:9px;color:#999;margin-top:2px">${p}% respondido</div></div>
+      <div class="kpi"><div class="lbl">Pontos Críticos</div><div class="val" style="color:${criticos.length>0?'#B23030':'#127548'}">${criticos.length}<span class="unit">/ ${d||1}</span></div><div style="font-size:9px;color:#B23030;margin-top:2px;font-weight:600">notas ≤ 2</div></div>
+    </div>
+    <div class="pil">
+      <div class="pil-c gov"><div><div class="lbl">Governança · 40%</div><div class="sub">NPQ ${gov==null?'—':npq(gov).toFixed(2)}</div></div><div class="val">${gov==null?'—':gov.toFixed(2)}</div></div>
+      <div class="pil-c tec"><div><div class="lbl">Técnico · 52%</div><div class="sub">NPQ ${tec==null?'—':npq(tec).toFixed(2)}</div></div><div class="val">${tec==null?'—':tec.toFixed(2)}</div></div>
+      <div class="pil-c kpi"><div><div class="lbl">KPIs · 8%</div><div class="sub">NPQ ${kpi==null?'—':npq(kpi).toFixed(2)}</div></div><div class="val">${kpi==null?'—':kpi.toFixed(2)}</div></div>
+    </div>
+
+    <h3 style="margin-top:10px">Top 3 Pontos Fortes e Pontos de Atenção</h3>
+    <div class="hl">
+      <div class="hl-card"><h3 class="fc">🟢 Forças (maior nota setor)</h3>
+        ${forcas.length?forcas.map(x=>`<li><b>${x.code} · ${escapeHtml(x.nome)}</b><span class="nt">${x.avg.toFixed(2)}</span></li>`).join(''):'<div style="opacity:.6;font-size:10px">—</div>'}
+      </div>
+      <div class="hl-card"><h3 class="at">🟠 Atenção (menor nota setor)</h3>
+        ${atencoes.length?atencoes.map(x=>`<li><b>${x.code} · ${escapeHtml(x.nome)}</b><span class="nt">${x.avg.toFixed(2)}</span></li>`).join(''):'<div style="opacity:.6;font-size:10px">—</div>'}
+      </div>
+    </div>
+
+    <h3>Pontos Críticos Identificados (nota ≤ 2)</h3>
+    ${criticos.length===0?`<div style="padding:10px 14px;background:#D4F4E4;border-left:3px solid #127548;border-radius:4px;font-size:10.5px"><b style="color:#127548">✓ Nenhum ponto crítico identificado.</b> Todos os critérios respondidos tiveram nota ≥ 3 (Definido).</div>`:`<div class="matrix">
+    ${(()=>{const by={};criticos.forEach(x=>{(by[x.code]=by[x.code]||[]).push(x);});return Object.keys(by).map(code=>{const items=by[code];const s=S[code];const pc=s.pilar==='Governança'?'#0B2447':s.pilar==='Técnico'?'#1A5296':'#1B5C6B';return `<div class="mxc">
+      <div class="mxh" style="background:${pc}"><span><b>${code}</b>${escapeHtml(s.nome)}</span><span>${items.length} crítico${items.length>1?'s':''}</span></div>
+      ${items.map(x=>`<div class="mxr"><span class="mxc-cod">${x.id}</span><span class="mxc-ponto">${escapeHtml(x.titulo)}</span><span style="text-align:center"><span class="nb nb-${x.nota}">${x.nota}</span></span></div>`).join('')}
+    </div>`;}).join('');})()}
+    </div>`}
+  </div>
+
+  <!-- ===== PÁGINA 2 — Avaliação completa + CTA ===== -->
+  <div class="sheet">
+    <h2><span class="n">2</span>Avaliação Completa das 26 Perguntas</h2>
+    <div class="sub">Todas as respostas agrupadas por setor, com nota e código NPQ de referência. Observações detalhadas estão preservadas no estado do arquivo.</div>
+    <div class="matrix">
+    ${SETORES_ORDER.map(code=>{
+      const s=S[code];const qs=qsOf(code);const avg=avgSector(code);
+      const pc=s.pilar==='Governança'?'#0B2447':s.pilar==='Técnico'?'#1A5296':'#1B5C6B';
+      return `<div class="mxc">
+        <div class="mxh" style="background:${pc}"><span><b>${code}</b>${escapeHtml(s.nome)}</span><span>${s.peso}% · ${avg==null?'—':avg.toFixed(2)}</span></div>
+        ${qs.map(q=>{const n=state.notas[q[1]];return `<div class="mxr"><span class="mxc-cod">${q[1]}</span><span class="mxc-ponto">${escapeHtml(q[2])}</span><span style="text-align:center">${typeof n==='number'?`<span class="nb nb-${n}">${n}</span>`:'<span class="nb nb-na">—</span>'}</span></div>`;}).join('')}
+      </div>`;
+    }).join('')}
+    </div>
+
+    <!-- ===== CTA FINAL ===== -->
+    <div class="cta">
+      <h2><span class="n">3</span>Próximo Passo · Auditoria Completa NPQ-OL / ABOL</h2>
+      <p>Este diagnóstico rápido avaliou <b>26 de 119 critérios</b> oficiais da norma NPQ-OL. Para a auditoria completa de certificação ABOL — com visita ao CD, entrevistas com gestores, verificação documental e plano de ação executivo — conte com a <b>Galeazzi &amp; Associados</b>.</p>
+      <div class="box">
+        <div class="it"><h4>📋 DIAGNÓSTICO COMPLETO</h4><p>119 critérios oficiais NPQ-OL em 17 setores · Governança 40% · Técnico 52% · KPIs 8%</p></div>
+        <div class="it"><h4>🏢 AUDITORIA IN LOCO</h4><p>Visita ao CD · Walk-through operacional · Entrevistas · Verificação documental e de sistemas</p></div>
+        <div class="it"><h4>🎯 PLANO DE AÇÃO EXECUTIVO</h4><p>Relatório em PPT · Apresentação ao C-Level · 15 iniciativas priorizadas · Preparação para certificação</p></div>
+      </div>
+      <div class="cta-box">
+        <div class="info">
+          <b>FALE COM A GALEAZZI</b>
+          📞 +55 11 3383 9600<br>
+          ✉ <a href="mailto:galeazzi@galeazzi.com.br?subject=Auditoria%20completa%20NPQ-OL%2FABOL%20-%20${encodeURIComponent(state.empresa||'')}">galeazzi@galeazzi.com.br</a><br>
+          🌐 <a href="https://www.galeazzi.com.br">www.galeazzi.com.br</a><br>
+          Av. Brigadeiro Faria Lima, 2081, 10º andar · Pinheiros, São Paulo · SP · Brasil
+        </div>
+        <a class="cta-btn" href="mailto:galeazzi@galeazzi.com.br?subject=Auditoria%20completa%20NPQ-OL%2FABOL%20-%20${encodeURIComponent(state.empresa||'')}&amp;body=Ol%C3%A1%2C%20gostaria%20de%20receber%20uma%20proposta%20para%20auditoria%20completa%20de%20Operador%20Log%C3%ADstico%20NPQ-OL%2FABOL.%20Empresa%3A%20${encodeURIComponent(state.empresa||'')}">Solicitar Auditoria →</a>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="bl"><span style="color:#979797">G</span><span style="color:#005B6D">A</span></div>
+      <div class="co">GALEAZZI &amp; ASSOCIADOS</div>
+      <div class="ct">ENTERPRISE PLATFORM</div>
+      <div class="ad">Consultoria em Transformação Operacional · 38 anos · supply chain, logística e reestruturação<br>
+        Av. Brigadeiro Faria Lima, 2081, 10º andar · Pinheiros, São Paulo · SP · Brasil<br>
+        <b>+55 11 3383 9600</b> · <a href="mailto:galeazzi@galeazzi.com.br">galeazzi@galeazzi.com.br</a> · <a href="https://www.galeazzi.com.br">www.galeazzi.com.br</a></div>
+      <div class="cf">Diagnóstico Rápido · Operador Logístico · Baseado em NPQ-OL / ABOL · Confidencial — Uso Exclusivo do Respondente</div>
+    </div>
+  </div>
+
+</div>
+</body></html>`;
+
+  const blob=new Blob([rep],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  const nome=(state.empresa||'prospect').replace(/[^a-z0-9]+/gi,'_');
+  a.download=`Diagnostico_Rapido_NPQ-OL_${nome}_${state.data}.html`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
